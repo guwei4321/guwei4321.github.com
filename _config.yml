@@ -70,4 +70,4 @@ theme: landscape
 deploy:
   type: git
   repo: git@github.com:guwei4321/blog.git
-  branch: gh-pages
+  branch: master
