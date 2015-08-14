@@ -5,7 +5,7 @@
 # Site
 title: 前端知识
 subtitle: 在于积累
-description: html5,Javascript,Css,AngularJs,Sass
+description: html5、Javascript、Css、AngularJs、Sass
 author: 顾小北
 email: guxiaobei89@gmail.com  #联系邮箱
 language: zh-CN #语言
@@ -86,12 +86,11 @@ sitemap:
 ## Themes: http://hexo.io/themes/
 theme: landscape
 
+duoshuo_shortname: html5jscss
+
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:guwei4321/guwei4321.github.com.git
+  repo: https://github.com/guwei4321/guwei4321.github.com.git
   branch: master
-
-
-duoshuo_shortname: html5jscss
