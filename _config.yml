@@ -3,17 +3,16 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: 前端知识
-subtitle: 在于积累
-description: html5、Javascript、Css、AngularJs、Sass
-author: 顾小北
-email: guxiaobei89@gmail.com  #联系邮箱
-language: zh-CN #语言
+title: Hexo
+subtitle:
+description:
+author: John Doe
+language:
 timezone:
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://blog.html5jscss.com
+url: http://yoursite.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
@@ -62,23 +61,13 @@ per_page: 10
 pagination_dir: page
 
 # Extensions
-Plugins: #http://hexo.io/plugins/
-- hexo-generator-sitemap
-
-#Feed Atom
-#sitemap
-sitemap:
-
-  path: sitemap.xml
-
+## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
 theme: landscape
-
-duoshuo_shortname: html5jscss
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/guwei4321/guwei4321.github.com.git
+  repo: git@github.com:guwei4321/guwei4321.github.com.git
   branch: master
