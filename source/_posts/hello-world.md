@@ -37,4 +37,4 @@ $ hexo deploy
 More info: [Deployment](http://hexo.io/docs/deployment.html)
 
 
-# Bye Bye 拜拜
+# 拜拜 Bye Bye
