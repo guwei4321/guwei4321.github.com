@@ -1,7 +1,7 @@
 # Header
 menu:
-  Home: /
-  Archives: /archives
+  首页: /
+  归档: /archives
 rss: /atom.xml
 
 # Content
@@ -11,15 +11,14 @@ fancybox: true
 # Sidebar
 sidebar: right
 widgets:
-- category
-- tag
-- tagcloud
-- archive
-- recent_posts
+- 分类
+- 标签
+- 标签云
+- 最新文章
 
 # Miscellaneous
 google_analytics:
-favicon: /favicon.png
+favicon: /favicon.ico
 twitter:
 google_plus:
 fb_admins:

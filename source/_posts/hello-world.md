@@ -35,6 +35,3 @@ $ hexo deploy
 ```
 
 More info: [Deployment](http://hexo.io/docs/deployment.html)
-
-
-# 你好
