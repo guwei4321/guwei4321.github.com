@@ -82,5 +82,10 @@ theme: landscape
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/guwei4321/guwei4321.github.com.git
-  branch: master
+  repo:
+    github: https://github.com/guwei4321/guwei4321.github.com.git,master
+    gitcafe: https://gitcafe.com/guwei/guwei.git,gitcafe-pages
+  # repo: https://github.com/guwei4321/guwei4321.github.com.git
+  # branch: master
+  # repo: https://gitcafe.com/guwei/guwei.git
+  # branch: gitcafe-pages
