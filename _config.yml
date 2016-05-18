@@ -83,8 +83,16 @@ theme: landscape
 deploy:
   type: git
   repo:
-    github: https://github.com/guwei4321/guwei4321.github.com.git,master
-    gitcafe: https://gitcafe.com/guwei/guwei.git,gitcafe-pages
+      github: git@github.com:guwei4321/guwei4321.github.io.git,master
+      # coding: git@coding.net:guwei1989/guwei1989.git,master
+      
+  # repo: https://github.com/guwei4321/guwei4321.github.com.git
+  # beanch: master
+  # repo: https://git.coding.net/guwei1989/guwei1989.git
+  # branch: coding-pages
+  # repo:
+  # github: https://github.com/guwei4321/guwei4321.github.com.git,master
+    # gitcafe: https://gitcafe.com/guwei/guwei.git,gitcafe-pages
   # repo: https://github.com/guwei4321/guwei4321.github.com.git
   # branch: master
   # repo: https://gitcafe.com/guwei/guwei.git
