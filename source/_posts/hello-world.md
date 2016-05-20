@@ -1,6 +1,6 @@
 title: hexo博客相关
 date: 2014-02-07 22:44:12
-updated : 2014-02-10 22:44:12
+updated : 2016-05-20 14:44:12
 permalink: hexo
 tags:
 - hexo
@@ -64,13 +64,13 @@ hexo d
 [官方文档](https://hexo.io/zh-cn/docs/commands.html)
 
 ##  其他笔记
-_ 同时部署到 github 和 gitcafe上 `_config.yml` 配置
+_ 同时部署到 github 和 coding上 `_config.yml` 配置
 ~~~
 deploy:
   type: git
   repo:
-    github: https://github.com/guwei4321/guwei4321.github.com.git,master
-    gitcafe: https://gitcafe.com/guwei/guwei.git,gitcafe-pages
+    github: git@github.com:guwei4321/guwei4321.github.io.git,master
+    coding: https://git.coding.net/guwei1989/guwei1989.git,coding-pages
 ~~~
 
 ## 其他同学的笔记
