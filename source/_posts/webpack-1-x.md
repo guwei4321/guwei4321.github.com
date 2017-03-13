@@ -218,4 +218,57 @@ var css = require("css!./style.css");
 ````
 结果一样
 
-### chunk
+## Chunk
+### Chunk是什么？
+webpack中 Chunk 实际上就是输出的 .js 文件，可能包含多个模块，主要的作用是为了优化异步加载。
+### Chuck包含了哪些内容
+* 同步情况下：一个 Check 会把模块中的所有依赖都加载到 Chunk 中
+* 异步情况下：所有被切割点分开的依赖被加载到一个 Chunk
+
+**require.ensure跟require都会被加载到一个 Chunk中**
+
+### Chunk 分类
+第三方库不需要打包到发布的文件中，这是几需要vendor，将第三方库打包成一个chunk。
+
+webpack将chunk类型分为三种**Entry chunk**，**Normal chunk**，**Initial chunk**。
+**Entry Chunk**
+包括两部分代码：webpack运行代码（如webpackJsonp, __webpack_require__ 等函数）和模块代码。
+
+**Normal Chunk**
+只包含模块代码
+
+**Initial  Chunk**
+本质上为Normal Chunk。但是他计算载入时间，比Normal Chunk更重要。一般在使用 CommonsChunkPlugin 时出现。
+
+#### CommonsChunkPlugin
+通过 `CommonsChunkPlugin` 可以将个模块的公共依赖单独打包成一个 chunk，这时webpack的运行代码会被移到`common chunk` 中，原来的 `entry chunk` 也降变为 `initial chunk`。
+
+`entry vendor`配合`CommonsChunkPlugin`使用，可以分离第三方库和app代码。
+
+````js
+entry: {
+   app: './app.js',
+   vendor: ['jquery', 'lodash']
+},
+plugins: {
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js')   
+}
+````
+
+这样子的话，app.js 只包含依赖的JS，但是对第三方依赖的都被排除掉了。第三方库被打包成 `vendor.bundle.js`。
+
+**CommonsChunkPlugin配置项：**
+
+- names: chunk的名称，字符串或数组。
+- filename: chunk文件名称，默认为output.filename或者output.chunkFilename
+- minChunks 被几个chunk调用的moudule才会加入common chunk中，最小值为2。如果设置为Infinity，则不会有module加入到common chunk中
+chunks: 需要提前common的源文件，默认为全部入口文件。
+- children: 如果设置为 `true`，所有  公共chunk 的子模块都会被选择
+- async:  如果设置为 `true`，一个异步的  公共chunk 会作为 `options.name` 的子模块，和 `options.chunks` 的兄弟模块被创建。 它会与 `options.chunks` 并行被加载。可以通过提供想要的字符串，而不是 `true` 来对输出的文件进行更换名称。
+- minSize: 在 公共chunk 被创建立之前，所有 公共模块 (common module) 的最少大小。
+
+## Plugin
+
+plugin 的跟loader差不多，只是插件是以对象的形式引入的，plugin 为 webpack 提供了更多的自定义功能。
+就不一一列举了，请查看
+ {% link webpack-plugins https://github.com/webpack-contrib/awesome-webpack#webpack-plugins 
