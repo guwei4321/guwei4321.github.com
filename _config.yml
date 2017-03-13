@@ -84,7 +84,6 @@ deploy:
   type: git
   repo:
       github: git@github.com:guwei4321/guwei4321.github.io.git,master
-      coding: https://git.coding.net/guwei1989/guwei1989.git,coding-pages
   # repo: https://github.com/guwei4321/guwei4321.github.com.git
   # beanch: master
   # repo: https://git.coding.net/guwei1989/guwei1989.git
