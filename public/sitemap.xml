@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://blog.html5jscss.com/demo/demo.html</loc>
+    
+    <lastmod>2017-03-13T10:03:18.835Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://blog.html5jscss.com/2017/02/15/webpack-1-x/</loc>
     
-    <lastmod>2017-03-13T09:55:53.127Z</lastmod>
+    <lastmod>2017-03-13T10:03:18.828Z</lastmod>
     
   </url>
   
@@ -12,13 +19,6 @@
     <loc>http://blog.html5jscss.com/2014/02/07/hexo/</loc>
     
     <lastmod>2016-05-20T06:44:12.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://blog.html5jscss.com/demo/demo.html</loc>
-    
-    <lastmod>2016-05-20T06:31:48.453Z</lastmod>
     
   </url>
   
