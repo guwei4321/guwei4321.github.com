@@ -113,6 +113,31 @@ webpack-dev-server
 一般我们都是通过配置文件投入生产，我们可以在配置指定多个入口文件、代码分离、暴露JS全局变量、编译CSS、压缩图片等等。阮老师做了一个 {% link webpack-demo https://github.com/ruanyf/webpack-demos webpack-demo %}写了很多简单的例子，是份不错的学习资料。所以这篇文章就不再介绍基本用法了。
 
 
+## Chunk
+### Chunk是什么？
+webpack中 Chunk 实际上就是输出的 .js 文件，可能包含多个模块，主要的作用是为了优化异步加载。
+### Chuck包含了哪些内容
+* 同步情况下：一个 Check 会把模块中的所有依赖都加载到 Chunk 中
+* 异步情况下：所有被切割点分开的依赖被加载到一个 Chunk
+
+**require.ensure跟require都会被加载到一个 Chunk中**
+
+### Chunk 分类
+第三方库不需要打包到发布的文件中，这是几需要vendor，将第三方库打包成一个chunk。
+
+webpack将chunk类型分为三种**Entry chunk**，**Normal chunk**，**Initial chunk**。
+**Entry Chunk**
+包括两部分代码：webpack运行代码（如webpackJsonp, __webpack_require__ 等函数）和模块代码。
+
+**Normal Chunk**
+只包含模块代码
+
+**Initial  Chunk**
+本质上为Normal Chunk。但是他计算载入时间，比Normal Chunk更重要。一般在使用 CommonsChunkPlugin 时出现。
+
+webpack 可以将代码切割成不同的 chunk，实现按需加载。
+
+
 ## loaders
 
 
@@ -121,7 +146,7 @@ webpack-dev-server
 Loaders are transformations that are applied on a resource file of your app. They are functions (running in node.js) that take the source of a resource file as the parameter and return the new source.
 {% endblockquote %}
 
-意思就是在webpack中，用过loader可以显示静态资源的转换。
+意思就是在webpack中，通过loader可以显示静态资源的转换。
 
 ### loader 功能
 
@@ -142,7 +167,8 @@ Loaders are transformations that are applied on a resource file of your app. The
 {
     // 通过扩展名称和正则表单时来匹配资源文件
     test: String,
-    loader: String | Array
+    loader: String | Array,
+    query: String | Object
 }
 
 ````
@@ -218,29 +244,103 @@ var css = require("css!./style.css");
 ````
 结果一样
 
-## Chunk
-### Chunk是什么？
-webpack中 Chunk 实际上就是输出的 .js 文件，可能包含多个模块，主要的作用是为了优化异步加载。
-### Chuck包含了哪些内容
-* 同步情况下：一个 Check 会把模块中的所有依赖都加载到 Chunk 中
-* 异步情况下：所有被切割点分开的依赖被加载到一个 Chunk
+## 常用Loaders
+### 加载 CSS
+加载css需要 `css-loader`和`style-loader`，分别做以下两件事：
+1. css-loader 会遍历 CSS 文件，然后找到 url() 表达式然后处理他们
+2. style-loader 会把原来的 CSS 代码插入页面中的一个 style 标签中
+````json
+{
+  // loader配置
+    test: /\.css$/,
+    loader: 'style!css' // 如果同时使用多个加载器，中间用 ! 连接，加载器的执行顺序是从右向左
+  }
+````
+### 图片处理
+图片处理需要 `url-loader` 和 `file-loader`
+````json
+{
+  // loader配置
+  test: /\.(png|jpg|gif|jpeg)$/,
+  loader: 'url?limit=25000'
+}
+````
+传入的 limit 参数是告诉它图片如果不大于 25KB 的话要自动在它从属的 css 文件中转成 BASE64 字符串。
 
-**require.ensure跟require都会被加载到一个 Chunk中**
+#### eslint
+````json
+  module : {
+    preLoaders: [
+        {test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/}
+    ],
+  }
+````
 
-### Chunk 分类
-第三方库不需要打包到发布的文件中，这是几需要vendor，将第三方库打包成一个chunk。
+## 常用Plugin
+###UglifyJsPlugin webpack自带的插件
+一般配置如下：
+````json
+  plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+          compress: {
+              warnings: false
+          }
+      })
+  ]
+````
 
-webpack将chunk类型分为三种**Entry chunk**，**Normal chunk**，**Initial chunk**。
-**Entry Chunk**
-包括两部分代码：webpack运行代码（如webpackJsonp, __webpack_require__ 等函数）和模块代码。
+### extractTextWebpackPlugin
+在webpack中，可以通过require引入css，通过loader对文件自动解析并打包文件。通常会将css以在页面的header切入style形式加载样式。但是我们如果你想通过外链形式加载css的话，通过extract-text-webpack-plugin就可以办到。
+````json
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
+plugins: [
+  new ExtractTextPlugin("app.css")
+]
+````
 
-**Normal Chunk**
-只包含模块代码
+### htmlWebpackPlugin
+生成HTML
 
-**Initial  Chunk**
-本质上为Normal Chunk。但是他计算载入时间，比Normal Chunk更重要。一般在使用 CommonsChunkPlugin 时出现。
+````json
+const path = require('path');
 
-#### CommonsChunkPlugin
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  entry: {
+    index: './pages/index.js',
+    page1: './pages/page1.js',
+    page2: './pages/page2.js'
+  },
+  output: {
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].js'
+  },
+  plugins: [
+    new HTMLWebpackPlugin({
+      filename: 'index.html',
+      template: 'templates/index.html',
+      inject: true,
+      chunks: ['index']
+    }),
+    new HTMLWebpackPlugin({
+      filename: 'page1.html',
+      template: 'templates/page1.html',
+      inject: true,
+      chunks: ['page1']
+    }),
+    new HTMLWebpackPlugin({
+      filename: 'page2.html',
+      template: 'templates/page2.html',
+      inject: true,
+      chunks: ['page2']
+    })
+  ]
+};
+````
+
+
+#### 提取公共Js插件
 通过 `CommonsChunkPlugin` 可以将个模块的公共依赖单独打包成一个 chunk，这时webpack的运行代码会被移到`common chunk` 中，原来的 `entry chunk` 也降变为 `initial chunk`。
 
 `entry vendor`配合`CommonsChunkPlugin`使用，可以分离第三方库和app代码。
@@ -267,8 +367,107 @@ chunks: 需要提前common的源文件，默认为全部入口文件。
 - async:  如果设置为 `true`，一个异步的  公共chunk 会作为 `options.name` 的子模块，和 `options.chunks` 的兄弟模块被创建。 它会与 `options.chunks` 并行被加载。可以通过提供想要的字符串，而不是 `true` 来对输出的文件进行更换名称。
 - minSize: 在 公共chunk 被创建立之前，所有 公共模块 (common module) 的最少大小。
 
-## Plugin
+#### ProvidePlugin插件
+将模块暴露到全局
 
-plugin 的跟loader差不多，只是插件是以对象的形式引入的，plugin 为 webpack 提供了更多的自定义功能。
-就不一一列举了，请查看
- {% link webpack-plugins https://github.com/webpack-contrib/awesome-webpack#webpack-plugins 
+````json
+new webpack.ProvidePlugin({
+    "R": "report",
+}),
+````
+
+#### 删除目录插件
+
+````json
+clean-webpack-plugin
+
+  var CleanPlugin = require("clean-webpack-plugin");
+  plugins: [
+    new CleanPlugin(['dist']),
+  ]
+````
+#### 拷贝文件插件
+
+copy-webpack-plugin
+````json
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+plugins: [
+  new CopyWebpackPlugin([{
+    from: __dirname + '/src/public'
+  }])
+]
+````
+
+
+#### 优化第三方包插件
+````json
+plugins: [
+  new webpack.DefinePlugin({
+      //去掉react中的警告，react会自己判断
+      'process.env': {
+          NODE_ENV: '"production"'
+      }
+  })
+]
+````
+
+#### 自动打开浏览器插件
+open-browser-webpack-plugin
+````json
+  // 自动打开浏览器插件
+  var OpenBrowserPlugin = require('open-browser-webpack-plugin');
+  plugins: [
+      new OpenBrowserPlugin({url: 'http://localhost:8080/', browser: 'chrome'})
+  ]
+````
+
+plugin 为 webpack 提供了更多的自定义功能。
+就不一一列举了，点击
+ {% link webpack-plugins https://github.com/webpack-contrib/awesome-webpack#webpack-plugins %}
+
+
+### Resolve属性
+webpack 在构建包的时候会按配置进行模块的查找
+````json
+ resolve: {
+      //查找module的话从这里开始查找
+      root: '/pomy/github/flux-example/src', //绝对路径
+      //自动扩展文件后缀名，意味着我们require模块可以省略不写后缀名
+      //注意一下, extensions 第一个是空字符串! 对应不需要后缀的情况.
+      extensions: ['', '.js', '.json', '.scss',’jsx’],
+
+      //模块别名定义，方便后续直接引用别名，无须多写长长的地址
+      alias: {
+          AppStore : 'js/stores/AppStores.js',//后续直接 require('AppStore') 即可
+          ActionType : 'js/actions/ActionType.js',
+          AppAction : 'js/actions/AppAction.js'
+      }
+  }
+````
+
+
+
+### Externals属性
+外部依赖不需要打包进 bundle，当我们想在项目中 require 一些其他的类库或者 API ，而又不想让这些类库的源码被构建到运行时文件中，这在实际开发中很有必要。 比如：在页面里通过 script 标签引用了 jQuery：`<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>`，所以并不想在其他 js 里再打包进入一遍，比如你的其他 js 代码类似：
+
+其实就是不是通过require或者import引入的，而是直接写在html中的js地址。
+
+````json
+    // 配置了这个属性之后 react 和 react-dom 这些第三方的包都不会被构建进 js 中，那么我们就需要通过 cdn 进行文件的引用了
+    // 前边的这个名称是在项目中引用用的，相当于 import React from 'react1' 中的 react
+    externals: {
+        'react1': 'react',
+        'react-dom1': 'react-dom',
+        '$1': 'jQuery'
+    }
+````
+
+这样用了 externals 属性时不用分离插件了，作用是这里引的插件不会被 webpack 所打包。要么用 cdn 要么需要 webpack 打包。
+
+### noParse属性
+module.noParse 是 webpack 的另一个很有用的配置项，如果确定一个模块中没有其他新的依赖项就可以配置这个像，webpack 将不再扫描这个文件中的依赖。
+````json
+  module: {
+    noParse: [/moment-with-locales/]
+  }
+````
