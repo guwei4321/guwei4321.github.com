@@ -1,6 +1,5 @@
-title: hexo博客相关
-date: 2014-02-07 22:44:12
-updated : 2016-05-20 14:44:12
+title: hexo博客相关命令
+date: 2016-02-07 22:44:12
 permalink: hexo
 tags:
 - hexo

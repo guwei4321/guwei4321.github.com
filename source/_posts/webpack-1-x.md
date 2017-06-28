@@ -1,13 +1,16 @@
-title: webpack-1.x
-date: 2017-02-15 17:25:04
+title: webpack-1.x 总结
+date: 2016-02-15 17:25:04
 tags:
+- webpack webpack1.x
+categories:
+- 前端构建工具
 ---
 
 
 ## webpack
 
 webpack在前端工程中越来越多见，当前流行的vue、react、weex等都推荐webpack作为打包工具。所以在这前端打包工具众多，但是没有一个最好用的时代，这应该是最值得去学习的前端打包工具。
-
+<!--more-->
 ### webpack是什么
 
 {% blockquote  官方解释 https://webpack.github.io/docs/what-is-webpack.html %}
@@ -41,10 +44,10 @@ $ npm i -g webpack webpack-dev-server
 
 **第三步：新建前端项目以及安装webpack**
 
-````
+```
 ├── index.html      // 入口 HTML  
 ├── main.js         // 入口 JS
-````
+```
 
 ````html
 <html>
@@ -249,7 +252,7 @@ var css = require("css!./style.css");
 加载css需要 `css-loader`和`style-loader`，分别做以下两件事：
 1. css-loader 会遍历 CSS 文件，然后找到 url() 表达式然后处理他们
 2. style-loader 会把原来的 CSS 代码插入页面中的一个 style 标签中
-````json
+````js
 {
   // loader配置
     test: /\.css$/,
@@ -258,7 +261,7 @@ var css = require("css!./style.css");
 ````
 ### 图片处理
 图片处理需要 `url-loader` 和 `file-loader`
-````json
+````js
 {
   // loader配置
   test: /\.(png|jpg|gif|jpeg)$/,
@@ -268,7 +271,7 @@ var css = require("css!./style.css");
 传入的 limit 参数是告诉它图片如果不大于 25KB 的话要自动在它从属的 css 文件中转成 BASE64 字符串。
 
 #### eslint
-````json
+````js
   module : {
     preLoaders: [
         {test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/}
@@ -279,7 +282,7 @@ var css = require("css!./style.css");
 ## 常用Plugin
 ###UglifyJsPlugin webpack自带的插件
 一般配置如下：
-````json
+````js
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
           compress: {
@@ -291,7 +294,7 @@ var css = require("css!./style.css");
 
 ### extractTextWebpackPlugin
 在webpack中，可以通过require引入css，通过loader对文件自动解析并打包文件。通常会将css以在页面的header切入style形式加载样式。但是我们如果你想通过外链形式加载css的话，通过extract-text-webpack-plugin就可以办到。
-````json
+````js
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 plugins: [
   new ExtractTextPlugin("app.css")
@@ -301,7 +304,7 @@ plugins: [
 ### htmlWebpackPlugin
 生成HTML
 
-````json
+````js
 const path = require('path');
 
 const HTMLWebpackPlugin = require('html-webpack-plugin');
@@ -370,16 +373,15 @@ chunks: 需要提前common的源文件，默认为全部入口文件。
 #### ProvidePlugin插件
 将模块暴露到全局
 
-````json
+````js
 new webpack.ProvidePlugin({
     "R": "report",
 }),
 ````
 
 #### 删除目录插件
-
-````json
 clean-webpack-plugin
+````js
 
   var CleanPlugin = require("clean-webpack-plugin");
   plugins: [
@@ -389,7 +391,7 @@ clean-webpack-plugin
 #### 拷贝文件插件
 
 copy-webpack-plugin
-````json
+````js
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 plugins: [
   new CopyWebpackPlugin([{
@@ -400,7 +402,7 @@ plugins: [
 
 
 #### 优化第三方包插件
-````json
+````js
 plugins: [
   new webpack.DefinePlugin({
       //去掉react中的警告，react会自己判断
@@ -413,7 +415,7 @@ plugins: [
 
 #### 自动打开浏览器插件
 open-browser-webpack-plugin
-````json
+````js
   // 自动打开浏览器插件
   var OpenBrowserPlugin = require('open-browser-webpack-plugin');
   plugins: [
@@ -428,7 +430,7 @@ plugin 为 webpack 提供了更多的自定义功能。
 
 ### Resolve属性
 webpack 在构建包的时候会按配置进行模块的查找
-````json
+````js
  resolve: {
       //查找module的话从这里开始查找
       root: '/pomy/github/flux-example/src', //绝对路径
@@ -452,7 +454,7 @@ webpack 在构建包的时候会按配置进行模块的查找
 
 其实就是不是通过require或者import引入的，而是直接写在html中的js地址。
 
-````json
+````js
     // 配置了这个属性之后 react 和 react-dom 这些第三方的包都不会被构建进 js 中，那么我们就需要通过 cdn 进行文件的引用了
     // 前边的这个名称是在项目中引用用的，相当于 import React from 'react1' 中的 react
     externals: {
@@ -466,7 +468,7 @@ webpack 在构建包的时候会按配置进行模块的查找
 
 ### noParse属性
 module.noParse 是 webpack 的另一个很有用的配置项，如果确定一个模块中没有其他新的依赖项就可以配置这个像，webpack 将不再扫描这个文件中的依赖。
-````json
+````js
   module: {
     noParse: [/moment-with-locales/]
   }
