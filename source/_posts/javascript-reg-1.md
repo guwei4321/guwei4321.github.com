@@ -1,6 +1,10 @@
 title: 正则基础学习
 date: 2017-07-20 14:38:42
-tags:
+tags: 
+- JavaScript
+- 正则
+categories:
+- JavaScript
 ---
 
 

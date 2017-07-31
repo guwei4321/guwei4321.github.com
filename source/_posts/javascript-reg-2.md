@@ -1,6 +1,10 @@
 title: 正则基础深入应用
 date: 2017-07-24 14:54:16
 tags:
+- JavaScript
+- 正则
+categories:
+- JavaScript
 ---
 
 

@@ -1,7 +1,8 @@
 title: webpack-1.x 总结
 date: 2016-02-15 17:25:04
 tags:
-- webpack webpack1.x
+- webpack
+- webpack1.x
 categories:
 - 前端构建工具
 ---
