@@ -9,7 +9,7 @@ This CSS module describes a way for authors to animate the values of CSS propert
 {% endblockquote %}
 
 以上是W3C官方解释，翻译过来大概意思就是：animation使用关键帧的方式，并且可以控制动画持续时间、循环次数，过渡类型。
-
+<!--more-->
 看了以上解释是不是觉得 animations 能实现的效果貌似用transfrom（过渡）搭配Transition（变形），transition（变形） 搭配 transfrom（过渡）确实是可以完成 animation 的一些效果，但是官网上说了 animation 这个属性是transition属性的扩展，而它比transition复杂的地方就是：keyframes（关键帧），我觉得不仅仅只有关键帧。
 <style type="text/css">#sky { width: 500px; height: 500px; position: relative; z-index: 1; overflow: hidden; background-color: #525252; }
     #sky.animate { -webkit-animation:sky  10s ease 1s 1 normal forwards; -webkit-animation-play-state: running; -moz-animation:sky  10s ease 1s 1 normal forwards; -moz-animation-play-state: running; -ms-animation:sky  10s ease 1s 1 normal forwards; -ms-animation-fill-mode: forwards; animation:sky  10s ease 1s 1 normal forwards; animation-fill-mode: forwards; }
@@ -82,36 +82,35 @@ Animation包含了8个独立的属性，分别为animation-name、animation-dura
 
 
 ## Animation动画
-
-````css
-animation：[[ animation-name ] || [ animation-duration ] || [ animation-timing-function ] || [ animation-delay ] || [ animation-iteration-count ] || [ animation-direction ]|| [animation-fill-mode]] [ , [ animation-name ] || [ animation-duration ] || [ animation-timing-function ] || [ animation-delay ] || [ animation-iteration-count ] || [ animation-direction ] || [animation-fill-mode]]*
-相关属性：[ animation-play-state ]
-/* 实际用法*/
-/*关键帧名字前得加浏览器前缀，这里为了减少文章篇幅，就略掉了~*/
-@keyframes sky {
-    0% { background-color: #525252; }
-    33% { background-color: #6293e5; }
-    66% { background-color:#6293e5; }
-    100% { background-color: #525252; }
-}
-/*缩写方式：*/
-.classname {
-    -webkit-animation:sky 10s ease 1s 1 normal forwards;
-    -webkit-animation-play-state: running;/*animation附加属性*/
-    -moz-animation:sky  10s ease 1s 1 normal forwards;
-    -moz-animation-play-state: running;/*animation附加属性*/
-    animation:sky  10s ease 1s 1 normal forwards;
-    animation-play-state: running;/*animation附加属性*/
-}
-/*拆分方式跟缩写方式一样前面得加浏览器前缀，一个一个写太占位置，所以就只写W3C标准的*/
-animation-name: sky;
-animation-duration: 10s;
-animation-timing-function: ease;
-animation-iteration-count: 1;
-animation-direction: normal;
-animation-delay: 0;
-animation-fill-mode: forwards;
-animation-play-state: running;
+````
+    animation：[[ animation-name ] || [ animation-duration ] || [ animation-timing-function ] || [ animation-delay ] || [ animation-iteration-count ] || [ animation-direction ]|| [animation-fill-mode]] [ , [ animation-name ] || [ animation-duration ] || [ animation-timing-function ] || [ animation-delay ] || [ animation-iteration-count ] || [ animation-direction ] || [animation-fill-mode]]*
+    相关属性：[ animation-play-state ]
+    /* 实际用法*/
+    /*关键帧名字前得加浏览器前缀，这里为了减少文章篇幅，就略掉了~*/
+    @keyframes sky {
+        0% { background-color: #525252; }
+        33% { background-color: #6293e5; }
+        66% { background-color:#6293e5; }
+        100% { background-color: #525252; }
+    }
+    /*缩写方式：*/
+    .classname {
+        -webkit-animation:sky 10s ease 1s 1 normal forwards;
+        -webkit-animation-play-state: running;/*animation附加属性*/
+        -moz-animation:sky  10s ease 1s 1 normal forwards;
+        -moz-animation-play-state: running;/*animation附加属性*/
+        animation:sky  10s ease 1s 1 normal forwards;
+        animation-play-state: running;/*animation附加属性*/
+    }
+    /*拆分方式跟缩写方式一样前面得加浏览器前缀，一个一个写太占位置，所以就只写W3C标准的*/
+    animation-name: sky;
+    animation-duration: 10s;
+    animation-timing-function: ease;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    animation-delay: 0;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
 ````
 
 ## animation取值
@@ -128,43 +127,45 @@ animation-play-state: running;
 #### 动画名称
 animation-nam指定元素的 animation 的名称，必须与规则@keyframes配合使用。animation-name具体语法如下：
 
-````css
-animation-name：none | <identifier> [ , none | <identifier> ]*
+````
+    animation-name：none | <identifier> [ , none | <identifier> ]*
 ````
 动画具体名字得设置成 Keyframes 一样的名字。
 #### Keyframes
 keyframes 语法
+````
+    keyframes-rule: '@keyframes' IDENT '{' keyframes-blocks '}';
+    keyframes-blocks: [ keyframe-selectors block ]* ;
+    keyframe-selectors: [ 'from' | 'to' | PERCENTAGE ] [ ',' [ 'from' | 'to' | PERCENTAGE ] ]*;
+````
 ````css
-keyframes-rule: '@keyframes' IDENT '{' keyframes-blocks '}';
-keyframes-blocks: [ keyframe-selectors block ]* ;
-keyframe-selectors: [ 'from' | 'to' | PERCENTAGE ] [ ',' [ 'from' | 'to' | PERCENTAGE ] ]*;
-/*具体写法*/
-/* @keyframes IDENT {*/
-@keyframes diagonal-slide {
-    from {
-        left: 0;
-        top: 0;
+    /*具体写法*/
+    /* @keyframes IDENT {*/
+    @keyframes diagonal-slide {
+        from {
+            left: 0;
+            top: 0;
+        }
+        to {
+            left: 100px;
+            top: 100px;
+        }
     }
-    to {
+    /*或者全部写成百分比的形式：*/
+    @keyframes wobble {
+        0% {
         left: 100px;
-        top: 100px;
+        }
+        40% {
+        left: 150px;
+        }
+        60% {
+        left: 75px;
+        }
+        100% {
+        left: 100px;
+        }
     }
-}
-/*或者全部写成百分比的形式：*/
-@keyframes wobble {
-    0% {
-    left: 100px;
-    }
-    40% {
-    left: 150px;
-    }
-    60% {
-    left: 75px;
-    }
-    100% {
-    left: 100px;
-    }
-}
 ````
 Keyframes的命名是”动画的名称”前带 @符号，后面紧接着一对花括号“{}”，括号中就是一些样式属性，多个属性的话 可以用 ，逗号隔开。
 
@@ -181,7 +182,7 @@ animation-duration：<time> [ , <time> ]*
 ### 动画的变化速率
 
 animation-timing-function的变化速率也跟transition的transition-timing-function属性一样，同样可以由cubic-bezier决定速率，也有同样的预留速率值 ease（逐渐变慢）、linear（匀速）等，语法如下：
-````css
+````
 animation-timing-function：linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>) [ , linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>) ]*
 ````
 
@@ -189,7 +190,7 @@ animation-timing-function：linear | ease | ease-in | ease-out | ease-in-out | c
 ### 动画的延迟执行时间
 
 animation-delay是用来指定一个动画的延迟执行的时间。语法如下：
-````css
+````
 animation-delay：<time> [ , <time> ]*
 ````
 
@@ -201,7 +202,7 @@ animation-delay：<time> [ , <time> ]*
 
 ### 动画的循环次数
 animation-iteration-count是用来制定动画的循环次数，语法如下：
-````css
+````
 animation-iteration-count：infinite | <number> [ , infinite | <number> ]*
 ````
 - ：默认值，代表只循环一次
@@ -210,7 +211,7 @@ animation-iteration-count：infinite | <number> [ , infinite | <number> ]*
 
 ### 动画的方向
 animation-direction是用来指定元素动画播放的方向，语法如下：
-````css
+````
 animation-direction：normal | alternate [ , normal | alternate ]*
 ````
 - normal：动画的每次循环都是正常播放
@@ -219,7 +220,7 @@ animation-direction：normal | alternate [ , normal | alternate ]*
 
 ### 动画结束的时的状态
 animation的附属属性：animation-fill-mode表示动画结束时的状态，语法如下：
-````css
+````
 animation-fill-mode：none | forwards | backwards | both [ , none | forwards | backwards | both ]*
 ````
 - none：默认值。不设置对象动画之外的状态
@@ -230,7 +231,7 @@ animation-fill-mode：none | forwards | backwards | both [ , none | forwards | b
 
 ### 动画的运动状态
 animation-play-state主要是用来控制元素动画的播放状态。其主要有两个值，running（播放）和paused（暂停）其中running为默认值。就像视频里的暂停播放一样.语法如下：
-````css
+````
 animation-play-state：running | paused [ , running | paused ]*
 ````
 ### 总结

@@ -19,7 +19,7 @@ categories:
 5. 以上得出的余数，对应着 [1,0,X,9,8,7,6,5,4,3,2]。
 
 根据以上结论，使用JS写相应程序，得出如下代码：
-````javascript
+````js
 /**
  * [checkID 验证身份证号码是否正确]
  * @param  {[String]} strIDCardnumber [必须是字符串，不然会触发大整数精度问题]

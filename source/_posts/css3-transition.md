@@ -7,22 +7,22 @@ CSS Transitions allows property changes in CSS values to occur smoothly over a s
 {% endblockquote %}
 
 以上是W3C官方解释，翻译过来大概意思就是在某段时间内，按照预定过程的来改变某个CSS属性。
-
+<!--more-->
 ## Transition
-````css
-transition：[ transition-property ] || [ transition-duration ] || [ transition-timing-function ] || [ transition-delay ]
-/* 实际用法*/
-/*缩写方式：*/
--webkit-transition:border-color .5s ease-in .1s, background-color .5s ease-in .1s, color .5s ease-in .1s;/*chrome2.0x+ safari3.1+*/
--moz-transition:border-color .5s ease-in .1s, background-color .5s ease-in .1s, color .5s ease-in .1s;/*Firefox 4 */
--o-transition:border-color .5s ease-in .1s, background-color .5s ease-in .1s, color .5s ease-in .1s;/*opera 10.5+ */
-/*IE9不支持，所以-ms-就没了 */
-transition:border-color .5s ease-in .1s, background-color .5s ease-in .1s, color .5s ease-in .1s;/*W3C */
-/*拆分方式跟缩写方式一样前面得加浏览器前缀，一个一个写太占位置，所以就只写W3C标准的*/
-transition-property:border-color, background-color, color;
-transition-duration:.5s, .5s, .5s;
-transition-timing-function:ease-in, ease-in, ease-in;
-transition-delay:.1s, .1s, .1s;
+````
+    transition：[ transition-property ] || [ transition-duration ] || [ transition-timing-function ] || [ transition-delay ]
+    /* 实际用法*/
+    /*缩写方式：*/
+    -webkit-transition:border-color .5s ease-in .1s, background-color .5s ease-in .1s, color .5s ease-in .1s;/*chrome2.0x+ safari3.1+*/
+    -moz-transition:border-color .5s ease-in .1s, background-color .5s ease-in .1s, color .5s ease-in .1s;/*Firefox 4 */
+    -o-transition:border-color .5s ease-in .1s, background-color .5s ease-in .1s, color .5s ease-in .1s;/*opera 10.5+ */
+    /*IE9不支持，所以-ms-就没了 */
+    transition:border-color .5s ease-in .1s, background-color .5s ease-in .1s, color .5s ease-in .1s;/*W3C */
+    /*拆分方式跟缩写方式一样前面得加浏览器前缀，一个一个写太占位置，所以就只写W3C标准的*/
+    transition-property:border-color, background-color, color;
+    transition-duration:.5s, .5s, .5s;
+    transition-timing-function:ease-in, ease-in, ease-in;
+    transition-delay:.1s, .1s, .1s;
 ````
 
 Transitions属性中如果提供多个属性值，都是以逗号（“，”）隔开。
@@ -36,8 +36,8 @@ Transitions属性中如果提供多个属性值，都是以逗号（“，”）
 ### 参与过渡的属性
 
 transition-property是用来指定元素需要过渡的css属性。语法如下：
-````css
-transition-property：all | none | <property>[ ,<property> ]*
+````
+    transition-property：all | none | <property>[ ,<property> ]*
 ````
 #### transition-property取值
 - all：所有可以进行过渡的css属性
@@ -48,14 +48,14 @@ transition-property：all | none | <property>[ ,<property> ]*
 
 ### 过渡持续时间
 transition-duration针对过渡效果的持续时间，用来指定元素转换过程的持续时间，取值：time 为数值，单位为s（秒）。其默认值是0，也就是变换时是即时的。语法如下：
-````css
-transition-duration：<time>[ ,<time> ]*
+````
+    transition-duration：<time>[ ,<time> ]*
 ````
 
 ### 过渡的变化速率
 transition-timing-function 针对了过渡效果的变化速率，有多种特效展示。语法如下：
-````css
-transition-timing-function：linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>)[ ,linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>) ]*
+````
+    transition-timing-function：linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>)[ ,linear | ease | ease-in | ease-out | ease-in-out | cubic-bezier(<number>, <number>, <number>, <number>) ]*
 ````
 
 所有过渡效果都涉及到一个：贝塞尔曲线 的东西{% link 点击 https://zh.wikipedia.org/wiki/%E8%B2%9D%E8%8C%B2%E6%9B%B2%E7%B7%9A  %}了解贝塞尔曲线。但是W3C预留的几个过渡效果来供我们使用，如下：
@@ -76,8 +76,8 @@ transition-timing-function：linear | ease | ease-in | ease-out | ease-in-out | 
 
  ### 过渡的延迟执行时间
 transition-delay是用来指定一个过渡延迟执行的时间。语法如下：
-````css
-transition-delay：<time>[ ,<time> ]*
+````
+    transition-delay：<time>[ ,<time> ]*
 ````
 ## Transitions实现的简单hover按钮
 asda

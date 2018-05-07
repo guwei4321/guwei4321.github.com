@@ -9,16 +9,18 @@ CSS transforms allows elements styled with CSS to be transformed in two-dimensio
 {% endblockquote %}
 
 以上是W3C官方解释，翻译过来大概意思就是：transforms 可以让元素的css在二维或者三维空间变化。
-
+<!--more-->
 ## Transition
-````css
+````
 transform：none | matrix(<number>,<number>,<number>,<number>,<number>,<number>)? translate(<length>[,<length>])? translateX(<length>)? translateY(<length>)? rotate(<angle>)? scale(<number>[,<number>])? scaleX(<number>)? scaleY(<number>)? skew(<angle>[,<angle>])? skewX(<<angle>) || skewY(<angle>)?
-/* 实际用法*/
--webkit-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);//chrome1.0x+ safari3.1+
--moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);//firefox3.5+
--o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);//opera 10.5+
--ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);//IE9+
-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);//W3C标准
+````
+````css
+    /* 实际用法*/
+    -webkit-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);//chrome1.0x+ safari3.1+
+    -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);//firefox3.5+
+    -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);//opera 10.5+
+    -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);//IE9+
+    transform: rotate(4deg) scale(1) skew(1deg) translate(10px);//W3C标准
 ````
 
 Transform 属性中如果提供多个属性值，都是以逗号（“，”）隔开。
@@ -49,7 +51,7 @@ Transform 属性中如果提供多个属性值，都是以逗号（“，”）�
 
 ### transform-origin（改变元素基点）
 
-````css
+````
 transform-origin：[ <percentage> | <length> | left | center | right ] [ <percentage> | <length> | top | center | bottom ]?
 /* 实际用法*/
 -webkit-transform-origin:top left;//chrome1.0x+ safari3.1+
