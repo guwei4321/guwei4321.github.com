@@ -1,4 +1,4 @@
-title: 哪些些JS属性/方法会导致重绘
+title: 哪些会导致重绘和回流
 date: 2018-05-15 13:53:51
 tags:
 - 技术细节
@@ -7,6 +7,11 @@ tags:
 categories:
 - Js
 ---
+
+
+{% blockquote paulirish/what-forces-layout, https://gist.github.com/paulirish/5d52fb081b3570c81e3a %}
+翻译自 《What forces layout / reflow》
+{% endblockquote %}
 
 当调用以下所有属性/方法时，会触发浏览器重绘。重绘就是让让浏览器同步计算样式和布局，通常是浏览器性能瓶颈。
 <!--more-->
@@ -76,6 +81,31 @@ categories:
 1. 很多很多。
 
 ## 附录
- {% img [Timeline trace of The Guardian. Outbrain is forcing layout repeatedly, probably in a loop.] http://om64pi295.bkt.clouddn.com/timeline-trace-of-the-guardian.png %}
+* 回流只在Dom结构有改变会有一定性能消耗，在设置无效的样式和布局的时候会触发。通常，部分原因是因为DOM节点变化（改变类名，增加/删除节点，甚至是增加伪元素，譬如:focus）
+* 如果布局发生变化，样式肯定会重新计算。所以重绘会触发布局以及样式的重新计算。重绘的消耗非常依赖于内容/位置的变化，但是这两个的消耗又差不多。
+* 改怎么避免回流跟重绘呢？
+    1. 尽量避免在 for 循环中重绘和改变DOM
+    2. 使用 DevTools Timeline，分析页面加载或用户交互后的每个时间。你可能会发现很多意想不到的事情。
+    3. 批处理读/写DOM，可以使用(FastDom)[https://github.com/wilsonpage/fastdom]或者虚拟DOM
+
+### 浏览器兼容性
+    因为每个浏览器渲染页面原理都不一样，所以使用 Chrome 的 DevTools看到的数据不一定在每个浏览器都适用。
+
+## CSS Triggers
+(CSS Triggers)[https://csstriggers.com/] 列出了在各个引擎下，Js设置/改变CSS的值时候是否触发回滚的情况，使用三种色块来表示是否会触发Layout/Paint/Composite。
+
+## 更多参考资料
+* [Avoiding layout thrashing — Web Fundamentals](https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing?hl=en)
+* [Fixing Layout thrashing in the real world | Matt Andrews](https://mattandre.ws/2014/05/really-fixing-layout-thrashing/)
+* [Timeline demo: Diagnosing forced synchronous layouts - Google Chrome](https://developer.chrome.com/devtools/docs/demos/too-much-layout)
+* [Preventing &apos;layout thrashing&apos; | Wilson Page](http://wilsonpage.co.uk/preventing-layout-thrashing/)
+* [wilsonpage/fastdom](https://github.com/wilsonpage/fastdom)
+* [Rendering: repaint, reflow/relayout, restyle / Stoyan](http://www.phpied.com/rendering-repaint-reflowrelayout-restyle/)
+* [We spent a week making Trello boards load extremely fast. Here’s how we did it. - Fog Creek Blog](http://blog.fogcreek.com/we-spent-a-week-making-trello-boards-load-extremely-fast-heres-how-we-did-it/)
+* [Minimizing browser reflow  |  PageSpeed Insights  |  Google Developers](https://developers.google.com/speed/articles/reflow?hl=en)
+* [Optimizing Web Content in UIWebViews and Websites on iOS](https://developer.apple.com/videos/wwdc/2012/?id=601)
+* [Accelerated Rendering in Chrome](http://www.html5rocks.com/en/tutorials/speed/layers/)
+* [web performance for the curious](https://www.igvita.com/slides/2012/web-performance-for-the-curious/)
+* [Jank Free](http://jankfree.org/)
 
 
