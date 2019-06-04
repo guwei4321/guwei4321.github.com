@@ -224,3 +224,285 @@ export default function createStore(reducer, preloadedState, enhancer) {
   }
 }
 ````
+将多个reducer合并为一个reducer
+`combineReducers.js` 源码分析如下：
+````javascript
+function getUndefinedStateErrorMessage(key, action) {
+  const actionType = action && action.type
+  const actionDescription =
+    (actionType && `action "${String(actionType)}"`) || 'an action'
+
+  return (
+    `Given ${actionDescription}, reducer "${key}" returned undefined. ` +
+    `To ignore an action, you must explicitly return the previous state. ` +
+    `If you want this reducer to hold no value, you can return null instead of undefined.`
+  )
+}
+
+function getUnexpectedStateShapeWarningMessage(
+  inputState,
+  reducers,
+  action,
+  unexpectedKeyCache
+) {
+  const reducerKeys = Object.keys(reducers)
+  const argumentName =
+    action && action.type === ActionTypes.INIT
+      ? 'preloadedState argument passed to createStore'
+      : 'previous state received by the reducer'
+
+  if (reducerKeys.length === 0) {
+    return (
+      'Store does not have a valid reducer. Make sure the argument passed ' +
+      'to combineReducers is an object whose values are reducers.'
+    )
+  }
+
+  if (!isPlainObject(inputState)) {
+    return (
+      `The ${argumentName} has unexpected type of "` +
+      {}.toString.call(inputState).match(/\s([a-z|A-Z]+)/)[1] +
+      `". Expected argument to be an object with the following ` +
+      `keys: "${reducerKeys.join('", "')}"`
+    )
+  }
+
+  const unexpectedKeys = Object.keys(inputState).filter(
+    key => !reducers.hasOwnProperty(key) && !unexpectedKeyCache[key]
+  )
+
+  unexpectedKeys.forEach(key => {
+    unexpectedKeyCache[key] = true
+  })
+
+  if (action && action.type === ActionTypes.REPLACE) return
+
+  if (unexpectedKeys.length > 0) {
+    return (
+      `Unexpected ${unexpectedKeys.length > 1 ? 'keys' : 'key'} ` +
+      `"${unexpectedKeys.join('", "')}" found in ${argumentName}. ` +
+      `Expected to find one of the known reducer keys instead: ` +
+      `"${reducerKeys.join('", "')}". Unexpected keys will be ignored.`
+    )
+  }
+}
+
+// 检查reducers的state是否有默认返回值
+function assertReducerShape(reducers) {
+  Object.keys(reducers).forEach(key => {
+    const reducer = reducers[key]
+    // 以默认值来执行reducer 
+    const initialState = reducer(undefined, { type: ActionTypes.INIT })
+
+    if (typeof initialState === 'undefined') {
+      throw new Error(
+        `Reducer "${key}" returned undefined during initialization. ` +
+          `If the state passed to the reducer is undefined, you must ` +
+          `explicitly return the initial state. The initial state may ` +
+          `not be undefined. If you don't want to set a value for this reducer, ` +
+          `you can use null instead of undefined.`
+      )
+    }
+
+    if (
+      typeof reducer(undefined, {
+        type: ActionTypes.PROBE_UNKNOWN_ACTION()
+      }) === 'undefined'
+    ) {
+      throw new Error(
+        `Reducer "${key}" returned undefined when probed with a random type. ` +
+          `Don't try to handle ${
+            ActionTypes.INIT
+          } or other actions in "redux/*" ` +
+          `namespace. They are considered private. Instead, you must return the ` +
+          `current state for any unknown actions, unless it is undefined, ` +
+          `in which case you must return the initial state, regardless of the ` +
+          `action type. The initial state may not be undefined, but can be null.`
+      )
+    }
+  })
+}
+
+ /**
+ 将传入的reducers转为，key为reducerName，value为reducer处理函数，形如
+ {
+   reducerA: funA
+   reducerB: funB
+ }
+ 并且生成新的state tree，形如：
+ {
+   reducerA: {
+     key: 'value'
+   },
+   reducerB: {
+     key: 'value'
+   }
+ }
+ */
+export default function combineReducers(reducers) {
+  const reducerKeys = Object.keys(reducers)
+  // 过滤掉reducers中不是function的键值对
+  const finalReducers = {}
+  for (let i = 0; i < reducerKeys.length; i++) {
+    const key = reducerKeys[i]
+
+    if (process.env.NODE_ENV !== 'production') {
+      if (typeof reducers[key] === 'undefined') {
+        warning(`No reducer provided for key "${key}"`)
+      }
+    }
+
+    if (typeof reducers[key] === 'function') {
+      finalReducers[key] = reducers[key]
+    }
+  }
+  const finalReducerKeys = Object.keys(finalReducers)
+
+  let unexpectedKeyCache
+  if (process.env.NODE_ENV !== 'production') {
+    unexpectedKeyCache = {}
+  }
+
+  let shapeAssertionError
+  try {
+    assertReducerShape(finalReducers)
+  } catch (e) {
+    shapeAssertionError = e
+  }
+
+  return function combination(state = {}, action) {
+    if (shapeAssertionError) {
+      throw shapeAssertionError
+    }
+
+    if (process.env.NODE_ENV !== 'production') {
+      const warningMessage = getUnexpectedStateShapeWarningMessage(
+        state,
+        finalReducers,
+        action,
+        unexpectedKeyCache
+      )
+      if (warningMessage) {
+        warning(warningMessage)
+      }
+    }
+
+    let hasChanged = false
+    // 存放最终的 state 树
+    const nextState = {}
+    for (let i = 0; i < finalReducerKeys.length; i++) {
+      // 获取每个reducer的key名
+      const key = finalReducerKeys[i]
+      // 获取 reducer
+      const reducer = finalReducers[key]
+      // 获取传入的state树
+      const previousStateForKey = state[key]
+      // 执行该key的reducer函数，生成新state tree
+      const nextStateForKey = reducer(previousStateForKey, action)
+      if (typeof nextStateForKey === 'undefined') {
+        const errorMessage = getUndefinedStateErrorMessage(key, action)
+        throw new Error(errorMessage)
+      }
+      // 以各自的reducerName作为key名，将新生成的state作为value值，生成最终的state tree
+      nextState[key] = nextStateForKey
+      // 判断所有的state有没有变化
+      hasChanged = hasChanged || nextStateForKey !== previousStateForKey
+    }
+    // 如果state tree 变化了，就返回新的；否则，返回旧的
+    return hasChanged ? nextState : state
+  }
+}
+````
+
+`applyMiddleware.js` 源码分析如下：
+````javascript
+import compose from './compose'
+
+ /**
+ applyMiddleware(thunk)就是 createStore 中的enhancer，负责扩展store
+ */
+export default function applyMiddleware(...middlewares) {
+  return createStore => (...args) => {
+    const store = createStore(...args)
+    let dispatch = () => {
+      throw new Error(
+        `Dispatching while constructing your middleware is not allowed. ` +
+          `Other middleware would not be applied to this dispatch.`
+      )
+    }
+
+    const middlewareAPI = {
+      getState: store.getState,
+      dispatch: (...args) => dispatch(...args)
+    }
+    // 将 middlewares 作为参数注入，函数科里化后返回新的函数链。
+    const chain = middlewares.map(middleware => middleware(middlewareAPI))
+    // 以 store.dispatch 来注入 
+    dispatch = compose(...chain)(store.dispatch)
+
+    return {
+      ...store,
+      dispatch
+    }
+  }
+}
+
+````
+
+`bindActionCreators.js` 源码分析如下：
+````javascript
+function bindActionCreator(actionCreator, dispatch) {
+  return function() {
+    return dispatch(actionCreator.apply(this, arguments))
+  }
+}
+
+/**
+ 将dispatch包装好来直接使用
+ */
+export default function bindActionCreators(actionCreators, dispatch) {
+  if (typeof actionCreators === 'function') {
+    return bindActionCreator(actionCreators, dispatch)
+  }
+
+  if (typeof actionCreators !== 'object' || actionCreators === null) {
+    throw new Error(
+      `bindActionCreators expected an object or a function, instead received ${
+        actionCreators === null ? 'null' : typeof actionCreators
+      }. ` +
+        `Did you write "import ActionCreators from" instead of "import * as ActionCreators from"?`
+    )
+  }
+  // 遍历 actionCreators 分别来执行 dispatch
+  const keys = Object.keys(actionCreators)
+  const boundActionCreators = {}
+  for (let i = 0; i < keys.length; i++) {
+    const key = keys[i]
+    const actionCreator = actionCreators[key]
+    if (typeof actionCreator === 'function') {
+      boundActionCreators[key] = bindActionCreator(actionCreator, dispatch)
+    }
+  }
+  return boundActionCreators
+}
+
+````
+
+`compose.js` 源码分析如下：
+````javascript
+/**
+ 传入 Functions 作为参数，返回链式调用的形态。譬如，compose(f, g, h) 最终返回 (...args) => f(g(h(...args)))
+*/
+export default function compose(...funcs) {
+  if (funcs.length === 0) {
+    return arg => arg
+  }
+
+  if (funcs.length === 1) {
+    return funcs[0]
+  }
+
+  return funcs.reduce((a, b) => (...args) => a(b(...args)))
+}
+
+````
