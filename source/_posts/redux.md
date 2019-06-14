@@ -415,6 +415,7 @@ export default function combineReducers(reducers) {
 ````
 
 `applyMiddleware.js` 源码分析如下：
+回顾下`createStore`方法，`createStore(reducer, preloadedState, enhancer)`，`applyMiddleware`作为第三个参数`enhancer`传入，
 ````javascript
 import compose from './compose'
 
