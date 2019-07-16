@@ -1,5 +1,5 @@
 title: Redux源码解析
-date: 2018-05-24 13:53:51
+date: 2019-05-24 13:53:51
 tags:
 - JavaScript
 - React
@@ -8,9 +8,31 @@ categories:
 - React
 ---
 
-版本号 redux@4.0.1
+> 此源码分析时，redux版本号是4.0.1
+
+#API
+
+`Redux`的API只有以下五个：
+1. createStore
+2. combineReducers
+3. bindActionCreators
+4. applyMiddleware
+5. compose
+
+我们分别针对这五个接口进行分析。
+<!--more-->
 
 ## createStore
+`createStore`创建一个Redux store 来存储所有state，接受三个参数: `reducer`, `preloadedState`, `enhancer` ：
+* `reducer`:  reducer 是一个函数，接收两个参数，分别是当前的 state 树和要处理的 action，返回新的 statetree，
+* `preloadedState`：初始化state，设置store中默认值 , 可以将服务端传来经过处理后的 state 传给它，如果使用  combineReducers 来制作root reducer，则必须是一个keys保持一致的普通对象。
+* `enhancer`：高阶函数，增加返回的 store。与第三方的 middleware 相似，通过函数改变 store 接口。
+
+返回一个对象，分别提供 dispatch, getState, subscribe, replaceReducer 四个方：
+* `dispatch`:接收一个action， 是一个object{type：'a_action_type'}作为参数，之后其内部会调用reducer，根据这个action，和当前state，返回新的state。
+* `getState`:获取最新state。
+* `subscribe`: 订阅函数，当 dispatch 的时候调用的，从listener数组中获取当前执行的dispatch，并执行。
+* `replaceReducer`:替换reducer，改变state修改的逻辑
 
 `createStore.js` 源码分析如下：
 ````javascript
@@ -19,23 +41,6 @@ import $$observable from 'symbol-observable'
 import ActionTypes from './utils/actionTypes'
 import isPlainObject from './utils/isPlainObject'
 
-/**
- * 创建一个Redux store 来存储所有state
- * 调用 dispatch 是唯一改变store的方法
- *
- * 应用只有一个单独的store. 通过action指定state tree做出不同的操作，
- * 通过combineReducers方法将将多个reducer合成一个reducer.
- *
- * @param {Function}  reducer 接受当前state和要处理的action，返回新的statetree
-reducer 是一个函数,接收两个参数，分别是当前的 state 树和要处理的 action，返回新的 state 树
-
-  [preloadedState]  初始化的state，可以设置store中的默认值 , 可以将服务端传来经过处理后的 state 传给它。
- * 如果使用  combineReducers 来制作root reducer，则必须是一个keys保持一致的普通对象
- 
- * @param {Function} [enhancer] 高阶函数，增加返回的 store。与第三方的 middleware 相似，通过函数改变 store 接口。 
- *
- * @returns {Store} 返回一个对象，分别提供 dispatch, getState, subscribe, replaceReducer 四个方法,   
- */
 export default function createStore(reducer, preloadedState, enhancer) {
   // 保证 传入的 preloadedState, enhancer 是非函数 
   if (
@@ -132,10 +137,6 @@ export default function createStore(reducer, preloadedState, enhancer) {
     }
   }
 
-    /**
-   * action 是对象，改变 state 的唯一方式
-   * 返回值：要分发的action
-   */
   function dispatch(action) {
     if (!isPlainObject(action)) {
       throw new Error(
@@ -224,7 +225,9 @@ export default function createStore(reducer, preloadedState, enhancer) {
   }
 }
 ````
-将多个reducer合并为一个reducer
+
+## combineReducers
+将多个reducer合并为一个reducer，传入的是一个对象，不定义reducer的键值的话，就是reducer的名词。
 `combineReducers.js` 源码分析如下：
 ````javascript
 function getUndefinedStateErrorMessage(key, action) {
@@ -413,9 +416,10 @@ export default function combineReducers(reducers) {
   }
 }
 ````
+## applyMiddleware
+回顾下`createStore`方法，`createStore(reducer, preloadedState, enhancer)`，`applyMiddleware`作为第三个参数`enhancer`传入，对dispatch进行包装，处理各种actin。
 
 `applyMiddleware.js` 源码分析如下：
-回顾下`createStore`方法，`createStore(reducer, preloadedState, enhancer)`，`applyMiddleware`作为第三个参数`enhancer`传入，
 ````javascript
 import compose from './compose'
 
@@ -449,7 +453,11 @@ export default function applyMiddleware(...middlewares) {
 }
 
 ````
-
+## bindActionCreators
+自动把多个 action 创建函数 绑定到相应的 dispatch() 方法上，可直接使用，不需要引入 action。
+接受两个参数：
+* `actionCreator`可以是对象也可以是函数，如果是对象则返回对象，如果是函数则返回函数。
+* `dispatch` dispatch函数
 `bindActionCreators.js` 源码分析如下：
 ````javascript
 function bindActionCreator(actionCreator, dispatch) {
@@ -461,6 +469,7 @@ function bindActionCreator(actionCreator, dispatch) {
 /**
  将dispatch包装好来直接使用
  */
+ 
 export default function bindActionCreators(actionCreators, dispatch) {
   if (typeof actionCreators === 'function') {
     return bindActionCreator(actionCreators, dispatch)
@@ -474,7 +483,7 @@ export default function bindActionCreators(actionCreators, dispatch) {
         `Did you write "import ActionCreators from" instead of "import * as ActionCreators from"?`
     )
   }
-  // 遍历 actionCreators 分别来执行 dispatch
+  // 遍历 actionCreators ， 返回 dispatch 设置为相应key对应的 action 的对象
   const keys = Object.keys(actionCreators)
   const boundActionCreators = {}
   for (let i = 0; i < keys.length; i++) {
@@ -488,6 +497,8 @@ export default function bindActionCreators(actionCreators, dispatch) {
 }
 
 ````
+## compose
+从里往外把接受到函数合成最终函数，能让传入的函数依次执行。
 
 `compose.js` 源码分析如下：
 ````javascript
