@@ -13,32 +13,30 @@
 
         　　　　paths: {
         　　　　　　"lodash": "./js/lodash",
+        　　　　　　"underscore": "./js/underscore",
         　　　　}
 
         　　});
     </script>
     <!-- <script src="./js/lodash.js"></script> -->
     <script>
-        require(['lodash'], function(_) {
+        require(['lodash', 'underscore'], function(_, __) {
             // Underscore/Lodash
-            var users = [
-                { 'user': 'barney',  'age': 36, 'active': true },
-                { 'user': 'fred',    'age': 40, 'active': false },
-                { 'user': 'pebbles', 'age': 1,  'active': true }
-            ]
-            var result = _.find(users,  function (o) { return o.age < 40; })
-            console.dir(result)
-            // output: active: true age: 36 user: "barney"
+            var a = __.object(['moe', 'larry', 'curly'], [30, 40, 50]);
+            console.log(a)
+            var b = __.object([['moe', 30], ['larry', 40], ['curly', 50]]);
+            console.log(b)
+            // output: [1, 2]
         });
         // Native
-        var users = [
-            { 'user': 'barney',  'age': 36, 'active': true },
-            { 'user': 'fred',    'age': 40, 'active': false },
-            { 'user': 'pebbles', 'age': 1,  'active': true }
-        ]
-        var result = users.find( (o) =>  o.age < 40 )
-        console.dir(result)
-        // output: active: true age: 36 user: "barney"
+        var a = [['moe', 30], ['larry', 40], ['curly', 50]].reduce((result, [key, val]) => Object.assign(result, {[key]: val}), {})
+        console.log(a)
+        // output: [1, 2]
+        var b = [['moe', 'larry', 'curly'], [30, 40, 50]].map((val) => {
+            Object.assign({}, {[val]: val})
+        })
+        console.log(b)
+        // output: [1, 2]
     </script>
 </body>
 </html>

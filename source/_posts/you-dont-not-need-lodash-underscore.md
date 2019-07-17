@@ -136,27 +136,56 @@ console.dir(result)
 ````
 
 ### _.pluck
-
+`Lodash` v4.0 已经移除`pluck`函数。
 ````javascript
-// Underscore/Lodash
-
+var users = [{name: "Alice"}, {name: "Bob"}, {name: "Jeremy"}]
+var names = _.pluck(users, "name")
+console.log(names)
+// output: ["Alice", "Bob", "Jeremy"]
 // Native
+var users = [{name: "Alice"}, {name: "Bob"}, {name: "Jeremy"}]
+var names = users.map( (o) => o.name )
+console.log(names)
+// output:["Alice", "Bob", "Jeremy"]
 ````
 
-### _.each
+### _.includes
 
 ````javascript
 // Underscore/Lodash
+var array = [1, 2, 3]
+// Underscore/Lodash - also called _.contains
+var isIncludes = _.includes(array, 1)
+console.log(isIncludes)
+// output: true
 
 // Native
+var array = [1, 2, 3]
+var isIncludes = array.includes(1);
+console.log(isIncludes)
+var isIndexOf = array.indexOf(1) > -1;
+// output: true
+console.log(isIndexOf)
+// output: true
 ````
 
-### _.each
+### _.toArray
 
 ````javascript
 // Underscore/Lodash
-
+_.toArray('abc')
+// output: ["a", "b", "c"]
+_.toArray([1, 2])
+// output: [1, 2]
+_.toArray({ 'a': 1, 'b': 2 })
+// output: [1, 2]
 // Native
+[...'abc']
+// output: ["a", "b", "c"]
+Array.from([1, 2])
+// output: [1, 2]
+Array.from(Object.values({ 'a': 1, 'b': 2 }))
+// output: [1, 2]
 ````
 
 ### _.each
