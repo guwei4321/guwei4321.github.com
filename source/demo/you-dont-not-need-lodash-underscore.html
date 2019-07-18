@@ -29,13 +29,20 @@
             // output: [1, 2]
         });
         // Native
-        var a = [['moe', 30], ['larry', 40], ['curly', 50]].reduce((result, [key, val]) => Object.assign(result, {[key]: val}), {})
+        var array = [['moe', 30], ['larry', 40], ['curly', 50]];
+        var a = array.reduce((result, [key, val]) => Object.assign(result, {[key]: val}), {})
         console.log(a)
         // output: [1, 2]
-        var b = [['moe', 'larry', 'curly'], [30, 40, 50]].map((val) => {
-            Object.assign({}, {[val]: val})
-        })
-        console.log(b)
+        var array = [['moe', 'larry', 'curly'], [30, 40, 50]];
+        // var b = array.slice(0, 1).map( (vals) => {
+        //     let result = Object.create(null);
+        //     vals.map((val, index) => result[val] = array[1][index])
+        //     return result;
+        // } )[0]
+        // var b = array.slice(0, 1)[0].reduce( (result, key, index, _array) => Object.assign(result, {[key]: array[1][index]}) ,{}  )
+        // var c = array.slice(0, 1)[0].reduce( (result, key, index, _array) => {...result, {[key]: array[1][index]}} ,{}  )
+        // console.log(c)
+        // console.log(b)
         // output: [1, 2]
     </script>
 </body>
