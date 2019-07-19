@@ -20,30 +20,31 @@
     </script>
     <!-- <script src="./js/lodash.js"></script> -->
     <script>
+        var users = [
+            { 'user': 'xiaoming',  'age': 36, 'active': true },
+            { 'user': 'xiaohong',    'age': 40, 'active': false },
+            { 'user': 'xiaogang', 'age': 1,  'active': true }
+        ]
+        function Stooge(name) {
+            this.name = name;
+        }
+        Stooge.prototype.silly = true;
         require(['lodash', 'underscore'], function(_, __) {
             // Underscore/Lodash
-            var a = __.object(['moe', 'larry', 'curly'], [30, 40, 50]);
-            console.log(a)
-            var b = __.object([['moe', 30], ['larry', 40], ['curly', 50]]);
-            console.log(b)
-            // output: [1, 2]
+            _.isFinite(-101);
+            // output true
+            _.isFinite(-Infinity);
+            // output false
+            _.isFinite('a');
+            // output false
         });
-        // Native
-        var array = [['moe', 30], ['larry', 40], ['curly', 50]];
-        var a = array.reduce((result, [key, val]) => Object.assign(result, {[key]: val}), {})
-        console.log(a)
-        // output: [1, 2]
-        var array = [['moe', 'larry', 'curly'], [30, 40, 50]];
-        // var b = array.slice(0, 1).map( (vals) => {
-        //     let result = Object.create(null);
-        //     vals.map((val, index) => result[val] = array[1][index])
-        //     return result;
-        // } )[0]
-        // var b = array.slice(0, 1)[0].reduce( (result, key, index, _array) => Object.assign(result, {[key]: array[1][index]}) ,{}  )
-        // var c = array.slice(0, 1)[0].reduce( (result, key, index, _array) => {...result, {[key]: array[1][index]}} ,{}  )
-        // console.log(c)
-        // console.log(b)
-        // output: [1, 2]
+        var array = []
+        console.log(Number.isFinite(-101));
+        // output true
+        console.log(Number.isFinite(-Infinity));
+        // output true
+        console.log(Number.isFinite('a'));
+        // output false
     </script>
 </body>
 </html>
