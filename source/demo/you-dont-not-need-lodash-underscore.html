@@ -29,22 +29,38 @@
             this.name = name;
         }
         Stooge.prototype.silly = true;
+        var objA = {
+            x: 66,
+            offsetX: function(offset) {
+                return this.x + offset;
+            }
+        }
+
+        var objB = {
+            x: 67
+        };
         require(['lodash', 'underscore'], function(_, __) {
             // Underscore/Lodash
-            _.isFinite(-101);
-            // output true
-            _.isFinite(-Infinity);
-            // output false
-            _.isFinite('a');
+            // var stooge = {name: 'moe'};
+            // stooge === _.identity(stooge);
+            // console.log(stooge)
+            // var a = _.each(['a', false, 'c'], function(value,index){
+            //     return true;
+            // })
+            // console.log(a)
+            // _.each({one: 1, two: 2, three: 3}, function(value,key){
+            //     console.log(key  + value)
+            // });
+            var sum = _.reduce({a:1, b:2, c:3}, function(memo, num){ return memo + num; }, 0);
+            console.log(sum)
+            // foo(_.bind(object.fun, object));
             // output false
         });
-        var array = []
-        console.log(Number.isFinite(-101));
-        // output true
-        console.log(Number.isFinite(-Infinity));
-        // output true
-        console.log(Number.isFinite('a'));
         // output false
+        var boundOffsetX = objA.offsetX.bind(objB, 0);
+        console.log(boundOffsetX())
+        Object.entries({one: 1, two: 2, three: 3}).forEach( (value, key) =>console.log(value[0] + value[1] ) )
+        // output one1 two2 three3
     </script>
 </body>
 </html>

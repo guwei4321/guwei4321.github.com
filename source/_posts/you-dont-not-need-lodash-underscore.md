@@ -8,24 +8,31 @@ categories:
 
 为了更好的理解函数式变成，我们可以先从替换`underscore/lodash`开始。从[You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore)代替方法的学习过程中，我们发现有些`underscore/lodash`来得通俗易懂，所以实际开发中我们根据实际情况取舍，像使用原生`reduce`代替group方法，此篇文章学习重点是理解函数式编程和ES6/S7语法。
 
-## Arrays
+如果项目小，也没必要引入经常爆出bug的`loadsh`。
 
+## collections
 ### _.each
-
+按顺序遍历list的所有元素。Es6的forEach只支持循环数组，可以使用`Object.entries`将对象转成数组。
 ````javascript
 // Underscore/Lodash
 _.each(['a', 'b', 'c'], function(value,index){
     console.log(index  + value)
 })
 // output: 0a 1b 2c
+_.each({one: 1, two: 2, three: 3}, function(value,key){
+    console.log(key  + value)
+});
+// output: one1 two2 three3
 
 // Native 
 ['a', 'b', 'c'].forEach( (value, index) => console.log(index + value))
 // output: 0a 1b 2c
+Object.entries({one: 1, two: 2, three: 3}).forEach( (value, key) =>console.log(value[0] + value[1] ) )
+// output one1 two2 three3
 ````
 
 ### _.map
-
+`_.map`跟`_.each`都是遍历list的所有元素，`_.each`只是在原list上操作，而`_.map`会创建一个新的list。所以native中我们使用同名函数`map`来实现就够了。
 ````javascript
 // Underscore/Lodash
 var array1 = ['a', 'b', 'c']
@@ -43,7 +50,7 @@ console.log(array2)
 ````
 
 ### _.reduce
-
+`reduce`可以用原生数组的`reduce`方法来模拟。`reduce`提供了两个参数，累加器函数跟初始值，累加器函数有四个参数分别是：上一次调用的值或者传入的初始值；正在处理的元素；正在处理元素的索引值以及调用的`reduce`的源数组。
 ````javascript
 // Underscore/Lodash
 var array = [0, 1, 2, 3, 4]
@@ -61,7 +68,7 @@ console.log(result)
 ````
 
 ### _.reduceRight
-
+`reduce`的从右往左累加的方法。
 ````javascript
 // Underscore/Lodash
 var array = [0, 1, 2, 3, 4]
@@ -79,7 +86,7 @@ console.log(result)
 ````
 
 ### _.every
-每一个值是否满足要求
+每一项都必须都符合条件。如果全部都符合条件，则返回true；有一项不符合则返回false。
 ````javascript
 // Underscore/Lodash
 var array = [10, 20, 30]
@@ -97,7 +104,7 @@ console.log(result)
 ````
 
 ### _.some
-
+只要有一项符合条件就返回true。如果有一项符合条件，则返回true；除非一项都不符合条件才返回false。
 ````javascript
 // Underscore/Lodash
 var array = [10, 20, 30]
@@ -189,6 +196,8 @@ Array.from([1, 2])
 Array.from(Object.values({ 'a': 1, 'b': 2 }))
 // output: [1, 2]
 ````
+
+## Arrays
 
 ### _.object
 
@@ -435,11 +444,25 @@ Number.isFinite('a')
 ### _.bind
 
 ````javascript
-// Underscore/Lodash
+var objA = {
+    x: 66,
+    offsetX: function(offset) {
+        return this.x + offset;
+    }
+}
 
+var objB = {
+    x: 67
+};
+// Underscore/Lodash
+boundOffsetX = _.bind(objA.offsetX, objB, 0);
+// output 67
 // Native
+boundOffsetX = objA.offsetX.bind(objB, 0);
+// output 67
 ````
 
+##Utility
 ### _.each
 
 ````javascript
