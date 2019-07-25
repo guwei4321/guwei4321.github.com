@@ -41,25 +41,24 @@
         };
         require(['lodash', 'underscore'], function(_, __) {
             // Underscore/Lodash
-            // var stooge = {name: 'moe'};
-            // stooge === _.identity(stooge);
-            // console.log(stooge)
-            // var a = _.each(['a', false, 'c'], function(value,index){
-            //     return true;
-            // })
-            // console.log(a)
-            // _.each({one: 1, two: 2, three: 3}, function(value,key){
-            //     console.log(key  + value)
-            // });
-            var sum = _.reduce({a:1, b:2, c:3}, function(memo, num){ return memo + num; }, 0);
-            console.log(sum)
-            // foo(_.bind(object.fun, object));
-            // output false
+            console.log(_.flatten([1, [2, [3, [4]], 5]]));
+            // => [1, 2, [3, [4]], 5]
         });
+        // Native
+        const flatten = [1, [2, [3, [4]], 5]].reduce( (a, b) => a.concat(b), [])
+        console.log(flatten)
+        // => [1, 2, [3, [4]], 5]
         // output false
-        var boundOffsetX = objA.offsetX.bind(objB, 0);
-        console.log(boundOffsetX())
-        Object.entries({one: 1, two: 2, three: 3}).forEach( (value, key) =>console.log(value[0] + value[1] ) )
+        // var users = [
+        //     { 'user': 'xiaoming',  'age': 36, 'active': true },
+        //     { 'user': 'xiaohong',    'age': 40, 'active': false },
+        //     { 'user': 'xiaogang', 'age': 1,  'active': true }
+        // ]
+        // var result = [2, 9, 9].indexOf(2)
+    // console.log( [...Reflect.enumerate( new Stooge("Hi") )] )
+    // console.log( Object.keys(new Stooge("Hi")) )
+        // console.log(boundOffsetX())
+        // Object.entries({one: 1, two: 2, three: 3}).forEach( (value, key) =>console.log(value[0] + value[1] ) )
         // output one1 two2 three3
     </script>
 </body>

@@ -9,8 +9,8 @@ categories:
 为了更好的理解函数式变成，我们可以先从替换`underscore/lodash`开始。从[You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore)代替方法的学习过程中，我们发现有些`underscore/lodash`来得通俗易懂，所以实际开发中我们根据实际情况取舍，像使用原生`reduce`代替group方法，此篇文章学习重点是理解函数式编程和ES6/S7语法。
 
 如果项目小，也没必要引入经常爆出bug的`loadsh`。
-
-PS：其中 `concat`(合并生成一个新数组)、`fill`（填充数组）
+<!--more-->
+PS：其中数组方法中的 `concat`(合并生成一个新数组)、`fill`（填充数组）、`reverse`(颠倒数组顺序)、`slice`(切割数组)等等跟原生方法一样就不列举出来了。
 ## collections
 ### _.each
 按顺序遍历list的所有元素。Es6的forEach只支持循环数组，可以使用`Object.entries`将对象转成数组。有两个参数：
@@ -397,28 +397,161 @@ console.log(arrays.reduce((source, target) => source.filter(value => !target.inc
 // output: [1, 3, 4]
 ````
 
-### _.each
-
+### _.drop
+原生`slice`方法的阉割版。
 ````javascript
 // Underscore/Lodash
+_.drop([1, 2, 3]);
+// => [2, 3]
+_.drop([1, 2, 3], 2);
+// => [3]
 
 // Native
+_.drop([1, 2, 3], 5);
+// => []
+ 
+_.drop([1, 2, 3], 0);
+// => [1, 2, 3]
 ````
 
-### _.each
-
+### _.first
+获取数组 array 的第一个元素。
 ````javascript
 // Underscore/Lodash
+_.first([1, 2, 3, 4, 5]);
+// => 1
 
+_.first([1, 2, 3, 4, 5], 2);
+// => [1, 2]
 // Native
+[1, 2, 3, 4, 5][0];
+// => 1
+//or
+[].concat(1, 2, 3, 4, 5).shift()
+// => 1
+//or
+[].concat([1, 2, 3, 4, 5]).shift()
+// => 1
+
+// Native (works even with potentially undefined/null, like _.first)
+[].concat(undefined).shift()
+// => undefined
+[1, 2, 3, 4, 5].slice(0, 2);
+// => [1, 2]
 ````
 
-### _.each
+
+### _.last
+获取array中的最后一个元素。
+````javascript
+// Underscore/Lodash
+const numbers = [1, 2, 3, 4, 5];
+_.last(numbers);
+// => 5
+
+_.last(numbers, 2);
+// => [4, 5]
+
+// Native
+const numbers = [1, 2, 3, 4, 5];
+numbers[numbers.length - 1];
+// => 5
+//or
+numbers.slice(-1)[0];
+// => 5
+[].concat(numbers).pop()
+// => 5
+
+// Native
+[].concat(undefined).pop()
+// => undefined
+
+numbers.slice(-2);
+// => [4, 5]
+````
+
+### _.flatten
 
 ````javascript
 // Underscore/Lodash
+_.flatten([1, [2, [3, [4]], 5]]);
+// => [1, 2, [3, [4]], 5]
+// Native
+const flatten = [1, [2, [3, [4]], 5]].reduce( (a, b) => a.concat(b), []) // 合并一级层级
+// => [1, 2, [3, [4]], 5]
+
+// Native(ES2019)
+const flatten = [1, [2, [3, [4]], 5]].flat()
+// => [1, 2, [3, [4]], 5]
+````
+
+### _.flattenDeep
+
+````javascript
+// Underscore/Lodash
+_.flattenDeep([1, [2, [3, [4]], 5]]);
+// => [1, 2, 3, 4, 5]
+// Native
+const flattenDeep = (arr) => Array.isArray(arr)
+  ? arr.reduce( (a, b) => a.concat(flattenDeep(b)) , []) // 如果是数组则继续合并
+  : [arr] // 知道不是数组为止
+
+flattenDeep([1, [[2], [3, [4]], 5]])
+// => [1, 2, 3, 4, 5]
+
+// Native(ES2019)
+[1, [2, [3, [4]], 5]].flat(Infinity) // 使用 Infinity 作为深度，展开为一维数组
+// => [1, 2, 3, 4, 5]
+````
+
+### _.isArrayBuffer
+检查 value 是否是 ArrayBuffer 对象。
+````javascript
+// Underscore/Lodash
+_.isArrayBuffer(new ArrayBuffer(2));
+// output: true
 
 // Native
+console.log(new ArrayBuffer(2) instanceof ArrayBuffer);
+// output: true
+````
+
+### _.intersection
+创建唯一值的数组
+````javascript
+// Underscore/Lodash
+console.log(_.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1]))
+// output: [1, 2]
+
+// Native
+var arrays = [[1, 2, 3], [101, 2, 1, 10], [2, 1]];
+console.log(array.reduce(function(a, b) {
+  return a.filter(function(value) { // 因为是包含共同值，所以很自然的使用filter来过滤并创建新数组
+    return b.includes(value); // 为true则保留该元素
+  });
+})));
+// output: [1, 2]
+
+// ES6
+let arrays = [[1, 2, 3], [101, 2, 1, 10], [2, 1]];
+console.log(arrays.reduce((a, b) => a.filter(c => b.includes(c))));
+// output: [1, 2]
+````
+
+### _.without
+创建一个剔除所有给定值的新数组
+````javascript
+// Underscore/Lodash
+var array = [1, 2, 3]
+console.log(_.without(array, 2))
+// output: [1, 3]
+
+// Native
+var array = [1, 2, 3]
+console.log(array.filter(function(value) {
+  return value !== 2;
+}));
+// output: [1, 3]
 ````
 
 ## Objects
@@ -564,412 +697,8 @@ boundOffsetX = _.bind(objA.offsetX, objB, 0);
 boundOffsetX = objA.offsetX.bind(objB, 0);
 // output 67
 ````
-
-##Utility
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
-
-### _.each
-
-````javascript
-// Underscore/Lodash
-
-// Native
-````
+大部分方法都从以下文章搬过来，觉得很有学习价值，就一个个修修改改搬过来。从中又熟悉了一遍ES6的函数方法，特别是逼格满满的`reduce`方法，^_^
+
+参考文章：
+1. [You-Dont-Need-Lodash-Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore)
+2. [You don't (may not) need Lodash/Underscore](https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore)
