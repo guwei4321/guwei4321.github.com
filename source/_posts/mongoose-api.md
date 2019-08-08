@@ -14,6 +14,7 @@ Mongoose is a MongoDB object modeling tool designed to work in an asynchronous e
 
 Mongoose是运行在异步环境中对MongoDB进行操作的对象建模工具。
 {% endblockquote %}
+<!--more-->
 
 ## 准备工作
 1. 首先电脑必须安装 [MongoDB](https://www.mongodb.com/) 和 [NodeJS](http://nodejs.org/)。
@@ -79,18 +80,19 @@ database()
 ## Schema
 每一个`schema`都是一个文档的映射结构，无法操作数据库，但是在`schema`上可以定义属性、静态方法、实例方法、查询辅助、索引、虚拟字段以及配置项。
 ### 允许的类型
-    文档中字段允许的属性：
-    1. String
-    2. Number
-    3. Date
-    4. Buffer
-    5. Boolean
-    6. Mixed
-    7. ObjectId
-    8. Array
-    9. Decimal128
-    10. Map
+文档中字段允许的属性：
+1. String
+2. Number
+3. Date
+4. Buffer
+5. Boolean
+6. Mixed
+7. ObjectId
+8. Array
+9. Decimal128
+10. Map
 
+实例如下：
 ````javascript
 var schema = new Schema({
     name:    String,
@@ -227,23 +229,12 @@ max  最大值(只适用于数字)
 match  正则匹配(只适用于字符串)
 enum   枚举匹配(只适用于字符串)
 ````
-### required
-将某个字段设置为必填字段，如果没有这个必填字段，则不会被保存。
-
-### default
-如果不设置某个字段，则会取默认值
-
-### min | max
-将某个字段设置取值范围
-
-### match
-字段必须包含指定字符
-
-### enum
-枚举值必须在枚举的范围内
-
-### validate
-定义一个函数，返回`true`则通过验证；`false`则不通过验证。
+1. required：将某个字段设置为必填字段，如果没有这个必填字段，则不会被保存。
+2. default: 如果不设置某个字段，则会取默认值
+3. min | max: 将某个字段设置取值范围
+4. match: 字段必须包含指定字符
+5. enum: 枚举值必须在枚举的范围内
+6. validate：定义一个函数，返回`true`则通过验证；`false`则不通过验证。
 
 ## Model
 就是由`Schema`生成的模型，可以对数据进行操作。
@@ -280,7 +271,7 @@ Person.find().byName('lan').exec(function(err, users){
 
 
 ## Entity
-由`Schema`生成的实例，可以定义由生成的实例方法对数据进行操作。
+由`Model`生成的实例，可以定义实例方法，由生成的实例对数据进行操作。
 ### 自定义实例方法
 通过`Schema`的`methods`属性给`document`添加方法，如下使用
 ````javascript
@@ -304,7 +295,7 @@ felyne.findByName('lan' ,function(err, result){
 ````
 
 
-接着我们介绍下怎么使用`mongoose`来操作“增删改查”。
+以上讲完了mongoose的基本模型，接着我们介绍下mongoose的基本方法。也就是“增删改查”的四种方法。
 
 ## 增
 ### 实例的save方法
@@ -353,24 +344,37 @@ Person.insertMany({name: 'lan'},{name: 'van'}, (err, doc) => {
 ## 删
 ### 实例的remove方法
 删除实例。
-语法：`document.remove([callback])`。
+语法：`document.remove([callback])`，例子如下：
+````javascript
+document.remove((err, doc) => console.log(err))
+````
 
 
 ### Model的remove方法
 删除符合条件的所有数据。
-语法：`Model.insertMany(doc(s), [options], [callback])`。
-
+语法：`model.remove(conditions, [callback])`，例子如下：
+````javascript
+model.remove({name:/60/},(err, doc) => console.log(err))
+````
 
 ### findOneAndRemove方法
 只删除符合条件的第一条数据
+语法：`Model.findOneAndRemove(conditions, [options], [callback])`，例子如下：
+````javascript
+Model.findOneAndRemove({age:{$lt:60}},(err, doc) => console.log(err))
+````
 
 ### findByIdAndRemove方法
 通过ID删数据
+语法：`Model.findByIdAndRemove(id, [options], [callback])`，例子如下：
+````javascript
+Model.findByIdAndRemove(id, (err, doc) => console.log(err))
+````
 
 ## 改
 ### update
 更改符合条件的数据
-options有如下选项
+语法：`Model.update(conditions, doc, [options], [callback])`，第一个参数表示查询条件，第二个参数是需要修改的数据，第三个参数控制选项，第四个参数是回调函数。options有如下选项
 * safe (boolean)： 默认为true。安全模式。
 * upsert (boolean)： 默认为false。如果不存在则创建新记录。
 * multi (boolean)： 默认为false。是否更新多个查询记录。
@@ -378,14 +382,100 @@ options有如下选项
 * setDefaultsOnInsert： 如果upsert选项为true，在新建时插入文档定义的默认值。
 * strict (boolean)： 以strict模式进行更新。
 * overwrite (boolean)： 默认为false。禁用update-only模式，允许覆盖记录。
+````javascript
+Model.update({age:{$gte:60}},{age:61}, (err,raw) => {
+    //{ n: 1, nModified: 1, ok: 1 }
+    console.log(raw);
+})
+````
+
 ### updateMany
 只能更新多个的update，就是options为`{multi:true}`的update。
-### updateMany
+语法：`Model.updateMany(conditions, doc, [options], [callback])`。例子如下：
+````javascript
+// 将姓名为lan的用户年龄变为70
+Model.updateMany({name:/lan/},{age:50},function(err,raw){
+    //{ n: 2, nModified: 2, ok: 1 }
+    console.log(raw);
+});
+````
+### updateOne
 只能更新一个的update，就是options为`{multi:false}`的update。
+语法：`Model.updateOne(conditions, doc, [options], [callback])`，例子如下：
+````javascript
+// 将姓名为lan的第一个用户年龄变为70
+Model.updateOne({name:/lan/},{age:70}, function(err,raw){
+    //{ n: 2, nModified: 2, ok: 1 }
+    console.log(raw);
+});
+````
+### 修改更改器
+1. `$inc`:增减修改器，只对数字有效。
+2. `$set`:指定键并修改，不存在则创建。
+3. `$unset`:删除一个键。
+````javascript
+// inc 
+ Model.update({
+    'age': 60
+}, {
+    '$inc': {
+        'age': 61
+    }
+});
+// 执行后: age=23
+// set 
+ Model.update({
+    'age': 60
+}, {
+    '$set': {
+        'age': '百岁老人'
+    }
+});
+// 执行后: age=百岁老人
+// set 
+ Model.update({
+    'age': 60
+}, {
+    '$unset': {
+        'age': '百岁老人'
+    }
+});
+// 执行后: 删除了age键
+````
+
+### 数组更改器
+1. `$push`: 给一个键push一个数组成员,键不存在会创建
+2. `$addToSet`:向数组中添加一个元素,如果存在就不添加。
+3. `$each`:遍历数组。
+3. `$pop`:向数组中尾部删除一个元素
+3. `$pull`:向数组中删除指定元素。
+````javascript
+// inc 
+ Model.update({
+    'age': 60
+}, {
+    '$push': {
+        'array': 1
+    }
+});
+// 执行后: 增加一个 array 键,类型为数组, 有一个成员 10
+Model.update({
+    'age': 60
+}, {
+    '$push': {
+        'array': {
+            '$each': [1, 2, 3, 4, 5]
+        }
+    }
+});
+// 执行后: array : [10,1,2,3,4,5]
+````
+
 
 ## 查
 ### find
-查询所有数据
+查询所有符合条件的数据。
+语法：`Model.find(conditions, [projection], [options], [callback])`,第一个参数表示查询条件，第二个参数用于控制返回的字段，第三个参数用于配置查询参数，第四个参数是回调函数。如果参数为空则传null
 #### 查询条件
 * $or　　　　或关系
 * $nor　　　 或关系取反
@@ -411,15 +501,43 @@ options有如下选项
 * $slice　　　　查询字段集合中的元素（比如从第几个之后，第N到第M个元素
 * $where       可以使用任意JavaScript作为条件
 
+````javascript
+// 查询名为lan年龄大于60的用户
+Model.find({name:/lan/,age:{$gte:60}},(err,docs)=>{
+    console.log(docs);
+})
+// 查询名为lan的用户，只输出name，不输出id
+Model.find({name:/lan/},{name:1,_id:0},(err,docs)=>{
+    console.log(docs);
+})
+// 找出跳过前两条的所有数据
+Model.find(null,null,{skip:2},(err,docs)=>{
+    console.log(docs);
+})
+````
+
 ### findById
-通过id查询数据
+通过id查询数据。
+语法：`Model.findById(id, [projection], [options], [callback])`，除了查询条件是id，其他参数跟`find`一样，例子如下：
+````javascript
+// 查询某个id的用户
+Model.findById(id,(err,doc)=>{
+    console.log(doc);
+})      
+````
 
 ### findOne
 返回查询到的第一个数据
-
+语法：`Model.findOne([conditions], [projection], [options], [callback])`，用法跟`find`一样，只是只返回查到的第一个数据，例子如下：
+````javascript
+// 查询某个id的用户
+Model.findOne({name:/lan/,age:{$gte:60}},(err,doc)=>{
+    console.log(doc);
+})      
+````
 
 ### 查询后处理
-查询后处理的方法如下：
+所谓的查询后处理，就是在查询到的结果里通过以下方法再处理，方法如下：
 * sort     排序
 * skip     跳过
 * limit    限制
@@ -447,6 +565,60 @@ options有如下选项
 
 ### pre()
 `pre()`是在执行方法之前执行的方法。
+````javascript
+var schema = new mongoose.Schema({ age:Number, name: String, });  
+schema.pre('find',function(next){
+    console.log('我是pre方法1');
+    next();
+});
+schema.pre('find',function(next){
+    console.log('我是pre方法2');
+    next();
+});  
+var user = mongoose.model('user', schema);
+user.find(null, {name:1}, (err,docs) => {
+    console.log(docs[0]);
+})    
+/*
+我是pre方法1
+我是pre方法2
+{ name: 'lan'}
+*/
+````
 
 ### post()
 `post()`是执行某些操作前最后执行的方法。
+````javascript
+var schema = new mongoose.Schema({ age:Number, name: String, });  
+schema.pre('post',function(next){
+    console.log('我是pre方法1');
+    next();
+});
+schema.pre('post',function(next){
+    console.log('我是pre方法2');
+    next();
+});  
+var user = mongoose.model('user', schema);
+user.find(null, {name:1}, (err,docs) => {
+    console.log(docs[0]);
+})    
+/*
+我是pre方法1
+我是pre方法2
+{ name: 'lan'}
+*/
+````
+
+## 聚合管道
+可以理解为高级的查询方法。
+语法：`Model.aggregate([options], [callback])`，`options`说明如下：
+* $project：修改输入文档的结构。可以用来重命名、增加或删除域，也可以用于创建计算结果以及嵌套文档。对应project()方法
+* $match：用于过滤数据，只输出符合条件的文档。$match使用MongoDB的标准查询操作。对应match()。
+* $limit：用来限制MongoDB聚合管道返回的文档数。对应limit()方法
+* $skip：在聚合管道中跳过指定数量的文档，并返回余下的文档。对应skip()。
+* $unwind：将文档中的某一个数组类型字段拆分成多条，每条包含数组中的一个值。对应unwind()方法
+* $group：将集合中的文档分组，可用于统计结果。对应group()方法
+* $sort：将输入文档排序后输出。对应sort()方法
+* $geoNear：输出接近某一地理位置的有序文档。对应near()。
+* $sample：随机选择N个
+* $lookup：连接操作符，用于连接同一个数据库中另一个集合，并获取指定的文档，类似于populate,[联表查询](../mongoose-populate)
