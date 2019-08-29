@@ -3,15 +3,19 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>前端笔记</title>
+  <title>react-communication | 前端笔记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="前端笔记">
-<meta property="og:url" content="http://blog.html5jscss.com/index.html">
+  <meta name="description" content="父子组件传通信 父组件通过props传递信息 子组件通过回调函数传递信息   跨级组件通信 层层传递props context   兄弟组件通信 利用自定义事件    React组件式开发的最大好处就是可组合性。所以也会经常遇到组件之间通信的问题，以下内容我们从 父子组件通信 、跨级传递 、兄弟组件通信三个方面来举例说明。 父子组件传通信在react中数据流是单向的，自上往下流动的，所以不能从下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react-communication">
+<meta property="og:url" content="http://blog.html5jscss.com/react-communication/index.html">
 <meta property="og:site_name" content="前端笔记">
+<meta property="og:description" content="父子组件传通信 父组件通过props传递信息 子组件通过回调函数传递信息   跨级组件通信 层层传递props context   兄弟组件通信 利用自定义事件    React组件式开发的最大好处就是可组合性。所以也会经常遇到组件之间通信的问题，以下内容我们从 父子组件通信 、跨级传递 、兄弟组件通信三个方面来举例说明。 父子组件传通信在react中数据流是单向的，自上往下流动的，所以不能从下">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-08-29T13:21:30.364Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端笔记">
+<meta name="twitter:title" content="react-communication">
+<meta name="twitter:description" content="父子组件传通信 父组件通过props传递信息 子组件通过回调函数传递信息   跨级组件通信 层层传递props context   兄弟组件通信 利用自定义事件    React组件式开发的最大好处就是可组合性。所以也会经常遇到组件之间通信的问题，以下内容我们从 父子组件通信 、跨级传递 、兄弟组件通信三个方面来举例说明。 父子组件传通信在react中数据流是单向的，自上往下流动的，所以不能从下">
   
     <link rel="alternative" href="/atom.xml" title="前端笔记" type="application/atom+xml">
   
@@ -56,9 +60,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-react-communication" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-react-communication" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/react-communication/" class="article-date">
   <time datetime="2019-08-15T02:06:44.000Z" itemprop="datePublished">2019-08-15</time>
@@ -71,8 +73,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/react-communication/">react-communication</a>
+    <h1 class="article-title" itemprop="name">
+      react-communication
     </h1>
   
 
@@ -117,440 +119,20 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-vue-communication" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/vue-communication/" class="article-date">
-  <time datetime="2019-08-09T07:49:50.000Z" itemprop="datePublished">2019-08-09</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Vue/">Vue</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/vue-communication/">vue组件通信</a>
-    </h1>
+    <a href="/vue-communication/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">vue组件通信</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><code>Vue</code>组件是开发，又是靠数据去驱动视图更新的。所以在开发过程中，会经常遇到组件间的通信的问题。以下内容我们从 父子组件通信 、跨级传递 、兄弟组件通信三个方面来举例说明。</p>
-<h2 id="父子组件通信"><a href="#父子组件通信" class="headerlink" title="父子组件通信"></a>父子组件通信</h2><h3 id="props-emit"><a href="#props-emit" class="headerlink" title="props / $emit"></a>props / $emit</h3><p>父组件通过<code>props</code>属性传值的方式给子组件，子组件通过<code>$emit</code>定义事件向父组件传递值。<br>
-        
-          <p class="article-more-link">
-            <a href="/vue-communication/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.html5jscss.com/vue-communication/" data-id="cjzcl76aj0037dkhsw4myc1sp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/">Vue</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue实操/">Vue实操</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-
-  
-    <article id="post-mongoose-populate" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/mongoose-populate/" class="article-date">
-  <time datetime="2019-08-01T06:07:19.000Z" itemprop="datePublished">2019-08-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/mongoDB/">mongoDB</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/mongoose-populate/">mongoose联表查询</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>很多情况下，不可能单独只查询一个表来获取数据，经常会多表联查。这里我们只讲<code>populate</code>方法和聚合查询。<br>
-        
-          <p class="article-more-link">
-            <a href="/mongoose-populate/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.html5jscss.com/mongoose-populate/" data-id="cjzcl7690000ndkhsyrpvsqvt" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoDB/">mongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodeJs/">nodeJs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-mongoose-api" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/mongoose-api/" class="article-date">
-  <time datetime="2019-08-01T06:07:19.000Z" itemprop="datePublished">2019-08-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/mongoDB/">mongoDB</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/mongoose-api/">入门 mongoose</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote><p>Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.</p>
-<p>Mongoose是运行在异步环境中对MongoDB进行操作的对象建模工具。</p>
-<footer><strong>mongoose</strong><cite><a href="https://github.com/Automattic/mongoose">github.com/Automattic/mongoose</a></cite></footer></blockquote>
-        
-          <p class="article-more-link">
-            <a href="/mongoose-api/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.html5jscss.com/mongoose-api/" data-id="cjzcl76aa002rdkhs5l5zfy9z" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoDB/">mongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodeJs/">nodeJs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-you-dont-not-need-lodash-underscore" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/you-dont-not-need-lodash-underscore/" class="article-date">
-  <time datetime="2019-07-16T01:23:26.000Z" itemprop="datePublished">2019-07-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/you-dont-not-need-lodash-underscore/">使用原生函数代替underscore/lodash</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>为了更好的理解函数式变成，我们可以先从替换<code>underscore/lodash</code>开始。从<a href="https://github.com/you-dont-need/You-Dont-Need-Lodash-Underscore">You-Dont-Need-Lodash-Underscore</a>代替方法的学习过程中，我们发现有些<code>underscore/lodash</code>来得通俗易懂，所以实际开发中我们根据实际情况取舍，像使用原生<code>reduce</code>代替group方法，此篇文章学习重点是理解函数式编程和ES6/S7语法。</p>
-<p>如果项目小，也没必要引入经常爆出bug的<code>loadsh</code>。<br>
-        
-          <p class="article-more-link">
-            <a href="/you-dont-not-need-lodash-underscore/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.html5jscss.com/you-dont-not-need-lodash-underscore/" data-id="cjzcl76ai0036dkhsoqwdvza7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-functional-programming" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/functional-programming/" class="article-date">
-  <time datetime="2019-07-15T01:46:49.000Z" itemprop="datePublished">2019-07-15</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/functional-programming/">函数式编程</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.html5jscss.com/functional-programming/" data-id="cjzcl768t000cdkhsl1yiwq98" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-redux" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/redux/" class="article-date">
-  <time datetime="2019-05-24T05:53:51.000Z" itemprop="datePublished">2019-05-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>►<a class="article-category-link" href="/categories/JavaScript/React/">React</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/redux/">Redux源码解析</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote>
-<p>此源码分析时，redux版本号是4.0.1</p>
-</blockquote>
-<p>#API</p>
-<p><code>Redux</code>的API只有以下五个：</p>
-<ol>
-<li>createStore</li>
-<li>combineReducers</li>
-<li>bindActionCreators</li>
-<li>applyMiddleware</li>
-<li>compose</li>
-</ol>
-<p>我们分别针对这五个接口进行分析。<br>
-        
-          <p class="article-more-link">
-            <a href="/redux/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.html5jscss.com/redux/" data-id="cjzcl76ac002tdkhsvagx8mp1" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-graphql-introduction" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/graphql-introduction/" class="article-date">
-  <time datetime="2019-05-08T06:07:58.000Z" itemprop="datePublished">2019-05-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Node-js/">Node.js</a>►<a class="article-category-link" href="/categories/Node-js/MongoDB/">MongoDB</a>►<a class="article-category-link" href="/categories/Node-js/MongoDB/React/">React</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/graphql-introduction/">graphql初探</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>编写graphql的大致过程如下：</p>
-<ul>
-<li>定义查询数据的结构，也就是schema。因为查询跟返回数据的结构几乎一样，所以首先编写schema来定义返回的数据类型。</li>
-<li>定义查询方法，这里就是定义处理数据之后返回的是什么数据了。处理数据的操作类型query(查询)或mutation(变更)等。 </li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.html5jscss.com/graphql-introduction/" data-id="cjzcl768r0007dkhsl13rfyji" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GraphQL/">GraphQL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Koa/">Koa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mongoose/">Mongoose</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-webpack-4-x" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/webpack-4-x/" class="article-date">
-  <time datetime="2019-04-30T06:17:27.000Z" itemprop="datePublished">2019-04-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/前端构建工具/">前端构建工具</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/webpack-4-x/">webpack-4-x</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>占坑</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.html5jscss.com/webpack-4-x/" data-id="cjzcl7695000sdkhsycmnqpzv" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack4-x/">webpack4.x</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-send-beacon" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/send-beacon/" class="article-date">
-  <time datetime="2018-06-14T08:06:45.000Z" itemprop="datePublished">2018-06-14</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/send-beacon/">send-beacon</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">imgPing</span>(<span class="params">url, callback</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> key = <span class="string">'__SOME_RANDOM_KEY__'</span> + (+<span class="keyword">new</span> <span class="built_in">Date</span>());</span><br><span class="line">    <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">    <span class="built_in">window</span>[key] = img;</span><br><span class="line">    img.onload = img.onerror = img.onabort = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        img.onload = img.onerror = img.onabort = <span class="literal">null</span>;</span><br><span class="line">        <span class="built_in">window</span>[key] = <span class="literal">null</span>;</span><br><span class="line">        img = <span class="literal">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (callback) &#123;</span><br><span class="line">            callback();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    img.src = concatUrl;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://blog.html5jscss.com/send-beacon/" data-id="cjzcl7697000wdkhsjl31rbx8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
 </section>
         
           <aside id="sidebar">
