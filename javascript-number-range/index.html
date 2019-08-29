@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>javascript-number-range | 前端笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="JavaScript是弱类型语言，所以JavaScript中所有的数字，无论是整数还是小数，起类型均为Number。JavaScript所能表示的数值范围为[5e-324,1.7976931348623157e+308]，这两个边界值可以分别用Number.MAX_VALUE和Number.MIN_VALUE 获得。对于超出JavaScript数值范围的，将显示 Infinity 和 -Infin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="javascript-number-range">
+<meta property="og:url" content="http://blog.html5jscss.com/javascript-number-range/index.html">
+<meta property="og:site_name" content="前端笔记">
+<meta property="og:description" content="JavaScript是弱类型语言，所以JavaScript中所有的数字，无论是整数还是小数，起类型均为Number。JavaScript所能表示的数值范围为[5e-324,1.7976931348623157e+308]，这两个边界值可以分别用Number.MAX_VALUE和Number.MIN_VALUE 获得。对于超出JavaScript数值范围的，将显示 Infinity 和 -Infin">
+<meta property="og:updated_time" content="2019-08-11T12:43:12.954Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="javascript-number-range">
+<meta name="twitter:description" content="JavaScript是弱类型语言，所以JavaScript中所有的数字，无论是整数还是小数，起类型均为Number。JavaScript所能表示的数值范围为[5e-324,1.7976931348623157e+308]，这两个边界值可以分别用Number.MAX_VALUE和Number.MIN_VALUE 获得。对于超出JavaScript数值范围的，将显示 Infinity 和 -Infin">
+  
+    <link rel="alternative" href="/atom.xml" title="前端笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">前端笔记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.html5jscss.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-javascript-number-range" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/javascript-number-range/" class="article-date">
+  <time datetime="2018-03-09T03:11:52.000Z" itemprop="datePublished">2018-03-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      javascript-number-range
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>JavaScript是弱类型语言，所以JavaScript中所有的数字，无论是整数还是小数，起类型均为Number。JavaScript所能表示的数值范围为[5e-324,1.7976931348623157e+308]，这两个边界值可以分别用<code>Number.MAX_VALUE</code>和<code>Number.MIN_VALUE</code> 获得。对于超出JavaScript数值范围的，将显示 Infinity 和 -Infinity。<br><a id="more"></a></p>
+<h2 id="JavaScript运算"><a href="#JavaScript运算" class="headerlink" title="JavaScript运算"></a>JavaScript运算</h2><p>在JavaScript里面，数字使用<a href="https://zh.wikipedia.org/wiki/IEEE_754" target="_blank" rel="external">IEEE 754</a>中规定的<a href="https://zh.wikipedia.org/wiki/雙精度浮點數" target="_blank" rel="external">双精度浮点类型</a>。在这个规定中，JavaScript能表示并精确算术运算的整数范围为[-(2^53 - 1),2^53 - 1]，也就是 [-9007199254740991,9007199254740991]，这两个边界值可分别使用<code>Number.MIN_SAFE_INTEGER</code>,<code>Number.MAX_SAFE_INTEGER</code>来获得。 超出这个范围的算术运算将会JavaScript将不保证运算结果的精度。譬如以下代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">9007199254740992</span>;</span><br><span class="line"><span class="built_in">console</span>.log(num + <span class="number">5</span>); <span class="comment">// 9007199254740996</span></span><br></pre></td></tr></table></figure></p>
+<p>正确的应该是显示 9007199254740997，但是已经超出JavaScript的运算精度范围，所以得到了错误结果。</p>
+<h2 id="JavaScript位运算"><a href="#JavaScript位运算" class="headerlink" title="JavaScript位运算"></a>JavaScript位运算</h2><p>JavaScript中对于位运算，JavaScript仅支持32位整数，又有一位要表示正负号，所以其范围：[-(2^31 - 1)，(2^31 - 1)]，超出也JavaScript也不将保证精度。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> maxSum = <span class="built_in">Math</span>.pow(<span class="number">2</span>,<span class="number">31</span>);</span><br><span class="line"><span class="built_in">console</span>.log(pow&amp;pow) <span class="comment">// -2147483648</span></span><br><span class="line"><span class="built_in">console</span>.log(pow&gt;&gt;<span class="number">1</span>) <span class="comment">// -1073741824</span></span><br></pre></td></tr></table></figure></p>
+<p>自己与自己正确应该是还是自己，但是他显示<code>-2147483648</code>, <code>pow&gt;&gt;1</code> 正确结果应该是跟<code>pow/2</code>的值一样。因为超出了位运算的范围，以上运算都得出了错误结果。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.html5jscss.com/javascript-number-range/" data-id="cjz6yr0xy000oc9n16eiezmj8" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JS实际应用/">JS实际应用</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/what-forces-layout-reflow/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          哪些会导致重绘和回流
+        
+      </div>
+    </a>
+  
+  
+    <a href="/css3-transfrom/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">css3-transfrom</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Css/">Css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/React/">React</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Js/">Js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/MongoDB/">MongoDB</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/MongoDB/React/">React</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodeJs/">nodeJs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端构建工具/">前端构建工具</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Css-积累/">Css 积累</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GraphQL/">GraphQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS实际应用/">JS实际应用</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS工具/">JS工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/">Koa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongoose/">Mongoose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoDB/">mongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs/">nodeJs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflow/">reflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack1-x/">webpack1.x</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack4-x/">webpack4.x</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能/">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术细节/">技术细节</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术细节-cross-dev/">技术细节 cross-dev</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Css-积累/" style="font-size: 10px;">Css 积累</a> <a href="/tags/GraphQL/" style="font-size: 10px;">GraphQL</a> <a href="/tags/JS实际应用/" style="font-size: 15px;">JS实际应用</a> <a href="/tags/JS工具/" style="font-size: 10px;">JS工具</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Koa/" style="font-size: 10px;">Koa</a> <a href="/tags/Mongoose/" style="font-size: 10px;">Mongoose</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mongoDB/" style="font-size: 15px;">mongoDB</a> <a href="/tags/mongoose/" style="font-size: 15px;">mongoose</a> <a href="/tags/nodeJs/" style="font-size: 15px;">nodeJs</a> <a href="/tags/reflow/" style="font-size: 10px;">reflow</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/webpack1-x/" style="font-size: 10px;">webpack1.x</a> <a href="/tags/webpack4-x/" style="font-size: 10px;">webpack4.x</a> <a href="/tags/前端性能/" style="font-size: 10px;">前端性能</a> <a href="/tags/技术细节/" style="font-size: 10px;">技术细节</a> <a href="/tags/技术细节-cross-dev/" style="font-size: 10px;">技术细节 cross-dev</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue-communication/">vue组件通信</a>
+          </li>
+        
+          <li>
+            <a href="/mongoose-populate/">mongoose联表查询</a>
+          </li>
+        
+          <li>
+            <a href="/mongoose-api/">入门 mongoose</a>
+          </li>
+        
+          <li>
+            <a href="/you-dont-not-need-lodash-underscore/">使用原生函数代替underscore/lodash</a>
+          </li>
+        
+          <li>
+            <a href="/functional-programming/">函数式编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 wei gu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+      Hosted by <a href="https://pages.coding.me">Coding Pages</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

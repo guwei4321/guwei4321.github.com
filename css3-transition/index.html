@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>css3-transition | 前端笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="CSS Transitions allows property changes in CSS values to occur smoothly over a specified duration.
+W3Ccss3-transitions
+以上是W3C官方解释，翻译过来大概意思就是在某段时间内，按照预定过程的来改变某个CSS属性。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css3-transition">
+<meta property="og:url" content="http://blog.html5jscss.com/css3-transition/index.html">
+<meta property="og:site_name" content="前端笔记">
+<meta property="og:description" content="CSS Transitions allows property changes in CSS values to occur smoothly over a specified duration.
+W3Ccss3-transitions
+以上是W3C官方解释，翻译过来大概意思就是在某段时间内，按照预定过程的来改变某个CSS属性。">
+<meta property="og:image" content="http://om64pi295.bkt.clouddn.com/TimingFunction.png">
+<meta property="og:updated_time" content="2019-08-11T12:43:12.949Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css3-transition">
+<meta name="twitter:description" content="CSS Transitions allows property changes in CSS values to occur smoothly over a specified duration.
+W3Ccss3-transitions
+以上是W3C官方解释，翻译过来大概意思就是在某段时间内，按照预定过程的来改变某个CSS属性。">
+<meta name="twitter:image" content="http://om64pi295.bkt.clouddn.com/TimingFunction.png">
+  
+    <link rel="alternative" href="/atom.xml" title="前端笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">前端笔记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.html5jscss.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-css3-transition" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/css3-transition/" class="article-date">
+  <time datetime="2017-11-06T09:29:25.000Z" itemprop="datePublished">2017-11-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      css3-transition
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote><p>CSS Transitions allows property changes in CSS values to occur smoothly over a specified duration.</p>
+<footer><strong>W3C</strong><cite><a href="https://www.w3.org/TR/css3-transitions/" target="_blank" rel="external">css3-transitions</a></cite></footer></blockquote>
+<p>以上是W3C官方解释，翻译过来大概意思就是在某段时间内，按照预定过程的来改变某个CSS属性。<br><a id="more"></a></p>
+<h2 id="Transition"><a href="#Transition" class="headerlink" title="Transition"></a>Transition</h2><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">transition：[ transition-property ] || [ transition-duration ] || [ transition-timing-function ] || [ transition-<span class="built_in">delay</span> ]</span><br><span class="line"><span class="comment">/* 实际用法*/</span></span><br><span class="line"><span class="comment">/*缩写方式：*/</span></span><br><span class="line">-webkit-transition:<span class="built_in">border</span>-<span class="built_in">color</span> .5s ease-<span class="keyword">in</span> .1s, <span class="built_in">background</span>-<span class="built_in">color</span> .5s ease-<span class="keyword">in</span> .1s, <span class="built_in">color</span> .5s ease-<span class="keyword">in</span> .1s;<span class="comment">/*chrome2.0x+ safari3.1+*/</span></span><br><span class="line">-moz-transition:<span class="built_in">border</span>-<span class="built_in">color</span> .5s ease-<span class="keyword">in</span> .1s, <span class="built_in">background</span>-<span class="built_in">color</span> .5s ease-<span class="keyword">in</span> .1s, <span class="built_in">color</span> .5s ease-<span class="keyword">in</span> .1s;<span class="comment">/*Firefox 4 */</span></span><br><span class="line">-o-transition:<span class="built_in">border</span>-<span class="built_in">color</span> .5s ease-<span class="keyword">in</span> .1s, <span class="built_in">background</span>-<span class="built_in">color</span> .5s ease-<span class="keyword">in</span> .1s, <span class="built_in">color</span> .5s ease-<span class="keyword">in</span> .1s;<span class="comment">/*opera 10.5+ */</span></span><br><span class="line"><span class="comment">/*IE9不支持，所以-ms-就没了 */</span></span><br><span class="line">transition:<span class="built_in">border</span>-<span class="built_in">color</span> .5s ease-<span class="keyword">in</span> .1s, <span class="built_in">background</span>-<span class="built_in">color</span> .5s ease-<span class="keyword">in</span> .1s, <span class="built_in">color</span> .5s ease-<span class="keyword">in</span> .1s;<span class="comment">/*W3C */</span></span><br><span class="line"><span class="comment">/*拆分方式跟缩写方式一样前面得加浏览器前缀，一个一个写太占位置，所以就只写W3C标准的*/</span></span><br><span class="line">transition-property:<span class="built_in">border</span>-<span class="built_in">color</span>, <span class="built_in">background</span>-<span class="built_in">color</span>, <span class="built_in">color</span>;</span><br><span class="line">transition-duration:.5s, .5s, .5s;</span><br><span class="line">transition-timing-function:ease-<span class="keyword">in</span>, ease-<span class="keyword">in</span>, ease-<span class="keyword">in</span>;</span><br><span class="line">transition-<span class="built_in">delay</span>:.1s, .1s, .1s;</span><br></pre></td></tr></table></figure>
+<p>Transitions属性中如果提供多个属性值，都是以逗号（“，”）隔开。</p>
+<h3 id="Transitions取值"><a href="#Transitions取值" class="headerlink" title="Transitions取值"></a>Transitions取值</h3><ul>
+<li>[ transition-property ]：设置对象中的参与过渡的属性</li>
+<li>[ transition-duration ]：设置对象过渡的持续时间</li>
+<li>[ transition-timing-function ]：设置对象中过渡的动画类型</li>
+<li>[ transition-delay ]：设置对象延迟过渡的时间</li>
+</ul>
+<h3 id="参与过渡的属性"><a href="#参与过渡的属性" class="headerlink" title="参与过渡的属性"></a>参与过渡的属性</h3><p>transition-property是用来指定元素需要过渡的css属性。语法如下：<br><figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transition-property：<span class="literal">all</span> | <span class="keyword">none</span> | <span class="variable">&lt;property&gt;</span>[ ,<span class="variable">&lt;property&gt;</span> ]*</span><br></pre></td></tr></table></figure></p>
+<h4 id="transition-property取值"><a href="#transition-property取值" class="headerlink" title="transition-property取值"></a>transition-property取值</h4><ul>
+<li>all：所有可以进行过渡的css属性</li>
+<li>none：不指定过渡的css属性</li>
+<li><property>：指定要进行过渡的css属性</property></li>
+</ul>
+<p>当指定为all时，这个也是其默认值，则元素产生任何属性值变化时都将执行transition效果；当其值为none时，transition马上停止执行；property是可以指定元素的某一个属性值，如 background-color、opacity、right、width、z-index、text-indent、text-shadow、padding等。具体哪些属性<a href="https://www.w3.org/TR/css3-animations/" target="_blank" rel="external">点击查看</a> </p>
+<h3 id="过渡持续时间"><a href="#过渡持续时间" class="headerlink" title="过渡持续时间"></a>过渡持续时间</h3><p>transition-duration针对过渡效果的持续时间，用来指定元素转换过程的持续时间，取值：time 为数值，单位为s（秒）。其默认值是0，也就是变换时是即时的。语法如下：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transition-duration：&lt;<span class="built_in">time</span>&gt;[ ,&lt;<span class="built_in">time</span>&gt; ]*</span><br></pre></td></tr></table></figure></p>
+<h3 id="过渡的变化速率"><a href="#过渡的变化速率" class="headerlink" title="过渡的变化速率"></a>过渡的变化速率</h3><p>transition-timing-function 针对了过渡效果的变化速率，有多种特效展示。语法如下：<br><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transition-timing-<span class="function"><span class="keyword">function</span></span>：linear | ease | ease-<span class="keyword">in</span> | ease-<span class="keyword">out</span> | ease-<span class="keyword">in</span>-<span class="keyword">out</span> | cubic-bezier(&lt;<span class="keyword">number</span>&gt;, &lt;<span class="keyword">number</span>&gt;, &lt;<span class="keyword">number</span>&gt;, &lt;<span class="keyword">number</span>&gt;)[ ,linear | ease | ease-<span class="keyword">in</span> | ease-<span class="keyword">out</span> | ease-<span class="keyword">in</span>-<span class="keyword">out</span> | cubic-bezier(&lt;<span class="keyword">number</span>&gt;, &lt;<span class="keyword">number</span>&gt;, &lt;<span class="keyword">number</span>&gt;, &lt;<span class="keyword">number</span>&gt;) ]*</span><br></pre></td></tr></table></figure></p>
+<p>所有过渡效果都涉及到一个：贝塞尔曲线 的东西<a href="https://zh.wikipedia.org/wiki/%E8%B2%9D%E8%8C%B2%E6%9B%B2%E7%B7%9A" target="_blank" rel="external">点击</a>了解贝塞尔曲线。但是W3C预留的几个过渡效果来供我们使用，如下：</p>
+<ol>
+<li>ease（逐渐变慢）：默认值，ease函数等同于贝塞尔曲线（cubic-bezier曲线）(0.25, 0.1, 0.25, 1.0).</li>
+<li>linear（匀速）：linear 函数等同于贝塞尔曲线（cubic-bezier曲线）(0.0, 0.0, 1.0, 1.0). </li>
+<li>ease-in(加速)：ease-in 函数等同于贝塞尔曲线（cubic-bezier曲线）(0.42, 0, 1.0, 1.0).</li>
+<li>ease-out（减速）：ease-out 函数等同于贝塞尔曲线（cubic-bezier曲线）(0, 0, 0.58, 1.0).</li>
+<li>ease-in-out（加速然后减速）：ease-in-out 函数等同于贝塞尔曲线（cubic-bezier曲线）(0.42, 0, 0.58, 1.0).</li>
+<li><p>cubic-bezier（该值允许你去自定义一个时间曲线）： 特定的贝塞尔曲线（cubic-bezier曲线）.</p>
+<p>贝塞尔曲线，如下图</p>
+<img src="http://om64pi295.bkt.clouddn.com/TimingFunction.png" class="[贝塞尔曲线（cubic-bezier曲线）]">
+<p>图上有四点，P0-3，其中P0[0,0]、P3[1,1]是默认的点且是固定不变的。而剩下的P1、P2两点则是我们通过cubic-bezier自定义的。</p>
+<p>所以所有值需在[0, 1]区域内，否则无效。<code>cubic-bezier(x1, y1, x2, y2)</code> 四个 x1, y1, x2, y2 值就等于曲线上点P1[x1, y1] 和点P2[x2, y2]的坐标值。</p>
+<h3 id="过渡的延迟执行时间"><a href="#过渡的延迟执行时间" class="headerlink" title="过渡的延迟执行时间"></a>过渡的延迟执行时间</h3><p>transition-delay是用来指定一个过渡延迟执行的时间。语法如下：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">transition-<span class="built_in">delay</span>：&lt;<span class="built_in">time</span>&gt;[ ,&lt;<span class="built_in">time</span>&gt; ]*</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="Transitions实现的简单hover按钮"><a href="#Transitions实现的简单hover按钮" class="headerlink" title="Transitions实现的简单hover按钮"></a>Transitions实现的简单hover按钮</h2><p>asda</p>
+<p><style type="text/css">#demo a.button{ background-color: #700; border-radius: 10px; box-shadow: 0 0 3px #212121; color: #fff; padding: 5px 10px; -webkit-transition: all 1s ease-in-out 0s; -moz-transition: all 1s ease-in-out 0s; -ms-transition: all 1s ease-in-out 0s; -o-transition: all 1s ease-in-out 0s; transition: all 1s ease-in-out 0s; text-decoration: none } #demo a.button:hover{ background-color: #b00; box-shadow: 0 0 10px #000;<br>}</style></p>
+<figure><br><div id="demo"><br>    <a class="button" href="">Transitions按钮</a><br></div><br></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.html5jscss.com/css3-transition/" data-id="cjz6yr0wd0008c9n1l771t3zd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/css3-transfrom/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          css3-transfrom
+        
+      </div>
+    </a>
+  
+  
+    <a href="/css3-animation/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">css3-animation</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Css/">Css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/React/">React</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Js/">Js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/MongoDB/">MongoDB</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/MongoDB/React/">React</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodeJs/">nodeJs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端构建工具/">前端构建工具</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Css-积累/">Css 积累</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GraphQL/">GraphQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS实际应用/">JS实际应用</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS工具/">JS工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/">Koa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongoose/">Mongoose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoDB/">mongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs/">nodeJs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflow/">reflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack1-x/">webpack1.x</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack4-x/">webpack4.x</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能/">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术细节/">技术细节</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术细节-cross-dev/">技术细节 cross-dev</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Css-积累/" style="font-size: 10px;">Css 积累</a> <a href="/tags/GraphQL/" style="font-size: 10px;">GraphQL</a> <a href="/tags/JS实际应用/" style="font-size: 15px;">JS实际应用</a> <a href="/tags/JS工具/" style="font-size: 10px;">JS工具</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Koa/" style="font-size: 10px;">Koa</a> <a href="/tags/Mongoose/" style="font-size: 10px;">Mongoose</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mongoDB/" style="font-size: 15px;">mongoDB</a> <a href="/tags/mongoose/" style="font-size: 15px;">mongoose</a> <a href="/tags/nodeJs/" style="font-size: 15px;">nodeJs</a> <a href="/tags/reflow/" style="font-size: 10px;">reflow</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/webpack1-x/" style="font-size: 10px;">webpack1.x</a> <a href="/tags/webpack4-x/" style="font-size: 10px;">webpack4.x</a> <a href="/tags/前端性能/" style="font-size: 10px;">前端性能</a> <a href="/tags/技术细节/" style="font-size: 10px;">技术细节</a> <a href="/tags/技术细节-cross-dev/" style="font-size: 10px;">技术细节 cross-dev</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue-communication/">vue组件通信</a>
+          </li>
+        
+          <li>
+            <a href="/mongoose-populate/">mongoose联表查询</a>
+          </li>
+        
+          <li>
+            <a href="/mongoose-api/">入门 mongoose</a>
+          </li>
+        
+          <li>
+            <a href="/you-dont-not-need-lodash-underscore/">使用原生函数代替underscore/lodash</a>
+          </li>
+        
+          <li>
+            <a href="/functional-programming/">函数式编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 wei gu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+      Hosted by <a href="https://pages.coding.me">Coding Pages</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>vue组件通信 | 前端笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="父子组件通信props / $emit父组件通过props属性传值的方式给子组件，子组件通过$emit定义事件向父组件传递值。
+例子使用一个简单的例子来验证下props / $emit，其中List.vue是Bank.vue的父组件。12345678910111213141516171819202122232425262728293031323334353637383940414243444546">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue组件通信">
+<meta property="og:url" content="http://blog.html5jscss.com/vue-communication/index.html">
+<meta property="og:site_name" content="前端笔记">
+<meta property="og:description" content="父子组件通信props / $emit父组件通过props属性传值的方式给子组件，子组件通过$emit定义事件向父组件传递值。
+例子使用一个简单的例子来验证下props / $emit，其中List.vue是Bank.vue的父组件。12345678910111213141516171819202122232425262728293031323334353637383940414243444546">
+<meta property="og:updated_time" content="2019-08-11T12:43:20.464Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="vue组件通信">
+<meta name="twitter:description" content="父子组件通信props / $emit父组件通过props属性传值的方式给子组件，子组件通过$emit定义事件向父组件传递值。
+例子使用一个简单的例子来验证下props / $emit，其中List.vue是Bank.vue的父组件。12345678910111213141516171819202122232425262728293031323334353637383940414243444546">
+  
+    <link rel="alternative" href="/atom.xml" title="前端笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">前端笔记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.html5jscss.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-vue-communication" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/vue-communication/" class="article-date">
+  <time datetime="2019-08-09T07:49:50.000Z" itemprop="datePublished">2019-08-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Vue/">Vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      vue组件通信
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="父子组件通信"><a href="#父子组件通信" class="headerlink" title="父子组件通信"></a>父子组件通信</h2><h3 id="props-emit"><a href="#props-emit" class="headerlink" title="props / $emit"></a>props / $emit</h3><p>父组件通过<code>props</code>属性传值的方式给子组件，子组件通过<code>$emit</code>定义事件向父组件传递值。</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>使用一个简单的例子来验证下<code>props / $emit</code>，其中<code>List.vue</code>是<code>Bank.vue</code>的父组件。<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">// List.vue</span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bank-item</span> <span class="attr">:list</span>=<span class="string">"banks"</span> @<span class="attr">onEmitCurBankIndex</span>=<span class="string">"onEmitCurBankIndex"</span>&gt;</span>:<span class="tag">&lt;/<span class="name">bank-item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>开户地：</span><span class="template-variable">&#123;&#123;curCity&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="keyword">import</span> bankItem <span class="keyword">from</span> <span class="string">'./Bank.vue'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'List'</span>,</span><br><span class="line">  components: &#123; bankItem &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      banks: [</span><br><span class="line">          &#123;name: <span class="string">'众邦银行'</span>, info: <span class="string">'武汉'</span>&#125;,</span><br><span class="line">          &#123;name: <span class="string">'营口银行'</span>, info: <span class="string">'营口'</span>&#125;,</span><br><span class="line">          &#123;name: <span class="string">'金城银行'</span>, info: <span class="string">'天津'</span>&#125;,</span><br><span class="line">        ],</span><br><span class="line">        curCity: <span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">      onEmitCurBankIndex(index) &#123;</span><br><span class="line">          <span class="keyword">this</span>.curCity = <span class="keyword">this</span>.banks[index].info;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">// Bank.vue</span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in list"</span> <span class="attr">:key</span>=<span class="string">"index"</span> @<span class="attr">click</span>=<span class="string">"emitCurBankIndex(index)"</span>&gt;</span></span><br><span class="line">            </span><span class="template-variable">&#123;&#123;item.name&#125;&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: [<span class="string">'list'</span>],</span><br><span class="line">  methods: &#123;</span><br><span class="line">      emitCurBankIndex(index) &#123;</span><br><span class="line">          <span class="keyword">this</span>.$emit(<span class="string">'onEmitCurBankIndex'</span>, index)</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>注意：通过prop传递的数据，子组件只能使用，不能修改；而父组件也只能通过监听事件才能获取传递的值。</p>
+<h3 id="ref-refs"><a href="#ref-refs" class="headerlink" title="ref / $refs"></a>ref / $refs</h3><p><code>ref</code>被用来给元素或者子组件注册引用信息。在父组件中可以使用<code>$refs</code>来获取引用信息。如果用在普通的DOM元素上，则引用信息指向DOM元素，如果是子元素，引用信息则指向子组件的实例。</p>
+<h4 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h4><p>我们拿<code>props / $emit</code>中的例子，当前银行索引从子元素中获取。<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">// List.vue</span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"list"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bank-item</span> <span class="attr">:list</span>=<span class="string">"banks"</span> @<span class="attr">onEmitCurBankIndex</span>=<span class="string">"onEmitCurBankIndex"</span>  <span class="attr">ref</span>=<span class="string">"bankItem"</span>&gt;</span>:<span class="tag">&lt;/<span class="name">bank-item</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>开户地：</span><span class="template-variable">&#123;&#123;curCity&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="keyword">import</span> bankItem <span class="keyword">from</span> <span class="string">'./Bank.vue'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">'List'</span>,</span><br><span class="line">  components: &#123; bankItem &#125;,</span><br><span class="line">  data() &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      banks: [</span><br><span class="line">          &#123;name: <span class="string">'众邦银行'</span>, info: <span class="string">'武汉'</span>&#125;,</span><br><span class="line">          &#123;name: <span class="string">'营口银行'</span>, info: <span class="string">'营口'</span>&#125;,</span><br><span class="line">          &#123;name: <span class="string">'金城银行'</span>, info: <span class="string">'天津'</span>&#125;,</span><br><span class="line">        ],</span><br><span class="line">        curCity: <span class="string">''</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">      <span class="comment">// 父组件通过v-on监听并接受传参   </span></span><br><span class="line">      onEmitCurBankIndex(index) &#123;</span><br><span class="line">          <span class="keyword">this</span>.curCity = <span class="keyword">this</span>.banks[index].info;</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mounted() &#123;</span><br><span class="line">      <span class="keyword">var</span> bank = <span class="keyword">this</span>.$refs.bankItem.curCity;</span><br><span class="line">      <span class="keyword">this</span>.curCity = <span class="keyword">this</span>.banks[bank].info; <span class="comment">// 默认选中通过$refs从子元素中获取</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line">// Bank.vue</span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in list"</span> <span class="attr">:key</span>=<span class="string">"index"</span> @<span class="attr">click</span>=<span class="string">"emitCurBankIndex(index)"</span>&gt;</span></span><br><span class="line">            </span><span class="template-variable">&#123;&#123;item.name&#125;&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  props: [<span class="string">'list'</span>],</span><br><span class="line">  data()&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      curCity:<span class="number">0</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">        <span class="comment">// 自定义时间，通过传参将值传给父组件 </span></span><br><span class="line">        emitCurBankIndex(index) &#123;</span><br><span class="line">          <span class="keyword">this</span>.$emit(<span class="string">'onEmitCurBankIndex'</span>, index)</span><br><span class="line">        &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<h3 id="children-parent"><a href="#children-parent" class="headerlink" title="$children / $parent"></a>$children / $parent</h3><p>指定已创建的父实例，在两者之间建立父子关系。子实例可以用<code>this.$parent</code>访问父实例，子实例被推入父实例的<code>$children</code>数组中。<code>this.$parent</code>返回的是包含父组件实例的对象，而<code>$children</code>返回的是由该父组件所包含的所有子组件的数组。</p>
+<h4 id="例子-2"><a href="#例子-2" class="headerlink" title="例子"></a>例子</h4><p>使用一个简单的例子来验证下<code>$children / $parent</code>，其中<code>Parent.vue</code>是<code>Children.vue</code>的父组件。<br><figure class="highlight django"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">// Parent.vue</span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parent-el"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是父组件<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">        我是子组件的值</span><span class="template-variable">&#123;&#123;tmp&#125;&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">children-a</span>&gt;</span><span class="tag">&lt;/<span class="name">children-a</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"setChildtVal"</span>&gt;</span>点击改变子集的值<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="keyword">import</span> ChildrenA <span class="keyword">from</span> <span class="string">'./ChildrenA.vue'</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    name: <span class="string">'Parent'</span>,</span><br><span class="line">    components:&#123;</span><br><span class="line">        ChildrenA</span><br><span class="line">    &#125;,</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            parentMsg: <span class="string">'我是父级的值'</span>,</span><br><span class="line">            tmp: <span class="string">''</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        setChildtVal: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.$children[<span class="number">0</span>].childrenMsg = <span class="string">'改变子级的值'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">// Children.vue</span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>我是子组件<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">        </span><span class="template-variable">&#123;&#123;childrenMsg&#125;&#125;</span><span class="xml"></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>父组件的值：</span><span class="template-variable">&#123;&#123;getParentVal&#125;&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;</span><br><span class="line">            childrenMsg: <span class="string">'子组件的值'</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">        getParentVal: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.$parent.parentMsg</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>注意：官网建议要节制地使用<code>$parent</code>和<code>$children</code>- 它们的主要目的是作为访问组件的应急方法。更推荐用<code>props</code>和<code>events</code>实现父子组件通信。</p>
+<h3 id="父子通信小结"><a href="#父子通信小结" class="headerlink" title="父子通信小结"></a>父子通信小结</h3><p><code>$refs</code> 和 <code>$children</code> 都只有在组件渲染完成后才填充，都是在<code>mounted</code>之后才存在，所以</p>
+<h3 id="兄弟组件通信"><a href="#兄弟组件通信" class="headerlink" title="兄弟组件通信"></a>兄弟组件通信</h3><p>父子通信可以通过官方的<code>API</code>一步来传递，但是兄弟间的数据传递要麻烦一点。得利用<code>vue</code>内部的一个事件机制，将其作为兄弟事件处理的中转站。</p>
+<h3 id="跨子传递"><a href="#跨子传递" class="headerlink" title="跨子传递"></a>跨子传递</h3><h3 id="provide-inject"><a href="#provide-inject" class="headerlink" title="provide/ inject"></a>provide/ inject</h3><p><code>provide/ inject</code> 是<code>vue2.2.0</code>新增的API。它解决了不管子组件嵌套多深，只要在父级组件中使用<code>provide</code>来提供变量，在子组件中就可以通过<code>inject</code>来注入变量。所以只要在祖先组件中使用<code>provide</code>定义了变量，子孙组件就能通过<code>inject</code>来获取，而不需要通过<code>prop</code>一层层的往下传递。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li><code>props / $emit</code>和<code>$children / $parent</code>只能解决父子组件的通信。</li>
+<li><code>$children</code>和<code>$refs</code>都不是响应式的，因此不能用它们在模板中做数据绑定</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.html5jscss.com/vue-communication/" data-id="cjz6yr0z6001bc9n1scz0185p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Vue/">Vue</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/mongoose-populate/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">mongoose联表查询</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Css/">Css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/React/">React</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Js/">Js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/MongoDB/">MongoDB</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/MongoDB/React/">React</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodeJs/">nodeJs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端构建工具/">前端构建工具</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Css-积累/">Css 积累</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GraphQL/">GraphQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS实际应用/">JS实际应用</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS工具/">JS工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/">Koa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongoose/">Mongoose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoDB/">mongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs/">nodeJs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflow/">reflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack1-x/">webpack1.x</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack4-x/">webpack4.x</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能/">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术细节/">技术细节</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术细节-cross-dev/">技术细节 cross-dev</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Css-积累/" style="font-size: 10px;">Css 积累</a> <a href="/tags/GraphQL/" style="font-size: 10px;">GraphQL</a> <a href="/tags/JS实际应用/" style="font-size: 15px;">JS实际应用</a> <a href="/tags/JS工具/" style="font-size: 10px;">JS工具</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Koa/" style="font-size: 10px;">Koa</a> <a href="/tags/Mongoose/" style="font-size: 10px;">Mongoose</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mongoDB/" style="font-size: 15px;">mongoDB</a> <a href="/tags/mongoose/" style="font-size: 15px;">mongoose</a> <a href="/tags/nodeJs/" style="font-size: 15px;">nodeJs</a> <a href="/tags/reflow/" style="font-size: 10px;">reflow</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/webpack1-x/" style="font-size: 10px;">webpack1.x</a> <a href="/tags/webpack4-x/" style="font-size: 10px;">webpack4.x</a> <a href="/tags/前端性能/" style="font-size: 10px;">前端性能</a> <a href="/tags/技术细节/" style="font-size: 10px;">技术细节</a> <a href="/tags/技术细节-cross-dev/" style="font-size: 10px;">技术细节 cross-dev</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue-communication/">vue组件通信</a>
+          </li>
+        
+          <li>
+            <a href="/mongoose-populate/">mongoose联表查询</a>
+          </li>
+        
+          <li>
+            <a href="/mongoose-api/">入门 mongoose</a>
+          </li>
+        
+          <li>
+            <a href="/you-dont-not-need-lodash-underscore/">使用原生函数代替underscore/lodash</a>
+          </li>
+        
+          <li>
+            <a href="/functional-programming/">函数式编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 wei gu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+      Hosted by <a href="https://pages.coding.me">Coding Pages</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

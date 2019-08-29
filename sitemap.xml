@@ -2,23 +2,198 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.html5jscss.com/2017/02/15/webpack-1-x/</loc>
+    <loc>http://blog.html5jscss.com/vue-communication/</loc>
     
-    <lastmod>2017-05-19T07:28:42.000Z</lastmod>
+    <lastmod>2019-08-11T12:43:20.464Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/demo/you-dont-not-need-lodash-underscore.html</loc>
+    
+    <lastmod>2019-08-11T12:43:12.983Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/demo/js/underscore.js</loc>
+    
+    <lastmod>2019-08-11T12:43:12.982Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/demo/js/require.js</loc>
+    
+    <lastmod>2019-08-11T12:43:12.982Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/demo/js/lodash.js</loc>
+    
+    <lastmod>2019-08-11T12:43:12.981Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://blog.html5jscss.com/demo/demo.html</loc>
     
-    <lastmod>2017-05-17T09:31:10.000Z</lastmod>
+    <lastmod>2019-08-11T12:43:12.963Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.html5jscss.com/2014/02/07/hexo/</loc>
+    <loc>http://blog.html5jscss.com/you-dont-not-need-lodash-underscore/</loc>
     
-    <lastmod>2016-05-20T06:44:12.000Z</lastmod>
+    <lastmod>2019-08-11T12:43:12.962Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/what-forces-layout-reflow/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.962Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/demo/css-attr-content.html</loc>
+    
+    <lastmod>2019-08-11T12:43:12.962Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/webpack-1-x/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.961Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/webpack-4-x/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.961Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/send-beacon/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.959Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/mongoose-api/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.959Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/mongoose-populate/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.959Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/redux/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.959Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/javascript-reg-2/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.958Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/javascript-reg-1/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.957Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/javascript-number-range/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.954Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/identity-number/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.953Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/hexo/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.953Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/graphql-introduction/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.950Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/functional-programming/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.950Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/eslint/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.950Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/css3-transition/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.949Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/css3-transfrom/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.948Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/css-attr-content/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.945Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/css3-animation/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.945Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.html5jscss.com/cross-env/</loc>
+    
+    <lastmod>2019-08-11T12:43:12.944Z</lastmod>
     
   </url>
   

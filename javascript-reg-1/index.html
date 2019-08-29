@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>正则基础学习 | 前端笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="正则表达式是一个威力巨大的处理字符串的工具，能够高效、神奇得完成对字符串的操作。相比较简单的字符串比较、查找、替换，正则表达式提供了更加强大的处理能力。正则表达式的价值就在于，不用正则来解决问题会让人疯掉，但是用了之后“纠结”的问题已不再是问题了。而且因为正则表达式用的不是一个固化的、具体的字符串来匹配字符串，而是抽象的模式的，所以只要正则写的规则没问题，一般都都能高效的完成任务。
+虽然正则表达式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正则基础学习">
+<meta property="og:url" content="http://blog.html5jscss.com/javascript-reg-1/index.html">
+<meta property="og:site_name" content="前端笔记">
+<meta property="og:description" content="正则表达式是一个威力巨大的处理字符串的工具，能够高效、神奇得完成对字符串的操作。相比较简单的字符串比较、查找、替换，正则表达式提供了更加强大的处理能力。正则表达式的价值就在于，不用正则来解决问题会让人疯掉，但是用了之后“纠结”的问题已不再是问题了。而且因为正则表达式用的不是一个固化的、具体的字符串来匹配字符串，而是抽象的模式的，所以只要正则写的规则没问题，一般都都能高效的完成任务。
+虽然正则表达式">
+<meta property="og:updated_time" content="2019-08-11T12:43:12.957Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="正则基础学习">
+<meta name="twitter:description" content="正则表达式是一个威力巨大的处理字符串的工具，能够高效、神奇得完成对字符串的操作。相比较简单的字符串比较、查找、替换，正则表达式提供了更加强大的处理能力。正则表达式的价值就在于，不用正则来解决问题会让人疯掉，但是用了之后“纠结”的问题已不再是问题了。而且因为正则表达式用的不是一个固化的、具体的字符串来匹配字符串，而是抽象的模式的，所以只要正则写的规则没问题，一般都都能高效的完成任务。
+虽然正则表达式">
+  
+    <link rel="alternative" href="/atom.xml" title="前端笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">前端笔记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.html5jscss.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-javascript-reg-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/javascript-reg-1/" class="article-date">
+  <time datetime="2017-07-20T06:38:42.000Z" itemprop="datePublished">2017-07-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/JavaScript/">JavaScript</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      正则基础学习
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>正则表达式是一个威力巨大的处理字符串的工具，能够高效、神奇得完成对字符串的操作。相比较简单的字符串比较、查找、替换，正则表达式提供了更加强大的处理能力。正则表达式的价值就在于，不用正则来解决问题会让人疯掉，但是用了之后“纠结”的问题已不再是问题了。而且因为正则表达式用的不是一个固化的、具体的字符串来匹配字符串，而是抽象的模式的，所以只要正则写的规则没问题，一般都都能高效的完成任务。</p>
+<p>虽然正则表达式看起来确实很像外星文，就像变魔术一样，魔术本身也不神奇，只是的观众不解其中奥妙。学会了其中的规则，我们再去使用，肯定会发出感慨：神奇、复杂、好用。<br><a id="more"></a><br>正则到底强在哪里呢？我们举个简单的例子：在一串包含数字以及英文字母的字符串中中找出数字并保存在数组中。代码如下：</p>
+<p><strong>不使用正则：</strong><br>遍历字符串，利用字符串charAt()的方法将字符串中的数字检索出来，再push数组中，然后继续检索再push到数组中直到结束。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">var</span> str = <span class="string">'12 javascript 34 html5 33 php 77 css'</span>;</span><br><span class="line">    <span class="keyword">var</span> arr = [];</span><br><span class="line">    <span class="keyword">var</span> figure = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i=<span class="string">'0'</span> &amp;&amp; str.charAt(i)&lt;=<span class="string">'9'</span>)&#123;</span><br><span class="line">            figure += str.charAt(i);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(figure)&#123;</span><br><span class="line">            arr.push(tmp);</span><br><span class="line">            figure =<span class="string">''</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(arr)<span class="comment">//[ "12" , "34" , "5" , "33" , "77" ]</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>而使用正则只需要如下短短的一行代码</strong>：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = str.match(<span class="regexp">/\d+/g</span>);</span><br></pre></td></tr></table></figure></p>
+<h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><h3 id="书写风格"><a href="#书写风格" class="headerlink" title="书写风格"></a>书写风格</h3><p>javascript中的正则是Perl5的正则表达式语法的大子集，所以在javascript中创建正则有js风格和petl风格两种。</p>
+<ol>
+<li>JS 风格： new RegExp(‘patten’,’ig’)</li>
+<li>perl风格：/patten/ig</li>
+</ol>
+<p>JS风格其实就是通过RegExp对象来表示，而perl风格更普遍的叫法是RegExp直接量。这两个语法都是一样的，只是转义字符的写法不同。</p>
+<h3 id="什么是正则"><a href="#什么是正则" class="headerlink" title="什么是正则"></a>什么是正则</h3><p>正则表达式的结构与数学表达式很类似。</p>
+<p>一个数学表达式由若干个“项”组成，“项”与“项”之间用加号或减号相连</p>
+<p>为了方便理解，让我们先来看看大家一个典型的的数学表达式 <code>(x+3)*2+y</code>：</p>
+<p>这个数学表达式中<code>(x+3)*2</code>和<code>y</code>分别是两个项。每个项又由若干个<strong>因子</strong>组成，因子之间用乘号或除号相连。这里第一个项有两个因子<code>(x+3)</code>和<code>2</code>，而第二个项只有一个因子“y”。每个因子可以是一个简单的数，一个代数变量，也可以是放在括号里面的一个表达式，括号中的表达式称为<strong>子表达式</strong>。这里<code>x+3</code>就是一个子表达式。</p>
+<p>与数学表达式的<strong>因子</strong>相对应，构成正则表达式的部件称为<strong>单位</strong>；<strong>项</strong>则与正则表达式的子表达式相对应。而从逻辑上讲，子表达式之间是串接的关系，一个字符串必须与每个子表达式依次相匹配，才算与这个表达式相匹配。</p>
+<h3 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h3><p>为了更好的学习正则，我们再来学习下正则表达式的一些术语</p>
+<ol>
+<li><p>匹配（matching）<br>一个正则表达式“匹配”一个字符串，其实是指这个正则表达式能在字符串中找到匹配文本。</p>
+</li>
+<li><p>元字符（metacharacter）<br>只有在字符组外部并且是在未转义之前的情况下，才是一个元字符。</p>
+</li>
+<li><p>子表达式（subexpression）<br> 子表达式指的一般是整个正则表达式中的一部分，通常是括号内的表达式，或者有|分隔的多选分支。子表达式由不可分割的单位组成。与多选分支不同的是，量词作用的对象是他们之前紧邻的子表达式。而如果量词之前紧邻的是一个括号保卫的自表达式，则不管其多么复杂都被视为一个单元。</p>
+</li>
+</ol>
+<h3 id="匹配模式"><a href="#匹配模式" class="headerlink" title="匹配模式"></a>匹配模式</h3><p>上例中斜杠后面的 <code>ig</code>是匹配模式，可选的值有3个：<code>i</code>,<code>g</code>,<code>m</code>。其含义如下：</p>
+<ul>
+<li><code>i</code>：为 ignore case，即 忽略大小写。</li>
+<li><code>g</code>：为 global search，即全局搜索。</li>
+<li><code>m</code>：为 moltiline search，即多行搜索。</li>
+</ul>
+<p>所以，一个完整正则表达式是由一个个<strong>子表达式</strong>组成的，而<strong>子表达式</strong>则是由各种符号组成，这些符号按照功能可以分成以下类：转义字符、预定义特殊字符、字符类、量词、贪婪模式和非贪婪模式、匹配位置、分组、非捕获性分组、前瞻（零宽断言）。</p>
+<h2 id="元字符组成部分"><a href="#元字符组成部分" class="headerlink" title="元字符组成部分"></a>元字符组成部分</h2><h3 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h3><p>什么是转义字符？在\后面加字符就可以转义为特殊字符。</p>
+<p>例如： <code>\n</code>匹配一个换行符， <code>\\</code>匹配“\”。</p>
+<h3 id="预定义特殊字符"><a href="#预定义特殊字符" class="headerlink" title="预定义特殊字符"></a>预定义特殊字符</h3><ol>
+<li><code>\o</code>:Nol字符。</li>
+<li><code>\t</code>:水平制表符。</li>
+<li><code>\v</code>:垂直制表符。</li>
+<li><code>\n</code>:换行符。</li>
+<li><code>\r</code>:回车符。</li>
+<li><code>\b</code>:退格符。 只有出现在字符中才有效，即[]（中括号）中。</li>
+</ol>
+<h3 id="字符类"><a href="#字符类" class="headerlink" title="字符类"></a>字符类</h3><ol>
+<li><code>[ ]</code>:表示范围，一个字符的集合，匹配该集合中的任意一个字符，例如 <code>[abc]</code>就可以匹配”css”中的c；<br>如果上例前面加 ^元字符，形如<code>[^asd]</code>，则表示匹配除了asd的其他字符；</li>
+</ol>
+<p>如果觉得匹配的字符太多，而且类型相似，则可以用-元字符表示，那么上例就可以这么写<code>[a-c]</code>这么写，所以上例也可以这么写 <code>[^a-d]</code></p>
+<ol>
+<li><code>\w</code>和<code>\W</code>:<code>\w</code>表示匹配任何ASCII字符组成的单词，等价于[a-zA-Z0-9]；<code>\W</code>表示匹配不是ASCII字符组成的单词等价于<code>[^a-zA-Z0-9]</code>。</li>
+<li><code>\s</code>和<code>\S</code>:<code>\s</code>匹配空白符，等价于<code>[\t\n\x0B\f\r]</code>；<code>\S</code>则匹配非空白字符，等价于<code>[^\t\n\x0B\f\r]</code>。</li>
+<li><code>\d</code>和<code>\D</code>:<code>\d</code>匹配数字字符，等价于<code>[0-9]</code>；<code>\D</code>匹配数字字符，等价于<code>[^0-9]</code></li>
+<li><p><code>.</code>:javascript有点特殊，由于浏览器的解析引擎不同，<code>.</code>的匹配范围也有所不同。</p>
+<ol>
+<li><p>IE8以下：<br>.匹配所有除了换行符<code>/n</code>换行符之外的任意字符。等同于<code>[^\n\r]</code></p>
+</li>
+<li><p>IE9以上以及其他浏览器<br>.匹配所有除了换行符<code>/n</code>换行符和回车符<code>\r</code>之外的任意字符。等同于<code>[^\n\r]</code></p>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.write(<span class="regexp">/./</span>.test(<span class="string">"\r"</span>) + <span class="string">""</span>);</span><br><span class="line"><span class="built_in">document</span>.write(<span class="regexp">/./</span>.test(<span class="string">"\n"</span>) + <span class="string">""</span>);</span><br><span class="line"><span class="comment">/*IE8以下输出true false；IE9以上及其他浏览器输出 false false*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="量词"><a href="#量词" class="headerlink" title="量词"></a>量词</h3><p>首先我们得了解匹配量词都是匹配优先的，简单说就是匹配量词的结果总是尝试匹配尽可能多的字符，直到匹配上限为止，然后为了让整个表达式匹配成功，就需要“释放”之前优先匹配的字符，所以也被称为贪婪模式。</p>
+<p>而既然有贪婪模式，则一定也有非贪婪模式。</p>
+<p>对于贪婪模式和非贪婪模式影响的是被量词修饰的子表达式的匹配行为，既在贪婪模式下，在整个表达式匹配成功的前提下，尽可能多的匹配，而非贪婪模式在在整个表达式匹配成功的前提下，尽可能少的匹配。而且允许允许接下来的正则继续匹配。</p>
+<p>贪婪模式的量词，也叫简单量词，如下：</p>
+<p><code>{n}</code>:n是一个正整数，表示前一个子表达式匹配n次。例如： /o{2}/匹配两次o，它可以匹配”footer“，但是不能匹配hot中的o。<br><code>{n,}</code>:n是一个正整数，表示前一个子表达式至少匹配n次。例如：/o{2,}/，它可以匹配“footer”，也可以匹配“fooooooooooter”。<br><code>{n,m}</code>:n、m都是正整数，表示至少匹配n次，至多m次。<br><code>?</code>:等价于{0,1}<br><code>+</code>:等价于{1,}<br><code>*</code>:等价于{0,}<br>而在贪婪模式后加上 ?就变成了非贪婪模式。</p>
+<h3 id="贪婪模式和非贪婪模式"><a href="#贪婪模式和非贪婪模式" class="headerlink" title="贪婪模式和非贪婪模式"></a>贪婪模式和非贪婪模式</h3><p>在上面提到的一个前提条件就是在整个表达式匹配成功，为什么要强调这个前提条件呢，看如下例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern = <span class="string">'aAaAaAb'</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/a+/i</span>.exec(pattern)); <span class="comment">//aAaAaA</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/a+?/i</span>.exec(pattern)); <span class="comment">//a</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/a+b/i</span>.exec(pattern)); <span class="comment">//aAaAaAb</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/a+?b/i</span>.exec(pattern)); <span class="comment">//aAaAaAb</span></span><br></pre></td></tr></table></figure>
+<p>全部是在忽略大小写的模式下：</p>
+<ol>
+<li>第一个匹配结果解释：采用贪婪模式，在匹配第一个“a”时，整个表达式匹配成功了，由于采用了贪婪模式，所以仍然向右匹配，向右再也没有可以成功匹配的子字串，匹配结束，最终匹配结果为“aAaAaA”</li>
+<li>第二个匹配结果解释：采用非贪婪模式，在匹配第一个“a”时，整个表达式匹配成功了，由于采用了非贪婪模式，所以结束匹配，最终匹配结果为“a。”</li>
+<li>第三个匹配结果解释：采用贪婪模式，所以a+仍然可以匹配到“aAaAaA”，但是由于后面的 b无法匹配成功，所以为了让整个表达式匹配成功，a+必须让出前面的匹配内容，所以最终匹配结果为“aAaAaAb”。</li>
+<li>第四个匹配结果解释：采用非贪婪模式，所以a+任然可以匹配到“a”，但是由于后面的 b无法匹配成功，所以为了让整个表达式匹配成功，a+必须继续匹配后面的直到“b”，所以最终匹配结果跟采用贪婪模式的匹配结果一样，也为“aAaAaAb”。</li>
+<li>所以，不管是贪婪模式还是非贪婪模式，都只有在整个表达式匹配成功的前提下量词才能影响字表达式的匹配行为。贪婪跟非贪婪模式主要功能是提高匹配效率，贪婪模式下可能会越过后面的正则，从而会导致匹配的回溯问题。所以在前面的正则坑会会越过后面的正则的情况下，请使用非贪婪模式。</li>
+</ol>
+<h3 id="匹配位置"><a href="#匹配位置" class="headerlink" title="匹配位置"></a>匹配位置</h3><p>前面说的量词是修饰子字符串的重复次数，而匹配位置则是来表示子字符串的出现位置，匹配的只是一个位置，所以是零宽度的。</p>
+<ol>
+<li><code>^</code>:匹配文字的开头。如果正则表达式的匹配模式设置为’,’m’则也匹配每个换行符或者回车符之后的位置。</li>
+<li><code>$</code>:匹配文字的开头。如果正则表达式的匹配模式设置为’,’m’则也匹配每个换行符或者回车符之前的位置。</li>
+<li><code>/b</code>:匹配单词边界，不匹配任何字符。</li>
+</ol>
+<p>所谓的“单词”，就是位于\w（ASCII单词）和\W（非ASCII单词）之间的边界，或者位于ASCII单词与字符串开始或者结尾的合法位置。所以\/bjava/b\不匹配“javascript is more than java”中的javascript中java而只匹配之后的单词“java”。</p>
+<p>而因为javascript只支持ASCII字符不支持Unicode的，所以在javascript这门语言中\w就可以等价于[a-zA-Z0-9]，也因为于此，javascript中\w是不包括中文已经其他Unicode码特殊符号的，如下例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"html5_css3中文_h5$c3&amp;汉字%"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(str.match(<span class="regexp">/\w+/g</span>)); <span class="comment">//"html5_css3" , "_h5" , "c3"</span></span><br><span class="line"><span class="built_in">console</span>.log(str.match(<span class="regexp">/.\b./g</span>));<span class="comment">//"3中" , "文_" , "5$" , "3&amp;"</span></span><br></pre></td></tr></table></figure>
+<p>第一个例子中\w+匹配了”html5_css3” , “<em>h5” , “c3”三个字符串，而其他的因为javascript只能匹配ASCII码的字符，所以除了字母、数字、“</em>“以及”$“的字符就都成单词的边界；而当使用.\b.（除了换行符之外的任意字符，.匹配了那些\w无法识别的Unicode码字符）匹配时，我们又得到”3中” , “文<em>“ , “5&amp;” ,说明这个字符串中有4个分界点5个子字符串，分别在”3中” , “文</em>“ , “5&amp;”之间，而四个子字符串分别是”html5_css3”，”中文,”_h5”,”$c3”,”&amp;汉字%”。</p>
+<p>所以，在处理一些字符串时，如果要使用\b得先确认是否还有ASCII码的字符。</p>
+<p>注意：\b在[]中表示退格。</p>
+<h3 id="分组"><a href="#分组" class="headerlink" title="分组"></a>分组</h3><p>学习完以上的，应该会知道中括号用来限定字符类的范围，大括号则用来指定重复的次数，而小括号除了限制多选项的范围以及将若干字符组合为一个单位让量词能影响这个单元。还有一个用途就是，小括号能”记住“它们匹配成功的文本，在正则表达式的后面引用前面“记住”的匹配文本，通过 \后加以为或者多位数字来实现，也就是“反向引用”。</p>
+<p>看实际例子吧：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1分组+量词</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/(js)&#123;2&#125;/</span>.test(<span class="string">"jsjs"</span>));<span class="comment">//true</span></span><br><span class="line"><span class="comment">//2分组+范围</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/[JL]script/</span>.test(<span class="string">"Lscript"</span>));<span class="comment">//true</span></span><br><span class="line"><span class="comment">//3反向引用</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/([jJ])s\1/</span>.test(<span class="string">"jsJs"</span>));<span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="regexp">/([jJ])s\1/</span>.test(<span class="string">"jsjs"</span>));<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<p>例1和例2将括号内的若干字符组合为一个单位。而例3因为\1引用的是之前匹配成功的字符串，所以例三中\1就只能匹配”js“而不能匹配”Js“。</p>
+<p>然后介绍第二个分组的符号|。</p>
+<p>与小括号不同，小括号内的是一个整体（独立的子表达式），而|分割开的各分支是多选分支，即你可以选择|前面的也可以选择|后面的，如果有多个|隔开则是多选几。如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg = <span class="regexp">/(html5|css3|js)!!/</span>;</span><br><span class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"html5!!"</span>));<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"css3!!"</span>));<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(reg.test(<span class="string">"js!!"</span>));<span class="comment">//true</span></span><br></pre></td></tr></table></figure>
+<h3 id="非捕获性分组"><a href="#非捕获性分组" class="headerlink" title="非捕获性分组"></a>非捕获性分组</h3><p>对带圆括号的子表达式的引用确实强大，但是既然能够反向引用，正则引擎肯定是保存了括号内的一些信息。所以从效率角度来看，如果只是为了分组而不反向引用的话就采取非捕获性分组的方法。要创建一个非捕获性分组，只要在捕获性分组的左括号的后面紧跟一个问号与冒号就行了。</p>
+<p>从字面意思来看：非捕获分组能分组，但是不能捕获各个组的信息。如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern1 = <span class="string">"JS,HTML5,CSS"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(pattern1.replace(<span class="regexp">/(\w+),(?:\w+)/</span>, <span class="string">"$2,$1"</span>));<span class="comment">//$2,JS,CSS</span></span><br></pre></td></tr></table></figure>
+<h3 id="前瞻"><a href="#前瞻" class="headerlink" title="前瞻"></a>前瞻</h3><p>前瞻也是属于零宽断言，说白了就是匹配位置的高级变体。前面我们说过的只是单纯的开头、结尾以及单词的边界，而前瞻的匹配则更加随意，如下：</p>
+<ol>
+<li><code>(?=p)</code>:要求之后的字符必须与p匹配</li>
+<li><code>(?!p)</code>:要求之后的字符必须不与p匹配</li>
+</ol>
+<p>如下实例：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reg1 = <span class="regexp">/java(?!Scrit)/</span>;</span><br><span class="line"><span class="keyword">var</span> reg2 = <span class="regexp">/java(?=Scrit)/</span>;</span><br><span class="line"><span class="built_in">console</span>.log(reg1.test(<span class="string">"javaScrit"</span>)); <span class="comment">//false</span></span><br><span class="line"><span class="built_in">console</span>.log(reg1.test(<span class="string">"javaB"</span>));<span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(reg2.test(<span class="string">"javaScrit"</span>)); <span class="comment">//true</span></span><br><span class="line"><span class="built_in">console</span>.log(reg2.test(<span class="string">"javaB"</span>));<span class="comment">//false</span></span><br></pre></td></tr></table></figure></p>
+<p>前瞻的作用就是给正则增加一个附加条件，只有满足条件，才能继续走下去，前瞻匹配的结果是不纳入结果里的，只是一个条件。</p>
+<p>支持正则方法有支持正则的字符串方法和正则自身的方法</p>
+<h2 id="支持正则表达式的-String-对象的方法"><a href="#支持正则表达式的-String-对象的方法" class="headerlink" title="支持正则表达式的 String 对象的方法"></a>支持正则表达式的 String 对象的方法</h2><h3 id="字符串搜索："><a href="#字符串搜索：" class="headerlink" title="字符串搜索："></a>字符串搜索：</h3><p><code>search()</code>方法用于检索字符串中指定的子字符串，返回匹配的字符的位置（0-~）。</p>
+<p>如果没有找到匹配的字符，则返回-1；将忽略RegExp中的全局模式，只返回第一个匹配的位置。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern = <span class="string">"hello html5 js css"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(pattern.search(<span class="regexp">/Html5/i</span>));<span class="comment">//6</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串匹配："><a href="#字符串匹配：" class="headerlink" title="字符串匹配："></a>字符串匹配：</h3><p><code>match()</code>方法可以返回匹配结果的数组，并且依赖于regexp的全局标志g。如果没有全局标志g，则只匹配一次；如果有，则匹配多次直到结束，最后返回一个存有匹配匹配文本的数组。</p>
+<p><code>match()</code>即不提供与子表达式匹配的文本的信息，也不声明每个匹配子串的索引位置。如果您需要这些信息，可以使用 RegExp.exec()。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern=<span class="string">"2012 years 12 month 20 is the end of the world"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(pattern.match(<span class="regexp">/\d+/g</span>));<span class="comment">//["2012","12","20"]</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串替代："><a href="#字符串替代：" class="headerlink" title="字符串替代："></a>字符串替代：</h3><p><code>replace()</code>方法用于替换字符串或者正则表达式匹配的子字符串，并且也依赖于regexp的全局标志g。如果没有全局标志g，则只替换第一个匹配的子字符串；如果有，则替换所有匹配的子字符串。</p>
+<p><code>replace()</code>的第二个参数可以是字符串，也可以是函数。如果是字符串，则由每个匹配的字符串替换，其中 $ 具有特殊的含义：</p>
+<ol>
+<li><code>$n</code>：其中n表示1-99，表示匹配的子字符串中的第n个，n就是带圆括号的子表达式的位置。</li>
+<li><code>$&amp;</code>：全部匹配的子字符串</li>
+<li>`$``：匹配子串左侧的文本</li>
+<li><code>$&#39;</code>：匹配子串右侧的文本</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern1 = <span class="string">"JS,HTML5,CSS"</span>;</span><br><span class="line"><span class="keyword">var</span> replace1 = pattern1.replace(<span class="regexp">/(\w&#123;1,&#125;),(\w+)/</span>, <span class="string">"$2,$1"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(replace1);<span class="comment">//HTML5,JS,CSS</span></span><br><span class="line"><span class="keyword">var</span> replace2 = pattern1.replace(<span class="regexp">/(\w+),/g</span>,<span class="string">"$1-"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(replace2);<span class="comment">//JS-HTML5-CSS</span></span><br></pre></td></tr></table></figure>
+<h3 id="字符串分割："><a href="#字符串分割：" class="headerlink" title="字符串分割："></a>字符串分割：</h3><p><code>split()</code>方法用于把一个字符串分割成字符串数组。该方法有两个参数，第一个参数是指定分割的边界；第二个参数是指定返回数组的长度，如果没有则字符串之间的都会被分割。</p>
+<p>若使用 <code>split(&quot;&quot;)</code> 则会将单词分割成字母<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern = <span class="string">"HTML5 JS CSS"</span>;</span><br><span class="line"><span class="keyword">var</span> sWord1 = pattern.split(<span class="string">" "</span>);</span><br><span class="line"><span class="keyword">var</span> sWord2 = pattern.split(<span class="string">""</span>);</span><br><span class="line"><span class="built_in">console</span>.log(sWord1);<span class="comment">//[ "HTML5" , "JS" , "CSS" ]</span></span><br><span class="line"><span class="built_in">console</span>.log(sWord2);<span class="comment">//[ "H" , "T" , "M" , "L" , "5" , " " , "J" , "S" , " " , "C" , "S" , "S"]</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="RegExp-对象的方法"><a href="#RegExp-对象的方法" class="headerlink" title="RegExp 对象的方法"></a>RegExp 对象的方法</h2><h2 id="test："><a href="#test：" class="headerlink" title="test："></a>test：</h2><p>test()方法用于检索要检测的字符串是否存在，若含有与regExp相匹配的文本，则返回true，否则返回false</p>
+<h2 id="exec："><a href="#exec：" class="headerlink" title="exec："></a>exec：</h2><p>exec()方法用于匹配字串，跟不是全局的match()方法很类似，但是它不仅能检索字符串中指定的值，返回找到的值，还能确定其位置。 比match()强大。如果利用 exec() 的lastIndex属性反复调用同样可以模拟match()全局检索字符串的效果。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.html5jscss.com/javascript-reg-1/" data-id="cjz6yr0y3000qc9n1e7aeoosr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/javascript-reg-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          正则基础深入应用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/cross-env/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">跨平台设置NODE_ENV</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Css/">Css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/React/">React</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Js/">Js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/MongoDB/">MongoDB</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/MongoDB/React/">React</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodeJs/">nodeJs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端构建工具/">前端构建工具</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Css-积累/">Css 积累</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GraphQL/">GraphQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS实际应用/">JS实际应用</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS工具/">JS工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/">Koa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongoose/">Mongoose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoDB/">mongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs/">nodeJs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflow/">reflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack1-x/">webpack1.x</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack4-x/">webpack4.x</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能/">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术细节/">技术细节</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术细节-cross-dev/">技术细节 cross-dev</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Css-积累/" style="font-size: 10px;">Css 积累</a> <a href="/tags/GraphQL/" style="font-size: 10px;">GraphQL</a> <a href="/tags/JS实际应用/" style="font-size: 15px;">JS实际应用</a> <a href="/tags/JS工具/" style="font-size: 10px;">JS工具</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Koa/" style="font-size: 10px;">Koa</a> <a href="/tags/Mongoose/" style="font-size: 10px;">Mongoose</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mongoDB/" style="font-size: 15px;">mongoDB</a> <a href="/tags/mongoose/" style="font-size: 15px;">mongoose</a> <a href="/tags/nodeJs/" style="font-size: 15px;">nodeJs</a> <a href="/tags/reflow/" style="font-size: 10px;">reflow</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/webpack1-x/" style="font-size: 10px;">webpack1.x</a> <a href="/tags/webpack4-x/" style="font-size: 10px;">webpack4.x</a> <a href="/tags/前端性能/" style="font-size: 10px;">前端性能</a> <a href="/tags/技术细节/" style="font-size: 10px;">技术细节</a> <a href="/tags/技术细节-cross-dev/" style="font-size: 10px;">技术细节 cross-dev</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue-communication/">vue组件通信</a>
+          </li>
+        
+          <li>
+            <a href="/mongoose-populate/">mongoose联表查询</a>
+          </li>
+        
+          <li>
+            <a href="/mongoose-api/">入门 mongoose</a>
+          </li>
+        
+          <li>
+            <a href="/you-dont-not-need-lodash-underscore/">使用原生函数代替underscore/lodash</a>
+          </li>
+        
+          <li>
+            <a href="/functional-programming/">函数式编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 wei gu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+      Hosted by <a href="https://pages.coding.me">Coding Pages</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

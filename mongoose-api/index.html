@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>入门 mongoose | 前端笔记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.
+Mongoose是运行在异步环境中对MongoDB进行操作的对象建模工具。
+mongoosegithub.com/Automattic/mongoose">
+<meta property="og:type" content="article">
+<meta property="og:title" content="入门 mongoose">
+<meta property="og:url" content="http://blog.html5jscss.com/mongoose-api/index.html">
+<meta property="og:site_name" content="前端笔记">
+<meta property="og:description" content="Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.
+Mongoose是运行在异步环境中对MongoDB进行操作的对象建模工具。
+mongoosegithub.com/Automattic/mongoose">
+<meta property="og:updated_time" content="2019-08-11T12:43:12.959Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="入门 mongoose">
+<meta name="twitter:description" content="Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.
+Mongoose是运行在异步环境中对MongoDB进行操作的对象建模工具。
+mongoosegithub.com/Automattic/mongoose">
+  
+    <link rel="alternative" href="/atom.xml" title="前端笔记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.ico">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">前端笔记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">首页</a>
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://blog.html5jscss.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-mongoose-api" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/mongoose-api/" class="article-date">
+  <time datetime="2019-08-01T06:07:19.000Z" itemprop="datePublished">2019-08-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/mongoDB/">mongoDB</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      入门 mongoose
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote><p>Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment.</p>
+<p>Mongoose是运行在异步环境中对MongoDB进行操作的对象建模工具。</p>
+<footer><strong>mongoose</strong><cite><a href="https://github.com/Automattic/mongoose" target="_blank" rel="external">github.com/Automattic/mongoose</a></cite></footer></blockquote>
+<a id="more"></a>
+<h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ol>
+<li>首先电脑必须安装 <a href="https://www.mongodb.com/" target="_blank" rel="external">MongoDB</a> 和 <a href="http://nodejs.org/" target="_blank" rel="external">NodeJS</a>。</li>
+<li>项目中使用npm来安装mongoose <code>npm install mongoose --save</code></li>
+<li>引入<code>mongoose</code>就能使用了。 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Using Node.js `require()`</span></span><br><span class="line"><span class="keyword">const</span> mongoose = <span class="built_in">require</span>(<span class="string">'mongoose'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Using ES6 imports</span></span><br><span class="line"><span class="keyword">import</span> mongoose <span class="keyword">from</span> <span class="string">'mongoose'</span>;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p><code>connect</code>用于创建连接数据库，也可以调用使用<code>disconnect</code>断开连接。如下代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> dbPath = <span class="string">'mongodb://localhost/test'</span>;</span><br><span class="line"><span class="keyword">const</span> database = () =&gt; &#123;</span><br><span class="line">    mongoose.set(<span class="string">'debug'</span>, <span class="literal">true</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> connect = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        mongoose.connect(dbPath, <span class="function"><span class="keyword">function</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span>(err)&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'连接失败'</span>);</span><br><span class="line">            &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(<span class="string">'连接成功'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    connect();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">    * 断开重新连接</span><br><span class="line">    */</span></span><br><span class="line">    mongoose.connection.on(<span class="string">'disconnected'</span>, () =&gt; &#123;</span><br><span class="line">        connect();</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">    * 连接成功</span><br><span class="line">    */</span></span><br><span class="line">    mongoose.connection.on(<span class="string">'connected'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;    </span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'已经连接成功'</span>);  </span><br><span class="line">    &#125;); </span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span><br><span class="line">    * 连接异常</span><br><span class="line">    */</span></span><br><span class="line">    mongoose.connection.on(<span class="string">'error'</span>, err =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.error(<span class="string">'异常'</span> + err)</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    mongoose.connection.on(<span class="string">'open'</span>, <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Connected to MongoDB '</span>, dbPath)</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">database()</span><br></pre></td></tr></table></figure></p>
+<p>如果要指定用户，可在连接的数据库地址上形如 ‘mongodb://用户名:密码@IP地址/数据库名称’ 结构上修改。</p>
+<h2 id="Schema"><a href="#Schema" class="headerlink" title="Schema"></a>Schema</h2><p>每一个<code>schema</code>都是一个文档的映射结构，无法操作数据库，但是在<code>schema</code>上可以定义属性、静态方法、实例方法、查询辅助、索引、虚拟字段以及配置项。</p>
+<h3 id="允许的类型"><a href="#允许的类型" class="headerlink" title="允许的类型"></a>允许的类型</h3><p>文档中字段允许的属性：</p>
+<ol>
+<li>String</li>
+<li>Number</li>
+<li>Date</li>
+<li>Buffer</li>
+<li>Boolean</li>
+<li>Mixed</li>
+<li>ObjectId</li>
+<li>Array</li>
+<li>Decimal128</li>
+<li>Map</li>
+</ol>
+<p>实例如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> schema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">    name:    <span class="built_in">String</span>,</span><br><span class="line">    binary:  Buffer,</span><br><span class="line">    living:  <span class="built_in">Boolean</span>,</span><br><span class="line">    updated: &#123; type: <span class="built_in">Date</span>, <span class="keyword">default</span>: <span class="built_in">Date</span>.now &#125;,</span><br><span class="line">    age:     &#123; type: <span class="built_in">Number</span>, min: <span class="number">18</span>, max: <span class="number">65</span> &#125;,</span><br><span class="line">    mixed:   Schema.Types.Mixed,</span><br><span class="line">    _someId: Schema.Types.ObjectId,</span><br><span class="line">    decimal: Schema.Types.Decimal128,</span><br><span class="line">    array: [],</span><br><span class="line">    ofString: [<span class="built_in">String</span>],</span><br><span class="line">    ofNumber: [<span class="built_in">Number</span>],</span><br><span class="line">    ofDates: [<span class="built_in">Date</span>],</span><br><span class="line">    ofBuffer: [Buffer],</span><br><span class="line">    ofBoolean: [<span class="built_in">Boolean</span>],</span><br><span class="line">    ofMixed: [Schema.Types.Mixed],</span><br><span class="line">    ofObjectId: [Schema.Types.ObjectId],</span><br><span class="line">    ofArrays: [[]],</span><br><span class="line">    ofArrayOfNumbers: [[<span class="built_in">Number</span>]],</span><br><span class="line">    nested: &#123;</span><br><span class="line">        stuff: &#123; type: <span class="built_in">String</span>, lowercase: <span class="literal">true</span>, trim: <span class="literal">true</span> &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    map: <span class="built_in">Map</span>,</span><br><span class="line">    mapOfString: &#123;</span><br><span class="line">    type: <span class="built_in">Map</span>,</span><br><span class="line">    <span class="keyword">of</span>: <span class="built_in">String</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 如下使用</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Thing = mongoose.model(<span class="string">'Thing'</span>, schema);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> m = <span class="keyword">new</span> Thing;</span><br><span class="line">m.name = <span class="string">'Statue of Liberty'</span>;</span><br><span class="line">m.age = <span class="number">125</span>;</span><br><span class="line">m.updated = <span class="keyword">new</span> <span class="built_in">Date</span>;</span><br><span class="line">m.binary = Buffer.alloc(<span class="number">0</span>);</span><br><span class="line">m.living = <span class="literal">false</span>;</span><br><span class="line">m.mixed = &#123; any: &#123; thing: <span class="string">'i want'</span> &#125; &#125;;</span><br><span class="line">m.markModified(<span class="string">'mixed'</span>);</span><br><span class="line">m._someId = <span class="keyword">new</span> mongoose.Types.ObjectId;</span><br><span class="line">m.array.push(<span class="number">1</span>);</span><br><span class="line">m.ofString.push(<span class="string">"strings!"</span>);</span><br><span class="line">m.ofNumber.unshift(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);</span><br><span class="line">m.ofDates.addToSet(<span class="keyword">new</span> <span class="built_in">Date</span>);</span><br><span class="line">m.ofBuffer.pop();</span><br><span class="line">m.ofMixed = [<span class="number">1</span>, [], <span class="string">'three'</span>, &#123; four: <span class="number">5</span> &#125;];</span><br><span class="line">m.nested.stuff = <span class="string">'good'</span>;</span><br><span class="line">m.map = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="string">'key'</span>, <span class="string">'value'</span>]]);</span><br><span class="line">m.save(callback);</span><br></pre></td></tr></table></figure></p>
+<h3 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h3><p><code>mongoose</code>自动会给每个<code>document</code>增加索引，可以在<code>connect</code>设置关闭所有的自动索引，也可以单独针对某个<code>doucument</code>设置。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">schema.set(<span class="string">'autoIndex'</span>, <span class="literal">false</span>);</span><br><span class="line"><span class="comment">// 或者</span></span><br><span class="line"><span class="keyword">new</span> Schema(&#123;&#125;, &#123;autoIndex: <span class="literal">false</span>&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="虚拟字段"><a href="#虚拟字段" class="headerlink" title="虚拟字段"></a>虚拟字段</h3><p>虚拟字段不会写入数据库中，可以利用它来格式化和组合属性值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> addressSchema = <span class="keyword">new</span> Schema(&#123;</span><br><span class="line">    address: &#123;   </span><br><span class="line">        city: <span class="built_in">String</span>,   </span><br><span class="line">        street: <span class="built_in">String</span> </span><br><span class="line">    &#125; </span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 设置获取虚拟字段的get方法</span></span><br><span class="line">addressSchema.virtual(<span class="string">'address.full'</span>).get(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.address.city + <span class="string">'/'</span> + <span class="keyword">this</span>.address.street</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 设置赋值虚拟字段的set方法</span></span><br><span class="line">addressSchema.virtual(<span class="string">'address.full'</span>).set(<span class="function"><span class="keyword">function</span>(<span class="params">address</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> split = address.split(<span class="string">'/'</span>);</span><br><span class="line">    <span class="keyword">this</span>.address.city = split[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">this</span>.address.street = split[<span class="number">1</span>];</span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">var</span> Address = mongoose.model(<span class="string">'Address'</span>, addressSchema);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> address1 = <span class="keyword">new</span> Address(&#123;</span><br><span class="line">    address: &#123;</span><br><span class="line">        city: <span class="string">'shanghai'</span>,</span><br><span class="line">        street: <span class="string">'jinzhong road'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 通过虚拟字段获取地址详情</span></span><br><span class="line"><span class="built_in">console</span>.log(address1.address.full) <span class="comment">// shanghai/jinzhong road</span></span><br><span class="line"><span class="comment">// 通过虚拟字段设置地址详情</span></span><br><span class="line">address1.address.full = <span class="string">"beijing/gugong"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(address1.address.city) <span class="comment">// beijing</span></span><br><span class="line"><span class="built_in">console</span>.log(address1.address.street) <span class="comment">// gugong</span></span><br><span class="line">address1.save() <span class="comment">// address.full将不会被保存到数据库中</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="配置项"><a href="#配置项" class="headerlink" title="配置项"></a>配置项</h3><p><code>Schema</code>可以使用配置项来设置，有两种方式设置：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Schema(&#123;…&#125;, options)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> schema = <span class="keyword">new</span> Schema(&#123;...&#125;);</span><br><span class="line">schema.set(option, value);</span><br></pre></td></tr></table></figure></p>
+<h4 id="有效的配置项"><a href="#有效的配置项" class="headerlink" title="有效的配置项"></a>有效的配置项</h4><ul>
+<li>autoIndex（默认true），创建默认索引（_id）。</li>
+<li>capped，限制一次操作的量。</li>
+<li>collection，定义集合的名字，默认是model名+s</li>
+<li>id _id（默认true），如果<code>schema</code>中没有定义id，<code>mongoose</code>默认分配一个id域</li>
+<li>read </li>
+<li>safe（默认true），在操作的时候要等待返回的MongoDB返回的结果；否则则不等待</li>
+<li>shardKey 让mongodb做分布式操作 </li>
+<li>strict（默认enabled）如果实例中的字段没在schema中定义过，那么这个字段就不会被保存进数据库</li>
+<li>toJSON，实例调用toJson方法后，针对返回的数据做处理</li>
+<li>toObject，实例调用toJson方法后，针对返回的数据做处理</li>
+<li>versionKey 版本锁，设置在每个文档上，默认键名为 <code>_v</code>。</li>
+<li>typeKey </li>
+<li>validateBeforeSave 保存数据库时会自动验证</li>
+<li>skipVersioning </li>
+<li>timestamps 在schema设置这个选项，会被自动添加createdAt和updatedAt，默认的名字是createdAt和updatedAt</li>
+<li>useNestedStrict 是否检查childSchem的配置</li>
+<li>retainKeyOrder，是否改变键的顺序</li>
+</ul>
+<h2 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h2><p><code>Schmema</code>里只设置属性的话，缺少字段也能保存；多了属性的话，虽然不会把多余的属性保存，但是还是进入数据库了。所以可以需要增加验证属性来限制下，就能避免像上面这些情况的发生了。常用的验证如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">required  数据必须填写</span><br><span class="line"><span class="keyword">default</span>  默认值</span><br><span class="line">validate  自定义匹配</span><br><span class="line">min  最小值(只适用于数字)</span><br><span class="line">max  最大值(只适用于数字)</span><br><span class="line">match  正则匹配(只适用于字符串)</span><br><span class="line">enum   枚举匹配(只适用于字符串)</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>required：将某个字段设置为必填字段，如果没有这个必填字段，则不会被保存。</li>
+<li>default: 如果不设置某个字段，则会取默认值</li>
+<li>min | max: 将某个字段设置取值范围</li>
+<li>match: 字段必须包含指定字符</li>
+<li>enum: 枚举值必须在枚举的范围内</li>
+<li>validate：定义一个函数，返回<code>true</code>则通过验证；<code>false</code>则不通过验证。</li>
+</ol>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>就是由<code>Schema</code>生成的模型，可以对数据进行操作。</p>
+<h3 id="自定义静态方法"><a href="#自定义静态方法" class="headerlink" title="自定义静态方法"></a>自定义静态方法</h3><p>通过<code>Schema</code>的<code>statics</code>属性给<code>model</code>添加方法，如下使用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询所有同名的用户</span></span><br><span class="line">personSchema.statics.findByName = <span class="function"><span class="keyword">function</span>(<span class="params">name, callback</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.model(<span class="string">'Person'</span>).find(&#123;<span class="string">'name'</span>:name&#125;, callback);  </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> Person = mongoose.model(<span class="string">'Person'</span>, personSchema)</span><br><span class="line">Person.findByName(<span class="string">'lan'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">err, persons</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(persons);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="查询辅助"><a href="#查询辅助" class="headerlink" title="查询辅助"></a>查询辅助</h3><p>通过<code>Schema</code>给<code>model</code>的查询增加辅助函数，如下使用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> personSchema = Schema(&#123;</span><br><span class="line">    name: <span class="built_in">String</span>,</span><br><span class="line">    age: <span class="built_in">Number</span>,</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 查询所有同名的用户</span></span><br><span class="line">personSchema.query.byName = <span class="function"><span class="keyword">function</span>(<span class="params">name, callback</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.find(&#123;name: name&#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> Person = mongoose.model(<span class="string">'Person'</span>, personSchema)</span><br><span class="line"><span class="comment">//使用</span></span><br><span class="line">Person.find().byName(<span class="string">'lan'</span>).exec(<span class="function"><span class="keyword">function</span>(<span class="params">err, users</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(users);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="Entity"><a href="#Entity" class="headerlink" title="Entity"></a>Entity</h2><p>由<code>Model</code>生成的实例，可以定义实例方法，由生成的实例对数据进行操作。</p>
+<h3 id="自定义实例方法"><a href="#自定义实例方法" class="headerlink" title="自定义实例方法"></a>自定义实例方法</h3><p>通过<code>Schema</code>的<code>methods</code>属性给<code>document</code>添加方法，如下使用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> personSchema = Schema(&#123;</span><br><span class="line">    name: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 查询所有同名的用户</span></span><br><span class="line">personSchema.methods.findByName = <span class="function"><span class="keyword">function</span>(<span class="params">name, callback</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.model(<span class="string">'Person'</span>).find(&#123;<span class="string">'name'</span>:name&#125;, callback);  </span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 自定义 showName 方法</span></span><br><span class="line">personSchema.methods.showName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> Person = mongoose.model(<span class="string">'Person'</span>, personSchema)</span><br><span class="line"><span class="keyword">var</span> felyne = <span class="keyword">new</span> Person(&#123;name: <span class="string">'lan'</span>&#125;)</span><br><span class="line">felyne.showName()</span><br><span class="line">felyne.findByName(<span class="string">'lan'</span> ,<span class="function"><span class="keyword">function</span>(<span class="params">err, result</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(result)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<p>以上讲完了mongoose的基本模型，接着我们介绍下mongoose的基本方法。也就是“增删改查”的四种方法。</p>
+<h2 id="增"><a href="#增" class="headerlink" title="增"></a>增</h2><h3 id="实例的save方法"><a href="#实例的save方法" class="headerlink" title="实例的save方法"></a>实例的save方法</h3><p>先实例化，然后再调用<code>save</code>方法。<br>语法：<code>save([options], [options.safe], [options.validateBeforeSave], [fn])</code>，例子如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> personSchema = Schema(&#123;</span><br><span class="line">    name: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">var</span> Person = mongoose.model(<span class="string">'Person'</span>, personSchema)</span><br><span class="line"><span class="keyword">var</span> felyne = <span class="keyword">new</span> Person(&#123;name: <span class="string">'lan'</span>&#125;)</span><br><span class="line">felyne.save((err, doc) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">    <span class="built_in">console</span>.log(doc);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="Model的create方法"><a href="#Model的create方法" class="headerlink" title="Model的create方法"></a>Model的create方法</h3><p>直接用<code>Model</code>调用<code>create</code>方法。<br>语法：<code>Model.create(doc(s), [callback])</code>，例子如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> personSchema = Schema(&#123;</span><br><span class="line">    name: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">var</span> Person = mongoose.model(<span class="string">'Person'</span>, personSchema)</span><br><span class="line">Person.create(&#123;name: <span class="string">'lan'</span>&#125;,&#123;name: <span class="string">'van'</span>&#125;, (err, doc) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">    <span class="built_in">console</span>.log(doc);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="Model的insertMany方法"><a href="#Model的insertMany方法" class="headerlink" title="Model的insertMany方法"></a>Model的insertMany方法</h3><p>也是用<code>Model</code>调用，跟<code>create</code>相比就是多了<code>operation</code>参数。<br>语法：<code>Model.insertMany(doc(s), [options], [callback])</code>，例子如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> personSchema = Schema(&#123;</span><br><span class="line">    name: <span class="built_in">String</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">var</span> Person = mongoose.model(<span class="string">'Person'</span>, personSchema)</span><br><span class="line">Person.insertMany(&#123;name: <span class="string">'lan'</span>&#125;,&#123;name: <span class="string">'van'</span>&#125;, (err, doc) =&gt; &#123;</span><br><span class="line">    <span class="keyword">if</span>(err) <span class="keyword">return</span> <span class="built_in">console</span>.error(err);</span><br><span class="line">    <span class="built_in">console</span>.log(doc);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h2 id="删"><a href="#删" class="headerlink" title="删"></a>删</h2><h3 id="实例的remove方法"><a href="#实例的remove方法" class="headerlink" title="实例的remove方法"></a>实例的remove方法</h3><p>删除实例。<br>语法：<code>document.remove([callback])</code>，例子如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.remove((err, doc) =&gt; <span class="built_in">console</span>.log(err))</span><br></pre></td></tr></table></figure></p>
+<h3 id="Model的remove方法"><a href="#Model的remove方法" class="headerlink" title="Model的remove方法"></a>Model的remove方法</h3><p>删除符合条件的所有数据。<br>语法：<code>model.remove(conditions, [callback])</code>，例子如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">model.remove(&#123;name:<span class="regexp">/60/</span>&#125;,(err, doc) =&gt; <span class="built_in">console</span>.log(err))</span><br></pre></td></tr></table></figure></p>
+<h3 id="findOneAndRemove方法"><a href="#findOneAndRemove方法" class="headerlink" title="findOneAndRemove方法"></a>findOneAndRemove方法</h3><p>只删除符合条件的第一条数据<br>语法：<code>Model.findOneAndRemove(conditions, [options], [callback])</code>，例子如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Model.findOneAndRemove(&#123;age:&#123;$lt:<span class="number">60</span>&#125;&#125;,(err, doc) =&gt; <span class="built_in">console</span>.log(err))</span><br></pre></td></tr></table></figure></p>
+<h3 id="findByIdAndRemove方法"><a href="#findByIdAndRemove方法" class="headerlink" title="findByIdAndRemove方法"></a>findByIdAndRemove方法</h3><p>通过ID删数据<br>语法：<code>Model.findByIdAndRemove(id, [options], [callback])</code>，例子如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Model.findByIdAndRemove(id, (err, doc) =&gt; <span class="built_in">console</span>.log(err))</span><br></pre></td></tr></table></figure></p>
+<h2 id="改"><a href="#改" class="headerlink" title="改"></a>改</h2><h3 id="update"><a href="#update" class="headerlink" title="update"></a>update</h3><p>更改符合条件的数据<br>语法：<code>Model.update(conditions, doc, [options], [callback])</code>，第一个参数表示查询条件，第二个参数是需要修改的数据，第三个参数控制选项，第四个参数是回调函数。options有如下选项</p>
+<ul>
+<li>safe (boolean)： 默认为true。安全模式。</li>
+<li>upsert (boolean)： 默认为false。如果不存在则创建新记录。</li>
+<li>multi (boolean)： 默认为false。是否更新多个查询记录。</li>
+<li>runValidators： 如果值为true，执行Validation验证。</li>
+<li>setDefaultsOnInsert： 如果upsert选项为true，在新建时插入文档定义的默认值。</li>
+<li>strict (boolean)： 以strict模式进行更新。</li>
+<li>overwrite (boolean)： 默认为false。禁用update-only模式，允许覆盖记录。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Model.update(&#123;age:&#123;$gte:<span class="number">60</span>&#125;&#125;,&#123;age:<span class="number">61</span>&#125;, (err,raw) =&gt; &#123;</span><br><span class="line">    <span class="comment">//&#123; n: 1, nModified: 1, ok: 1 &#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(raw);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="updateMany"><a href="#updateMany" class="headerlink" title="updateMany"></a>updateMany</h3><p>只能更新多个的update，就是options为<code>{multi:true}</code>的update。<br>语法：<code>Model.updateMany(conditions, doc, [options], [callback])</code>。例子如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将姓名为lan的用户年龄变为70</span></span><br><span class="line">Model.updateMany(&#123;name:<span class="regexp">/lan/</span>&#125;,&#123;age:<span class="number">50</span>&#125;,<span class="function"><span class="keyword">function</span>(<span class="params">err,raw</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//&#123; n: 2, nModified: 2, ok: 1 &#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(raw);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="updateOne"><a href="#updateOne" class="headerlink" title="updateOne"></a>updateOne</h3><p>只能更新一个的update，就是options为<code>{multi:false}</code>的update。<br>语法：<code>Model.updateOne(conditions, doc, [options], [callback])</code>，例子如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将姓名为lan的第一个用户年龄变为70</span></span><br><span class="line">Model.updateOne(&#123;name:<span class="regexp">/lan/</span>&#125;,&#123;age:<span class="number">70</span>&#125;, <span class="function"><span class="keyword">function</span>(<span class="params">err,raw</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//&#123; n: 2, nModified: 2, ok: 1 &#125;</span></span><br><span class="line">    <span class="built_in">console</span>.log(raw);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h3 id="修改更改器"><a href="#修改更改器" class="headerlink" title="修改更改器"></a>修改更改器</h3><ol>
+<li><code>$inc</code>:增减修改器，只对数字有效。</li>
+<li><code>$set</code>:指定键并修改，不存在则创建。</li>
+<li><code>$unset</code>:删除一个键。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// inc </span></span><br><span class="line"> Model.update(&#123;</span><br><span class="line">    <span class="string">'age'</span>: <span class="number">60</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">    <span class="string">'$inc'</span>: &#123;</span><br><span class="line">        <span class="string">'age'</span>: <span class="number">61</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 执行后: age=23</span></span><br><span class="line"><span class="comment">// set </span></span><br><span class="line"> Model.update(&#123;</span><br><span class="line">    <span class="string">'age'</span>: <span class="number">60</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">    <span class="string">'$set'</span>: &#123;</span><br><span class="line">        <span class="string">'age'</span>: <span class="string">'百岁老人'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 执行后: age=百岁老人</span></span><br><span class="line"><span class="comment">// set </span></span><br><span class="line"> Model.update(&#123;</span><br><span class="line">    <span class="string">'age'</span>: <span class="number">60</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">    <span class="string">'$unset'</span>: &#123;</span><br><span class="line">        <span class="string">'age'</span>: <span class="string">'百岁老人'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 执行后: 删除了age键</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="数组更改器"><a href="#数组更改器" class="headerlink" title="数组更改器"></a>数组更改器</h3><ol>
+<li><code>$push</code>: 给一个键push一个数组成员,键不存在会创建</li>
+<li><code>$addToSet</code>:向数组中添加一个元素,如果存在就不添加。</li>
+<li><code>$each</code>:遍历数组。</li>
+<li><code>$pop</code>:向数组中尾部删除一个元素</li>
+<li><code>$pull</code>:向数组中删除指定元素。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// inc </span></span><br><span class="line"> Model.update(&#123;</span><br><span class="line">    <span class="string">'age'</span>: <span class="number">60</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">    <span class="string">'$push'</span>: &#123;</span><br><span class="line">        <span class="string">'array'</span>: <span class="number">1</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 执行后: 增加一个 array 键,类型为数组, 有一个成员 10</span></span><br><span class="line">Model.update(&#123;</span><br><span class="line">    <span class="string">'age'</span>: <span class="number">60</span></span><br><span class="line">&#125;, &#123;</span><br><span class="line">    <span class="string">'$push'</span>: &#123;</span><br><span class="line">        <span class="string">'array'</span>: &#123;</span><br><span class="line">            <span class="string">'$each'</span>: [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// 执行后: array : [10,1,2,3,4,5]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="查"><a href="#查" class="headerlink" title="查"></a>查</h2><h3 id="find"><a href="#find" class="headerlink" title="find"></a>find</h3><p>查询所有符合条件的数据。<br>语法：<code>Model.find(conditions, [projection], [options], [callback])</code>,第一个参数表示查询条件，第二个参数用于控制返回的字段，第三个参数用于配置查询参数，第四个参数是回调函数。如果参数为空则传null</p>
+<h4 id="查询条件"><a href="#查询条件" class="headerlink" title="查询条件"></a>查询条件</h4><ul>
+<li>$or　　　　或关系</li>
+<li>$nor　　　 或关系取反</li>
+<li>$gt　　　　大于</li>
+<li>$gte　　　 大于等于</li>
+<li>$lt　　　　小于</li>
+<li>$lte　　　 小于等于</li>
+<li>$ne　　　　不等于</li>
+<li>$in　　　　在多个值范围内</li>
+<li>$nin　　　 不在多个值范围内</li>
+<li>$all　　　 匹配数组中多个值</li>
+<li>$regex　　 正则，用于模糊查询</li>
+<li>$size　　　匹配数组大小</li>
+<li>$maxDistance　范围查询，距离（基于LBS）</li>
+<li>$mod　　　　取模运算</li>
+<li>$near　　　 邻域查询，查询附近的位置（基于LBS）</li>
+<li>$exists　　 字段是否存在</li>
+<li>$elemMatch　匹配内数组内的元素</li>
+<li>$within　　　范围查询（基于LBS）</li>
+<li>$box　　　　 范围查询，矩形范围（基于LBS）</li>
+<li>$center　　　范围醒询，圆形范围（基于LBS）</li>
+<li>$centerSphere　范围查询，球形范围（基于LBS）</li>
+<li>$slice　　　　查询字段集合中的元素（比如从第几个之后，第N到第M个元素</li>
+<li>$where       可以使用任意JavaScript作为条件</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询名为lan年龄大于60的用户</span></span><br><span class="line">Model.find(&#123;name:<span class="regexp">/lan/</span>,age:&#123;$gte:<span class="number">60</span>&#125;&#125;,(err,docs)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(docs);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 查询名为lan的用户，只输出name，不输出id</span></span><br><span class="line">Model.find(&#123;name:<span class="regexp">/lan/</span>&#125;,&#123;name:<span class="number">1</span>,_id:<span class="number">0</span>&#125;,(err,docs)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(docs);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// 找出跳过前两条的所有数据</span></span><br><span class="line">Model.find(<span class="literal">null</span>,<span class="literal">null</span>,&#123;skip:<span class="number">2</span>&#125;,(err,docs)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(docs);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="findById"><a href="#findById" class="headerlink" title="findById"></a>findById</h3><p>通过id查询数据。<br>语法：<code>Model.findById(id, [projection], [options], [callback])</code>，除了查询条件是id，其他参数跟<code>find</code>一样，例子如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询某个id的用户</span></span><br><span class="line">Model.findById(id,(err,doc)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(doc);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="findOne"><a href="#findOne" class="headerlink" title="findOne"></a>findOne</h3><p>返回查询到的第一个数据<br>语法：<code>Model.findOne([conditions], [projection], [options], [callback])</code>，用法跟<code>find</code>一样，只是只返回查到的第一个数据，例子如下：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 查询某个id的用户</span></span><br><span class="line">Model.findOne(&#123;name:<span class="regexp">/lan/</span>,age:&#123;$gte:<span class="number">60</span>&#125;&#125;,(err,doc)=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(doc);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
+<h3 id="查询后处理"><a href="#查询后处理" class="headerlink" title="查询后处理"></a>查询后处理</h3><p>所谓的查询后处理，就是在查询到的结果里通过以下方法再处理，方法如下：</p>
+<ul>
+<li>sort     排序</li>
+<li>skip     跳过</li>
+<li>limit    限制</li>
+<li>select   显示字段</li>
+<li>exect    执行</li>
+<li>count    计数</li>
+<li>distinct 去重</li>
+</ul>
+<h2 id="前后钩子"><a href="#前后钩子" class="headerlink" title="前后钩子"></a>前后钩子</h2><p>中间件函数，在执行某些操作之前执行某些函数，在schema上定义。<br>以下函数可以设置前后钩子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">validate</span><br><span class="line">save</span><br><span class="line">remove</span><br><span class="line">count</span><br><span class="line">find</span><br><span class="line">findOne</span><br><span class="line">findOneAndRemove</span><br><span class="line">findOneAndUpdate</span><br><span class="line">insertMany</span><br><span class="line">update</span><br></pre></td></tr></table></figure></p>
+<h3 id="pre"><a href="#pre" class="headerlink" title="pre()"></a>pre()</h3><p><code>pre()</code>是在执行方法之前执行的方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> schema = <span class="keyword">new</span> mongoose.Schema(&#123; age:<span class="built_in">Number</span>, name: <span class="built_in">String</span>, &#125;);  </span><br><span class="line">schema.pre(<span class="string">'find'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">next</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'我是pre方法1'</span>);</span><br><span class="line">    next();</span><br><span class="line">&#125;);</span><br><span class="line">schema.pre(<span class="string">'find'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">next</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'我是pre方法2'</span>);</span><br><span class="line">    next();</span><br><span class="line">&#125;);  </span><br><span class="line"><span class="keyword">var</span> user = mongoose.model(<span class="string">'user'</span>, schema);</span><br><span class="line">user.find(<span class="literal">null</span>, &#123;name:<span class="number">1</span>&#125;, (err,docs) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(docs[<span class="number">0</span>]);</span><br><span class="line">&#125;)    </span><br><span class="line"><span class="comment">/*</span><br><span class="line">我是pre方法1</span><br><span class="line">我是pre方法2</span><br><span class="line">&#123; name: 'lan'&#125;</span><br><span class="line">*/</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="post"><a href="#post" class="headerlink" title="post()"></a>post()</h3><p><code>post()</code>是执行某些操作前最后执行的方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> schema = <span class="keyword">new</span> mongoose.Schema(&#123; age:<span class="built_in">Number</span>, name: <span class="built_in">String</span>, &#125;);  </span><br><span class="line">schema.pre(<span class="string">'post'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">next</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'我是pre方法1'</span>);</span><br><span class="line">    next();</span><br><span class="line">&#125;);</span><br><span class="line">schema.pre(<span class="string">'post'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">next</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'我是pre方法2'</span>);</span><br><span class="line">    next();</span><br><span class="line">&#125;);  </span><br><span class="line"><span class="keyword">var</span> user = mongoose.model(<span class="string">'user'</span>, schema);</span><br><span class="line">user.find(<span class="literal">null</span>, &#123;name:<span class="number">1</span>&#125;, (err,docs) =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(docs[<span class="number">0</span>]);</span><br><span class="line">&#125;)    </span><br><span class="line"><span class="comment">/*</span><br><span class="line">我是pre方法1</span><br><span class="line">我是pre方法2</span><br><span class="line">&#123; name: 'lan'&#125;</span><br><span class="line">*/</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="聚合管道"><a href="#聚合管道" class="headerlink" title="聚合管道"></a>聚合管道</h2><p>可以理解为高级的查询方法。<br>语法：<code>Model.aggregate([options], [callback])</code>，<code>options</code>说明如下：</p>
+<ul>
+<li>$project：修改输入文档的结构。可以用来重命名、增加或删除域，也可以用于创建计算结果以及嵌套文档。对应project()方法</li>
+<li>$match：用于过滤数据，只输出符合条件的文档。$match使用MongoDB的标准查询操作。对应match()。</li>
+<li>$limit：用来限制MongoDB聚合管道返回的文档数。对应limit()方法</li>
+<li>$skip：在聚合管道中跳过指定数量的文档，并返回余下的文档。对应skip()。</li>
+<li>$unwind：将文档中的某一个数组类型字段拆分成多条，每条包含数组中的一个值。对应unwind()方法</li>
+<li>$group：将集合中的文档分组，可用于统计结果。对应group()方法</li>
+<li>$sort：将输入文档排序后输出。对应sort()方法</li>
+<li>$geoNear：输出接近某一地理位置的有序文档。对应near()。</li>
+<li>$sample：随机选择N个</li>
+<li>$lookup：连接操作符，用于连接同一个数据库中另一个集合，并获取指定的文档，类似于populate,<a href="../mongoose-populate">联表查询</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://blog.html5jscss.com/mongoose-api/" data-id="cjz6yr0y8000uc9n1303iy8fx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoDB/">mongoDB</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongoose/">mongoose</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodeJs/">nodeJs</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/mongoose-populate/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          mongoose联表查询
+        
+      </div>
+    </a>
+  
+  
+    <a href="/you-dont-not-need-lodash-underscore/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">使用原生函数代替underscore/lodash</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Css/">Css</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/">JavaScript</a><span class="category-list-count">8</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/JavaScript/React/">React</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Js/">Js</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/MongoDB/">MongoDB</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/MongoDB/React/">React</a><span class="category-list-count">1</span></li></ul></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/Vue/">Vue</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/mongoDB/">mongoDB</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/nodeJs/">nodeJs</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/前端构建工具/">前端构建工具</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Css-积累/">Css 积累</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GraphQL/">GraphQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS实际应用/">JS实际应用</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JS工具/">JS工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">9</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Koa/">Koa</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongoose/">Mongoose</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoDB/">mongoDB</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongoose/">mongoose</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodeJs/">nodeJs</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/reflow/">reflow</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack1-x/">webpack1.x</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack4-x/">webpack4.x</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端性能/">前端性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术细节/">技术细节</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/技术细节-cross-dev/">技术细节 cross-dev</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/正则/">正则</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Css-积累/" style="font-size: 10px;">Css 积累</a> <a href="/tags/GraphQL/" style="font-size: 10px;">GraphQL</a> <a href="/tags/JS实际应用/" style="font-size: 15px;">JS实际应用</a> <a href="/tags/JS工具/" style="font-size: 10px;">JS工具</a> <a href="/tags/JavaScript/" style="font-size: 20px;">JavaScript</a> <a href="/tags/Koa/" style="font-size: 10px;">Koa</a> <a href="/tags/Mongoose/" style="font-size: 10px;">Mongoose</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/Vue/" style="font-size: 10px;">Vue</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mongoDB/" style="font-size: 15px;">mongoDB</a> <a href="/tags/mongoose/" style="font-size: 15px;">mongoose</a> <a href="/tags/nodeJs/" style="font-size: 15px;">nodeJs</a> <a href="/tags/reflow/" style="font-size: 10px;">reflow</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a> <a href="/tags/webpack1-x/" style="font-size: 10px;">webpack1.x</a> <a href="/tags/webpack4-x/" style="font-size: 10px;">webpack4.x</a> <a href="/tags/前端性能/" style="font-size: 10px;">前端性能</a> <a href="/tags/技术细节/" style="font-size: 10px;">技术细节</a> <a href="/tags/技术细节-cross-dev/" style="font-size: 10px;">技术细节 cross-dev</a> <a href="/tags/正则/" style="font-size: 15px;">正则</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">June 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">June 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">February 2016</a><span class="archive-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/vue-communication/">vue组件通信</a>
+          </li>
+        
+          <li>
+            <a href="/mongoose-populate/">mongoose联表查询</a>
+          </li>
+        
+          <li>
+            <a href="/mongoose-api/">入门 mongoose</a>
+          </li>
+        
+          <li>
+            <a href="/you-dont-not-need-lodash-underscore/">使用原生函数代替underscore/lodash</a>
+          </li>
+        
+          <li>
+            <a href="/functional-programming/">函数式编程</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 wei gu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a><br>
+      Hosted by <a href="https://pages.coding.me">Coding Pages</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">首页</a>
+  
+    <a href="/archives" class="mobile-nav-link">归档</a>
+  
+</nav>
+    
+
+<script src="/js/jquery.min.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
