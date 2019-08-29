@@ -132,7 +132,7 @@
 <li><code>[ ]</code>:表示范围，一个字符的集合，匹配该集合中的任意一个字符，例如 <code>[abc]</code>就可以匹配”css”中的c；<br>如果上例前面加 ^元字符，形如<code>[^asd]</code>，则表示匹配除了asd的其他字符；</li>
 </ol>
 <p>如果觉得匹配的字符太多，而且类型相似，则可以用-元字符表示，那么上例就可以这么写<code>[a-c]</code>这么写，所以上例也可以这么写 <code>[^a-d]</code></p>
-<ol>
+<ol start="2">
 <li><code>\w</code>和<code>\W</code>:<code>\w</code>表示匹配任何ASCII字符组成的单词，等价于[a-zA-Z0-9]；<code>\W</code>表示匹配不是ASCII字符组成的单词等价于<code>[^a-zA-Z0-9]</code>。</li>
 <li><code>\s</code>和<code>\S</code>:<code>\s</code>匹配空白符，等价于<code>[\t\n\x0B\f\r]</code>；<code>\S</code>则匹配非空白字符，等价于<code>[^\t\n\x0B\f\r]</code>。</li>
 <li><code>\d</code>和<code>\D</code>:<code>\d</code>匹配数字字符，等价于<code>[0-9]</code>；<code>\D</code>匹配数字字符，等价于<code>[^0-9]</code></li>
@@ -202,7 +202,7 @@
 <ol>
 <li><code>$n</code>：其中n表示1-99，表示匹配的子字符串中的第n个，n就是带圆括号的子表达式的位置。</li>
 <li><code>$&amp;</code>：全部匹配的子字符串</li>
-<li>`$``：匹配子串左侧的文本</li>
+<li><code>$`</code>：匹配子串左侧的文本</li>
 <li><code>$&#39;</code>：匹配子串右侧的文本</li>
 </ol>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> pattern1 = <span class="string">"JS,HTML5,CSS"</span>;</span><br><span class="line"><span class="keyword">var</span> replace1 = pattern1.replace(<span class="regexp">/(\w&#123;1,&#125;),(\w+)/</span>, <span class="string">"$2,$1"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(replace1);<span class="comment">//HTML5,JS,CSS</span></span><br><span class="line"><span class="keyword">var</span> replace2 = pattern1.replace(<span class="regexp">/(\w+),/g</span>,<span class="string">"$1-"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(replace2);<span class="comment">//JS-HTML5-CSS</span></span><br></pre></td></tr></table></figure>
@@ -214,7 +214,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.html5jscss.com/javascript-reg-1/" data-id="cjzcl76aa002qdkhs9r4yysha" class="article-share-link">Share</a>
+      <a data-url="http://blog.html5jscss.com/javascript-reg-1/" data-id="cjzwqi4cj000qygn147ouvk13" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/正则/">正则</a></li></ul>

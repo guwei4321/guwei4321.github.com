@@ -1,11 +1,11 @@
 /**
  * @license
- * lodash 4.5.0 (Custom Build) <https: lodash.com="">
+ * lodash 4.5.0 (Custom Build) <https: lodash.com>
  * Build: `lodash -o ./dist/lodash.js`
- * Copyright 2012-2016 The Dojo Foundation <http: dojofoundation.org="">
- * Based on Underscore.js 1.8.3 <http: underscorejs.org="" license="">
+ * Copyright 2012-2016 The Dojo Foundation <http: dojofoundation.org>
+ * Based on Underscore.js 1.8.3 <http: underscorejs.org license>
  * Copyright 2009-2016 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
- * Available under MIT license <https: lodash.com="" license="">
+ * Available under MIT license <https: lodash.com license>
  */
 ;(function() {
 
@@ -297,7 +297,7 @@
     /** Used to map characters to HTML entities. */
     var htmlEscapes = {
       '&': '&amp;',
-      '<': '&lt;',="" '="">': '&gt;',
+      '<': '&lt;', '>': '&gt;',
       '"': '&quot;',
       "'": '&#39;',
       '`': '&#96;'
@@ -306,7 +306,7 @@
     /** Used to map HTML entities to characters. */
     var htmlUnescapes = {
       '&amp;': '&',
-      '&lt;': '<', '&gt;':="" '="">',
+      '&lt;': '<', '&gt;': '>',
       '&quot;': '"',
       '&#39;': "'",
       '&#96;': '`'
@@ -2262,7 +2262,7 @@
       function baseClamp(number, lower, upper) {
         if (number === number) {
           if (upper !== undefined) {
-            number = number <= upper="" ?="" number="" :="" upper;="" }="" if="" (lower="" !="=" undefined)="" {="">= lower ? number : lower;
+            number = number <= upper ? number : upper; } if (lower !="=" undefined) {>= lower ? number : lower;
           }
         }
         return number;
@@ -3490,10 +3490,10 @@
         var low = 0,
             high = array ? array.length : low;
   
-        if (typeof value == 'number' && value === value && high <= half_max_array_length)="" {="" while="" (low="" <="" high)="" var="" mid="(low" +="">>> 1,
+        if (typeof value == 'number' && value === value && high <= half_max_array_length) { while (low < high) var mid="(low" +>>> 1,
                 computed = array[mid];
   
-            if ((retHighest ? (computed <= value)="" :="" (computed="" <="" value))="" &&="" computed="" !="=" null)="" {="" low="mid" +="" 1;="" }="" else="" high="mid;" return="" high;="" basesortedindexby(array,="" value,="" identity,="" rethighest);="" **="" *="" the="" base="" implementation="" of="" `_.sortedindexby`="" and="" `_.sortedlastindexby`="" which="" invokes="" `iteratee`="" for="" `value`="" each="" element="" `array`="" to="" compute="" their="" sort="" ranking.="" iteratee="" is="" invoked="" with="" one="" argument;="" (value).="" @private="" @param="" {array}="" array="" sorted="" inspect.="" {*}="" value="" evaluate.="" {function}="" per="" element.="" {boolean}="" [rethighest]="" specify="" returning="" highest="" qualified="" index.="" @returns="" {number}="" returns="" index="" at="" should="" be="" inserted="" into="" `array`.="" function="" iteratee,="" rethighest)="" var="" ?="" array.length="" 0,="" valisnan="value" valisnull="value" =="=" null,="" valisundef="value" undefined;="" while="" (low="" high)="" mid="nativeFloor((low" 2),="" isdef="computed" undefined,="" isreflexive="computed" computed;="" if="" (valisnan)="" setlow="isReflexive" ||="" rethighest;="" (valisnull)="" (rethighest="" (valisundef)="" isdef);="" value);="" (setlow)="" nativemin(high,="" max_array_index);="" `_.sorteduniq`.="" new="" duplicate="" free="" array.="" basesorteduniq(array)="" basesorteduniqby(array);="" `_.sorteduniqby`="" without="" support="" shorthands.="" [iteratee]="" basesorteduniqby(array,="" iteratee)="" length="array.length," iteratee(value)="" seen="computed," resindex="0," result="[value];" (++index="" length)="" value;="" (!eq(computed,="" seen))="" result[++resindex]="value;" result;="" `_.uniqby`="" [comparator]="" comparator="" baseuniq(array,="" comparator)="" includes="arrayIncludes," iscommon="true," (comparator)="" (length="">= LARGE_ARRAY_SIZE) {
+            if ((retHighest ? (computed <= value) : (computed < value)) && computed !="=" null) { low="mid" + 1; } else high="mid;" return high; basesortedindexby(array, value, identity, rethighest); ** * the base implementation of `_.sortedindexby` and `_.sortedlastindexby` which invokes `iteratee` for `value` each element `array` to compute their sort ranking. iteratee is invoked with one argument; (value). @private @param {array} array sorted inspect. {*} value evaluate. {function} per element. {boolean} [rethighest] specify returning highest qualified index. @returns {number} returns index at should be inserted into `array`. function iteratee, rethighest) var ? array.length 0, valisnan="value" valisnull="value" =="=" null, valisundef="value" undefined; while (low high) mid="nativeFloor((low" 2), isdef="computed" undefined, isreflexive="computed" computed; if (valisnan) setlow="isReflexive" || rethighest; (valisnull) (rethighest (valisundef) isdef); value); (setlow) nativemin(high, max_array_index); `_.sorteduniq`. new duplicate free array. basesorteduniq(array) basesorteduniqby(array); `_.sorteduniqby` without support shorthands. [iteratee] basesorteduniqby(array, iteratee) length="array.length," iteratee(value) seen="computed," resindex="0," result="[value];" (++index length) value; (!eq(computed, seen)) result[++resindex]="value;" result; `_.uniqby` [comparator] comparator baseuniq(array, comparator) includes="arrayIncludes," iscommon="true," (comparator) (length>= LARGE_ARRAY_SIZE) {
           var set = iteratee ? null : createSet(array);
           if (set) {
             return setToArray(set);
@@ -5120,7 +5120,7 @@
   
         var isCombo =
           (srcBitmask == ARY_FLAG && (bitmask == CURRY_FLAG)) ||
-          (srcBitmask == ARY_FLAG && (bitmask == REARG_FLAG) && (data[7].length <= 0="" 1="" source[8]))="" ||="" (srcbitmask="=" (ary_flag="" |="" rearg_flag)="" &&="" (source[7].length="" <="source[8])" (bitmask="=" curry_flag));="" exit="" early="" if="" metadata="" can't="" be="" merged.="" (!(iscommon="" iscombo))="" {="" return="" data;="" }="" use="" source="" `thisarg`="" available.="" &="" bind_flag)="" data[2]="source[2];" set="" when="" currying="" a="" bound="" function.="" newbitmask="" ?="" :="" curry_bound_flag;="" compose="" partial="" arguments.="" var="" value="source[3];" (value)="" partials="data[3];" data[3]="partials" composeargs(partials,="" value,="" source[4])="" copyarray(value);="" data[4]="partials" replaceholders(data[3],="" placeholder)="" copyarray(source[4]);="" right="" data[5]="partials" composeargsright(partials,="" source[6])="" data[6]="partials" replaceholders(data[5],="" copyarray(source[6]);="" `argpos`="" data[7]="copyArray(value);" `ary`="" it's="" smaller.="" ary_flag)="" data[8]="data[8]" =="null" source[8]="" nativemin(data[8],="" source[8]);="" `arity`="" one="" is="" not="" provided.="" (data[9]="=" null)="" data[9]="source[9];" `func`="" and="" merge="" bitmasks.="" data[0]="source[0];" data[1]="newBitmask;" **="" *="" used="" by="" `_.defaultsdeep`="" to="" customize="" its="" `_.merge`="" use.="" @private="" @param="" {*}="" objvalue="" the="" destination="" value.="" srcvalue="" {string}="" key="" of="" property="" merge.="" {object}="" object="" parent="" `objvalue`.="" `srcvalue`.="" [stack]="" tracks="" traversed="" values="" their="" merged="" counterparts.="" @returns="" returns="" assign.="" function="" mergedefaults(objvalue,="" srcvalue,="" key,="" object,="" source,="" stack)="" (isobject(objvalue)="" isobject(srcvalue))="" stack.set(srcvalue,="" objvalue);="" basemerge(objvalue,="" undefined,="" mergedefaults,="" stack);="" objvalue;="" gets="" at="" `path`="" `object`.="" query.="" {array}="" path="" get="" of.="" parent(object,="" path)="" path.length="=" get(object,="" baseslice(path,="" 0,="" -1));="" reorder="" `array`="" according="" specified="" indexes="" where="" element="" first="" index="" assigned="" as="" element,="" second="" so="" on.="" array="" reorder.="" arranged="" indexes.="" `array`.="" reorder(array,="" indexes)="" arrlength="array.length," length="nativeMin(indexes.length," arrlength),="" oldarray="copyArray(array);" while="" (length--)="" array[length]="isIndex(index," arrlength)="" oldarray[index]="" undefined;="" array;="" sets="" for="" `func`.="" **note:**="" this="" becomes="" hot,="" i.e.="" invoked="" lot="" in="" short="" period="" time,="" it="" will="" trip="" breaker="" transition="" an="" identity="" avoid="" garbage="" collection="" pauses="" v8.="" see="" [v8="" issue="" 2070](https:="" code.google.com="" p="" v8="" issues="" detail?id="2070)" more="" details.="" {function}="" func="" associate="" with.="" data="" metadata.="" setdata="(function()" count="0," lastcalled="0;" function(key,="" value)="" stamp="now()," remaining="HOT_SPAN" -="" (stamp="" lastcalled);="" (remaining=""> 0) {
+          (srcBitmask == ARY_FLAG && (bitmask == REARG_FLAG) && (data[7].length <= 0 1 source[8])) || (srcbitmask="=" (ary_flag | rearg_flag) && (source[7].length <="source[8])" (bitmask="=" curry_flag)); exit early if metadata can't be merged. (!(iscommon iscombo)) { return data; } use source `thisarg` available. & bind_flag) data[2]="source[2];" set when currying a bound function. newbitmask ? : curry_bound_flag; compose partial arguments. var value="source[3];" (value) partials="data[3];" data[3]="partials" composeargs(partials, value, source[4]) copyarray(value); data[4]="partials" replaceholders(data[3], placeholder) copyarray(source[4]); right data[5]="partials" composeargsright(partials, source[6]) data[6]="partials" replaceholders(data[5], copyarray(source[6]); `argpos` data[7]="copyArray(value);" `ary` it's smaller. ary_flag) data[8]="data[8]" =="null" source[8] nativemin(data[8], source[8]); `arity` one is not provided. (data[9]="=" null) data[9]="source[9];" `func` and merge bitmasks. data[0]="source[0];" data[1]="newBitmask;" ** * used by `_.defaultsdeep` to customize its `_.merge` use. @private @param {*} objvalue the destination value. srcvalue {string} key of property merge. {object} object parent `objvalue`. `srcvalue`. [stack] tracks traversed values their merged counterparts. @returns returns assign. function mergedefaults(objvalue, srcvalue, key, object, source, stack) (isobject(objvalue) isobject(srcvalue)) stack.set(srcvalue, objvalue); basemerge(objvalue, undefined, mergedefaults, stack); objvalue; gets at `path` `object`. query. {array} path get of. parent(object, path) path.length="=" get(object, baseslice(path, 0, -1)); reorder `array` according specified indexes where element first index assigned as element, second so on. array reorder. arranged indexes. `array`. reorder(array, indexes) arrlength="array.length," length="nativeMin(indexes.length," arrlength), oldarray="copyArray(array);" while (length--) array[length]="isIndex(index," arrlength) oldarray[index] undefined; array; sets for `func`. **note:** this becomes hot, i.e. invoked lot in short period time, it will trip breaker transition an identity avoid garbage collection pauses v8. see [v8 issue 2070](https: code.google.com p v8 issues detail?id="2070)" more details. {function} func associate with. data metadata. setdata="(function()" count="0," lastcalled="0;" function(key, value) stamp="now()," remaining="HOT_SPAN" - (stamp lastcalled); (remaining> 0) {
             if (++count >= HOT_COUNT) {
               return key;
             }
@@ -7563,7 +7563,7 @@
           fromIndex = nativeMax(length + fromIndex, 0);
         }
         return isString(collection)
-          ? (fromIndex <= length="" &&="" collection.indexof(value,="" fromindex)=""> -1)
+          ? (fromIndex <= length && collection.indexof(value, fromindex)> -1)
           : (!!length && baseIndexOf(collection, value, fromIndex) > -1);
       }
   
@@ -8166,7 +8166,7 @@
           if (--n > 0) {
             result = func.apply(this, arguments);
           }
-          if (n <= 1)="" {="" func="undefined;" }="" return="" result;="" };="" **="" *="" creates="" a="" function="" that="" invokes="" `func`="" with="" the="" `this`="" binding="" of="" `thisarg`="" and="" prepends="" any="" additional="" `_.bind`="" arguments="" to="" those="" provided="" bound="" function.="" `_.bind.placeholder`="" value,="" which="" defaults="" `_`="" in="" monolithic="" builds,="" may="" be="" used="" as="" placeholder="" for="" partially="" applied="" arguments.="" **note:**="" unlike="" native="" `function#bind`="" this="" method="" doesn't="" set="" "length"="" property="" functions.="" @static="" @memberof="" _="" @category="" @param="" {function}="" bind.="" {*}="" thisarg="" `func`.="" {...*}="" [partials]="" applied.="" @returns="" returns="" new="" @example="" var="" greet="function(greeting," punctuation)="" greeting="" +="" '="" this.user="" punctuation;="" object="{" 'user':="" 'fred'="" object,="" 'hi');="" bound('!');="" ==""> 'hi fred!'
+          if (n <= 1) { func="undefined;" } return result; }; ** * creates a function that invokes `func` with the `this` binding of `thisarg` and prepends any additional `_.bind` arguments to those provided bound function. `_.bind.placeholder` value, which defaults `_` in monolithic builds, may be used as placeholder for partially applied arguments. **note:** unlike native `function#bind` this method doesn't set "length" property functions. @static @memberof _ @category @param {function} bind. {*} thisarg `func`. {...*} [partials] applied. @returns returns new @example var greet="function(greeting," punctuation) greeting + ' this.user punctuation; object="{" 'user': 'fred' object, 'hi'); bound('!'); => 'hi fred!'
        *
        * // Bound with placeholders.
        * var bound = _.bind(greet, object, _, '!');
@@ -8429,7 +8429,7 @@
   
         function delayed() {
           var remaining = wait - (now() - stamp);
-          if (remaining <= 0="" ||="" remaining=""> wait) {
+          if (remaining <= 0 || remaining> wait) {
             complete(trailingCall, maxTimeoutId);
           } else {
             timeoutId = setTimeout(delayed, remaining);
@@ -8462,7 +8462,7 @@
             }
             var remaining = maxWait - (stamp - lastCalled);
   
-            var isCalled = (remaining <= 0="" ||="" remaining=""> maxWait) &&
+            var isCalled = (remaining <= 0 || remaining> maxWait) &&
               (leading || maxTimeoutId);
   
             if (isCalled) {
@@ -9700,7 +9700,7 @@
        */
       function isLength(value) {
         return typeof value == 'number' &&
-          value > -1 && value % 1 == 0 && value <= max_safe_integer;="" }="" **="" *="" checks="" if="" `value`="" is="" the="" [language="" type](https:="" es5.github.io="" #x8)="" of="" `object`.="" (e.g.="" arrays,="" functions,="" objects,="" regexes,="" `new="" number(0)`,="" and="" string('')`)="" @static="" @memberof="" _="" @category="" lang="" @param="" {*}="" value="" to="" check.="" @returns="" {boolean}="" returns="" `true`="" an="" object,="" else="" `false`.="" @example="" _.isobject({});="" ==""> true
+          value > -1 && value % 1 == 0 && value <= max_safe_integer; } ** * checks if `value` is the [language type](https: es5.github.io #x8) of `object`. (e.g. arrays, functions, objects, regexes, `new number(0)`, and string('')`) @static @memberof _ @category lang @param {*} value to check. @returns {boolean} returns `true` an object, else `false`. @example _.isobject({}); => true
        *
        * _.isObject([1, 2, 3]);
        * // => true
@@ -10047,7 +10047,7 @@
        * // => false
        */
       function isSafeInteger(value) {
-        return isInteger(value) && value >= -MAX_SAFE_INTEGER && value <= max_safe_integer;="" }="" **="" *="" checks="" if="" `value`="" is="" classified="" as="" a="" `set`="" object.="" @static="" @memberof="" _="" @category="" lang="" @param="" {*}="" value="" the="" to="" check.="" @returns="" {boolean}="" returns="" `true`="" correctly="" classified,="" else="" `false`.="" @example="" _.isset(new="" set);="" ==""> true
+        return isInteger(value) && value >= -MAX_SAFE_INTEGER && value <= max_safe_integer; } ** * checks if `value` is classified as a `set` object. @static @memberof _ @category lang @param {*} value the to check. @returns {boolean} returns `true` correctly classified, else `false`. @example _.isset(new set); => true
        *
        * _.isSet(new WeakSet);
        * // => false
@@ -10224,7 +10224,7 @@
        * // => false
        */
       function lte(value, other) {
-        return value <= 2="" other;="" }="" **="" *="" converts="" `value`="" to="" an="" array.="" @static="" @memberof="" _="" @category="" lang="" @param="" {*}="" value="" the="" convert.="" @returns="" {array}="" returns="" converted="" @example="" _.toarray({="" 'a':="" 1,="" 'b':="" });="" ==""> [1, 2]
+        return value <= 2 other; } ** * converts `value` to an array. @static @memberof _ @category lang @param {*} value the convert. @returns {array} returns converted @example _.toarray({ 'a': 1, 'b': }); => [1, 2]
        *
        * _.toArray('abc');
        * // => ['a', 'b', 'c']
@@ -11940,7 +11940,7 @@
       }
   
       /**
-       * Converts the characters "&", "<", "="">", '"', "'", and "\`" in `string` to
+       * Converts the characters "&", "<", ">", '"', "'", and "\`" in `string` to
        * their corresponding HTML entities.
        *
        * **Note:** No other characters are escaped. To escape additional
@@ -12399,12 +12399,12 @@
        * @example
        *
        * // Use the "interpolate" delimiter to create a compiled template.
-       * var compiled = _.template('hello <%= user="" %="">!');
+       * var compiled = _.template('hello <%= user %>!');
        * compiled({ 'user': 'fred' });
        * // => 'hello fred!'
        *
        * // Use the HTML "escape" delimiter to escape data property values.
-       * var compiled = _.template('<b><%- value="" %=""></%-></b>');
+       * var compiled = _.template('<b><%- value %></%-></b>');
        * compiled({ 'value': '<script>' });
        * // => '<b>&lt;script&gt;</b>'
        *

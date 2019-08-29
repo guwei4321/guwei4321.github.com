@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="前端笔记">
 <meta property="og:description" content="翻译自 《What forces layout / reflow》 paulirish/what-forces-layout,gist.github.com/paulirish/5d52fb081b3570c81e3a 当调用以下所有属性/方法时，会触发浏览器重绘。重绘就是让让浏览器同步计算样式和布局，通常是浏览器性能瓶颈。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-30T06:04:29.100Z">
+<meta property="og:updated_time" content="2019-08-11T12:43:12.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="哪些会导致重绘和回流">
 <meta name="twitter:description" content="翻译自 《What forces layout / reflow》 paulirish/what-forces-layout,gist.github.com/paulirish/5d52fb081b3570c81e3a 当调用以下所有属性/方法时，会触发浏览器重绘。重绘就是让让浏览器同步计算样式和布局，通常是浏览器性能瓶颈。">
@@ -88,7 +88,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <blockquote><p>翻译自 《What forces layout / reflow》</p>
-<footer><strong>paulirish/what-forces-layout,</strong><cite><a href="https://gist.github.com/paulirish/5d52fb081b3570c81e3a" target="_blank" rel="external">gist.github.com/paulirish/5d52fb081b3570c81e3a</a></cite></footer></blockquote>
+<footer><strong>paulirish/what-forces-layout,</strong><cite><a href="https://gist.github.com/paulirish/5d52fb081b3570c81e3a" target="_blank" rel="noopener">gist.github.com/paulirish/5d52fb081b3570c81e3a</a></cite></footer></blockquote>
 <p>当调用以下所有属性/方法时，会触发浏览器重绘。重绘就是让让浏览器同步计算样式和布局，通常是浏览器性能瓶颈。<br><a id="more"></a></p>
 <h2 id="Element"><a href="#Element" class="headerlink" title="Element"></a>Element</h2><h3 id="盒子度量"><a href="#盒子度量" class="headerlink" title="盒子度量"></a>盒子度量</h3><ul>
 <li><code>elem.offsetLeft</code>, <code>elem.offsetTop</code>, <code>elem.offsetWidth</code>, <code>elem.offsetHeight</code>, <code>elem.offsetParent</code></li>
@@ -102,11 +102,11 @@
 <li><code>elem.scrollLeft</code>, <code>elem.scrollTop</code> 设置也会影响他们</li>
 </ul>
 <h3 id="Focus"><a href="#Focus" class="headerlink" title="Focus"></a>Focus</h3><ul>
-<li><code>elem.focus()</code> 会触发两次重绘 <a href="https://cs.chromium.org/chromium/src/third_party/WebKit/Source/core/dom/Element.cpp?q=updateLayoutIgnorePendingStylesheets+-f:out+-f:test&amp;sq=package:chromium&amp;dr=C" target="_blank" rel="external">source</a>&amp;l=2923</li>
+<li><code>elem.focus()</code> 会触发两次重绘 <a href="https://cs.chromium.org/chromium/src/third_party/WebKit/Source/core/dom/Element.cpp?q=updateLayoutIgnorePendingStylesheets+-f:out+-f:test&amp;sq=package:chromium&amp;dr=C" target="_blank" rel="noopener">source</a>&amp;l=2923</li>
 </ul>
 <h3 id="还有…"><a href="#还有…" class="headerlink" title="还有…"></a>还有…</h3><ul>
 <li><code>elem.computedRole</code>, <code>elem.computedName</code></li>
-<li><code>elem.innerText</code> <a href="https://cs.chromium.org/chromium/src/third_party/WebKit/Source/core/dom/Element.cpp?q=updateLayoutIgnorePendingStylesheets+-f:out+-f:test&amp;sq=package:chromium&amp;dr=C" target="_blank" rel="external">source</a>&amp;l=3440</li>
+<li><code>elem.innerText</code> <a href="https://cs.chromium.org/chromium/src/third_party/WebKit/Source/core/dom/Element.cpp?q=updateLayoutIgnorePendingStylesheets+-f:out+-f:test&amp;sq=package:chromium&amp;dr=C" target="_blank" rel="noopener">source</a>&amp;l=3440</li>
 </ul>
 <h3 id="getComputedStyle"><a href="#getComputedStyle" class="headerlink" title="getComputedStyle"></a>getComputedStyle</h3><p><code>window.getComputedStyle()</code> 会触发典型的样式重新计算<br><code>window.getComputedStyle()</code> 会触发重绘:</p>
 <ol>
@@ -149,7 +149,7 @@
 <li><code>range.getClientRects()</code>, <code>range.getBoundingClientRect()</code></li>
 </ol>
 <h3 id="SVG"><a href="#SVG" class="headerlink" title="SVG"></a>SVG</h3><ol>
-<li>很多，没有详尽的列表，但是(Tony Gentilcore’s 2011 Layout Triggering List )[<a href="http://gent.ilcore.com/2011/03/how-not-to-trigger-layout-in-webkit.html]列出了一些。" target="_blank" rel="external">http://gent.ilcore.com/2011/03/how-not-to-trigger-layout-in-webkit.html]列出了一些。</a></li>
+<li>很多，没有详尽的列表，但是(Tony Gentilcore’s 2011 Layout Triggering List )[<a href="http://gent.ilcore.com/2011/03/how-not-to-trigger-layout-in-webkit.html]列出了一些。" target="_blank" rel="noopener">http://gent.ilcore.com/2011/03/how-not-to-trigger-layout-in-webkit.html]列出了一些。</a></li>
 </ol>
 <h3 id="contenteditable"><a href="#contenteditable" class="headerlink" title="contenteditable"></a>contenteditable</h3><ol>
 <li>很多很多。</li>
@@ -160,31 +160,31 @@
 <li>改怎么避免回流跟重绘呢？<ol>
 <li>尽量避免在 for 循环中重绘和改变DOM</li>
 <li>使用 DevTools Timeline，分析页面加载或用户交互后的每个时间。你可能会发现很多意想不到的事情。</li>
-<li>批处理读/写DOM，可以使用(FastDom)[<a href="https://github.com/wilsonpage/fastdom]或者虚拟DOM" target="_blank" rel="external">https://github.com/wilsonpage/fastdom]或者虚拟DOM</a></li>
+<li>批处理读/写DOM，可以使用(FastDom)[<a href="https://github.com/wilsonpage/fastdom]或者虚拟DOM" target="_blank" rel="noopener">https://github.com/wilsonpage/fastdom]或者虚拟DOM</a></li>
 </ol>
 </li>
 </ul>
 <h3 id="浏览器兼容性"><a href="#浏览器兼容性" class="headerlink" title="浏览器兼容性"></a>浏览器兼容性</h3><pre><code>因为每个浏览器渲染页面原理都不一样，所以使用 Chrome 的 DevTools看到的数据不一定在每个浏览器都适用。
-</code></pre><h2 id="CSS-Triggers"><a href="#CSS-Triggers" class="headerlink" title="CSS Triggers"></a>CSS Triggers</h2><p>(CSS Triggers)[<a href="https://csstriggers.com/" target="_blank" rel="external">https://csstriggers.com/</a>] 列出了在各个引擎下，Js设置/改变CSS的值时候是否触发回滚的情况，使用三种色块来表示是否会触发Layout/Paint/Composite。</p>
+</code></pre><h2 id="CSS-Triggers"><a href="#CSS-Triggers" class="headerlink" title="CSS Triggers"></a>CSS Triggers</h2><p>(CSS Triggers)[<a href="https://csstriggers.com/]" target="_blank" rel="noopener">https://csstriggers.com/]</a> 列出了在各个引擎下，Js设置/改变CSS的值时候是否触发回滚的情况，使用三种色块来表示是否会触发Layout/Paint/Composite。</p>
 <h2 id="更多参考资料"><a href="#更多参考资料" class="headerlink" title="更多参考资料"></a>更多参考资料</h2><ul>
-<li><a href="https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing?hl=en" target="_blank" rel="external">Avoiding layout thrashing — Web Fundamentals</a></li>
-<li><a href="https://mattandre.ws/2014/05/really-fixing-layout-thrashing/" target="_blank" rel="external">Fixing Layout thrashing in the real world | Matt Andrews</a></li>
-<li><a href="https://developer.chrome.com/devtools/docs/demos/too-much-layout" target="_blank" rel="external">Timeline demo: Diagnosing forced synchronous layouts - Google Chrome</a></li>
-<li><a href="http://wilsonpage.co.uk/preventing-layout-thrashing/" target="_blank" rel="external">Preventing &apos;layout thrashing&apos; | Wilson Page</a></li>
-<li><a href="https://github.com/wilsonpage/fastdom" target="_blank" rel="external">wilsonpage/fastdom</a></li>
-<li><a href="http://www.phpied.com/rendering-repaint-reflowrelayout-restyle/" target="_blank" rel="external">Rendering: repaint, reflow/relayout, restyle / Stoyan</a></li>
-<li><a href="http://blog.fogcreek.com/we-spent-a-week-making-trello-boards-load-extremely-fast-heres-how-we-did-it/" target="_blank" rel="external">We spent a week making Trello boards load extremely fast. Here’s how we did it. - Fog Creek Blog</a></li>
-<li><a href="https://developers.google.com/speed/articles/reflow?hl=en" target="_blank" rel="external">Minimizing browser reflow  |  PageSpeed Insights  |  Google Developers</a></li>
-<li><a href="https://developer.apple.com/videos/wwdc/2012/?id=601" target="_blank" rel="external">Optimizing Web Content in UIWebViews and Websites on iOS</a></li>
-<li><a href="http://www.html5rocks.com/en/tutorials/speed/layers/" target="_blank" rel="external">Accelerated Rendering in Chrome</a></li>
-<li><a href="https://www.igvita.com/slides/2012/web-performance-for-the-curious/" target="_blank" rel="external">web performance for the curious</a></li>
-<li><a href="http://jankfree.org/" target="_blank" rel="external">Jank Free</a></li>
+<li><a href="https://developers.google.com/web/fundamentals/performance/rendering/avoid-large-complex-layouts-and-layout-thrashing?hl=en" target="_blank" rel="noopener">Avoiding layout thrashing — Web Fundamentals</a></li>
+<li><a href="https://mattandre.ws/2014/05/really-fixing-layout-thrashing/" target="_blank" rel="noopener">Fixing Layout thrashing in the real world | Matt Andrews</a></li>
+<li><a href="https://developer.chrome.com/devtools/docs/demos/too-much-layout" target="_blank" rel="noopener">Timeline demo: Diagnosing forced synchronous layouts - Google Chrome</a></li>
+<li><a href="http://wilsonpage.co.uk/preventing-layout-thrashing/" target="_blank" rel="noopener">Preventing &apos;layout thrashing&apos; | Wilson Page</a></li>
+<li><a href="https://github.com/wilsonpage/fastdom" target="_blank" rel="noopener">wilsonpage/fastdom</a></li>
+<li><a href="http://www.phpied.com/rendering-repaint-reflowrelayout-restyle/" target="_blank" rel="noopener">Rendering: repaint, reflow/relayout, restyle / Stoyan</a></li>
+<li><a href="http://blog.fogcreek.com/we-spent-a-week-making-trello-boards-load-extremely-fast-heres-how-we-did-it/" target="_blank" rel="noopener">We spent a week making Trello boards load extremely fast. Here’s how we did it. - Fog Creek Blog</a></li>
+<li><a href="https://developers.google.com/speed/articles/reflow?hl=en" target="_blank" rel="noopener">Minimizing browser reflow  |  PageSpeed Insights  |  Google Developers</a></li>
+<li><a href="https://developer.apple.com/videos/wwdc/2012/?id=601" target="_blank" rel="noopener">Optimizing Web Content in UIWebViews and Websites on iOS</a></li>
+<li><a href="http://www.html5rocks.com/en/tutorials/speed/layers/" target="_blank" rel="noopener">Accelerated Rendering in Chrome</a></li>
+<li><a href="https://www.igvita.com/slides/2012/web-performance-for-the-curious/" target="_blank" rel="noopener">web performance for the curious</a></li>
+<li><a href="http://jankfree.org/" target="_blank" rel="noopener">Jank Free</a></li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://blog.html5jscss.com/what-forces-layout-reflow/" data-id="cjzcl769a0012dkhsznnbiku4" class="article-share-link">Share</a>
+      <a data-url="http://blog.html5jscss.com/what-forces-layout-reflow/" data-id="cjzwqi4dm001lygn106s99ur4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/reflow/">reflow</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端性能/">前端性能</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/技术细节/">技术细节</a></li></ul>
