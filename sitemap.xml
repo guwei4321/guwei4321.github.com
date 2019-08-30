@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.html5jscss.com/vue-communication/</loc>
+    <loc>http://blog.html5jscss.com/react-communication/</loc>
     
-    <lastmod>2019-08-29T13:21:30.365Z</lastmod>
+    <lastmod>2019-08-30T13:40:25.063Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.html5jscss.com/react-communication/</loc>
+    <loc>http://blog.html5jscss.com/vue-communication/</loc>
     
-    <lastmod>2019-08-29T13:21:30.364Z</lastmod>
+    <lastmod>2019-08-29T13:21:30.365Z</lastmod>
     
   </url>
   
@@ -72,14 +72,14 @@
   </url>
   
   <url>
-    <loc>http://blog.html5jscss.com/mongoose-api/</loc>
+    <loc>http://blog.html5jscss.com/redux/</loc>
     
     <lastmod>2019-08-11T12:43:12.959Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.html5jscss.com/redux/</loc>
+    <loc>http://blog.html5jscss.com/mongoose-api/</loc>
     
     <lastmod>2019-08-11T12:43:12.959Z</lastmod>
     
@@ -128,14 +128,14 @@
   </url>
   
   <url>
-    <loc>http://blog.html5jscss.com/graphql-introduction/</loc>
+    <loc>http://blog.html5jscss.com/functional-programming/</loc>
     
     <lastmod>2019-08-11T12:43:12.950Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.html5jscss.com/functional-programming/</loc>
+    <loc>http://blog.html5jscss.com/graphql-introduction/</loc>
     
     <lastmod>2019-08-11T12:43:12.950Z</lastmod>
     
